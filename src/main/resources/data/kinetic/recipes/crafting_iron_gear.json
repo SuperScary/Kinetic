@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NSN",
+    "SWS",
+    "NSN"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "kinetic:stone_gear"
+    },
+    "N": {
+      "item": "kinetic:duracite_nugget"
+    }
+  },
+  "result": {
+    "item": "kinetic:iron_gear"
+  }
+}

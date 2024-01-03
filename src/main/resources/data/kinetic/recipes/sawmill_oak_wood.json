@@ -1,0 +1,12 @@
+{
+  "type": "kinetic:sawmill",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_log"
+    }
+  ],
+  "output": {
+    "count": 6,
+    "item": "minecraft:oak_wood_planks"
+  }
+}

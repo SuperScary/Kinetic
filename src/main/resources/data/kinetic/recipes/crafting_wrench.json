@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SP",
+    " P"
+  ],
+  "key": {
+    "S": {
+      "item": "kinetic:duracite_ingot"
+    },
+    "P": {
+      "item": "kinetic:plastic"
+    }
+  },
+  "result": {
+    "item": "kinetic:wrench",
+    "count": 1
+  }
+}

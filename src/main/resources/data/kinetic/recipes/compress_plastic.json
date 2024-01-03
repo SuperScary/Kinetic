@@ -1,0 +1,12 @@
+{
+  "type": "kinetic:compress",
+  "ingredients": [
+    {
+      "item": "kinetic:raw_plastic"
+    }
+  ],
+  "output": {
+    "count": 2,
+    "item": "kinetic:plastic"
+  }
+}

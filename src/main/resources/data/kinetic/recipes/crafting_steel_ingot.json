@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "kinetic:steel_nugget"
+    }
+  },
+  "result": {
+    "item": "kinetic:steel_ingot"
+  }
+}

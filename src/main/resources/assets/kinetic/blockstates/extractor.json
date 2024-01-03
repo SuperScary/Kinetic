@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,powered=false": {
+      "model": "kinetic:block/extractor"
+    },
+    "facing=east,powered=false": {
+      "model": "kinetic:block/extractor",
+      "y": 90
+    },
+    "facing=south,powered=false": {
+      "model": "kinetic:block/extractor",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "kinetic:block/extractor",
+      "y": 270
+    },
+    "facing=north,powered=true": {
+      "model": "kinetic:block/extractor_lit"
+    },
+    "facing=east,powered=true": {
+      "model": "kinetic:block/extractor_lit",
+      "y": 90
+    },
+    "facing=south,powered=true": {
+      "model": "kinetic:block/extractor_lit",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "kinetic:block/extractor_lit",
+      "y": 270
+    }
+  }
+}

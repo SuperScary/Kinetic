@@ -1,0 +1,35 @@
+{
+  "item.kinetic.raw_duracite": "Raw Duracite",
+  "item.kinetic.duracite_dust": "Duracite Dust",
+  "item.kinetic.duracite_ingot": "Duracite Ingot",
+  "item.kinetic.duracite_nugget": "Duracite Nugget",
+  "item.kinetic.steel_dust": "Steel Dust",
+  "item.kinetic.steel_ingot": "Steel Ingot",
+  "item.kinetic.steel_nugget": "Steel Nugget",
+  "item.kinetic.wood_gear": "Wooden Gear",
+  "item.kinetic.stone_gear": "Stone Gear",
+  "item.kinetic.iron_gear": "Iron Gear",
+  "item.kinetic.ore_finder": "Ore Finder",
+  "item.kinetic.untreated_rubber": "Untreated Rubber",
+  "item.kinetic.rubber": "Rubber",
+  "item.kinetic.plastic": "Plastic",
+  "item.kinetic.raw_plastic": "Raw Plastic",
+  "item.kinetic.wrench": "Wrench",
+  "item.kinetic.flux_coil": "Flux Coil",
+
+  "block.kinetic.duracite_ore": "Duracite Ore",
+  "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
+  "block.kinetic.raw_duracite_block": "Raw Duracite Block",
+  "block.kinetic.duracite_block": "Duracite Block",
+  "block.kinetic.steel_block": "Steel Block",
+  "block.kinetic.machine_base": "Machine Base",
+  "block.kinetic.compressor": "Compressor",
+  "block.kinetic.extractor": "Extractor",
+  "block.kinetic.sawmill": "Sawmill",
+  "block.kinetic.crusher": "Crusher",
+
+  "itemGroup.kinetic": "Kinetic",
+
+  "chat.ore_found": "Found %s at %s, %s, %s.",
+  "chat.ore_not_found": "No ores found."
+}

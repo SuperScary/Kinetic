@@ -1,0 +1,14 @@
+{
+  "values": [
+    "kinetic:duracite_ore",
+    "kinetic:deepslate_duracite_ore",
+    "kinetic:raw_duracite_block",
+    "kinetic:steel_block",
+    "kinetic:duracite_block",
+    "kinetic:machine_base",
+    "kinetic:compressor",
+    "kinetic:extractor",
+    "kinetic:sawmill",
+    "kinetic:crusher"
+  ]
+}

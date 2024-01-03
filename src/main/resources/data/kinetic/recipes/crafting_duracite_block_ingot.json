@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kinetic:duracite_block"
+    }
+  ],
+  "result": {
+    "item": "kinetic:duracite_ingot",
+    "count": 9
+  }
+}

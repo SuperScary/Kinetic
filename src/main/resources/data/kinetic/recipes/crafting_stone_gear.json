@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NSN",
+    "SWS",
+    "NSN"
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "minecraft:stone"
+      },
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "W": {
+      "item": "kinetic:wood_gear"
+    },
+    "N": {
+      "item": "kinetic:duracite_nugget"
+    }
+  },
+  "result": {
+    "item": "kinetic:stone_gear"
+  }
+}

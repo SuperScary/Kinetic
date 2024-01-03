@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,powered=false": {
+      "model": "kinetic:block/crusher"
+    },
+    "facing=east,powered=false": {
+      "model": "kinetic:block/crusher",
+      "y": 90
+    },
+    "facing=south,powered=false": {
+      "model": "kinetic:block/crusher",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "kinetic:block/crusher",
+      "y": 270
+    },
+    "facing=north,powered=true": {
+      "model": "kinetic:block/crusher_lit"
+    },
+    "facing=east,powered=true": {
+      "model": "kinetic:block/crusher_lit",
+      "y": 90
+    },
+    "facing=south,powered=true": {
+      "model": "kinetic:block/crusher_lit",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "kinetic:block/crusher_lit",
+      "y": 270
+    }
+  }
+}
