@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.checkerframework.checker.units.qual.C;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
 import superscary.kinetic.block.KineticBlocks;
@@ -32,6 +33,12 @@ public class KineticItems
     public static final RegistryObject<Item> RUBBER = reg("rubber", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> UNTREATED_RUBBER = reg("untreated_rubber", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FLUX_COIL = reg("flux_coil", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SULFUR = reg("sulfur", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CAPACITOR_BASIC = reg("capacitor_basic", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 64000, 128, 1));
+    public static final RegistryObject<Item> CAPACITOR_STANDARD = reg("capacitor_standard", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 128000, 256, 1));
+    public static final RegistryObject<Item> CAPACITOR_PREMIUM = reg("capacitor_premium", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 256000, 512, 2));
+    public static final RegistryObject<Item> CAPACITOR_DELUXE = reg("capacitor_deluxe", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 512000, 1024, 3));
+    public static final RegistryObject<Item> CAPACITOR_ULTIMATE = reg("capacitor_ultimate", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 1024000, 2048, 4));
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));

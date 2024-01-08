@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.recipe.CompressorRecipe;
 
 public class CompressorCategory implements IRecipeCategory<CompressorRecipe>
@@ -58,7 +59,8 @@ public class CompressorCategory implements IRecipeCategory<CompressorRecipe>
     @Override
     public void setRecipe (IRecipeLayoutBuilder builder, CompressorRecipe recipe, IFocusGroup focuses)
     {
-        builder.addSlot(RecipeIngredientRole.INPUT, 80, 11).addIngredients(recipe.getIngredients().get(0));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 59).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.INPUT, 56, 35).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 35).addItemStack(recipe.getResultItem(null));
+        builder.addSlot(RecipeIngredientRole.CATALYST, 21, 57).addItemStack(new ItemStack(KineticItems.CAPACITOR_BASIC.get()));
     }
 }

@@ -59,7 +59,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
 
     public SawmillBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.COMPRESSOR_BE.get(), pos, state);
+        super(KineticBlockEntities.SAWMILL_BE.get(), pos, state);
         this.data = new ContainerData()
         {
             @Override

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "kinetic:block/treated_machine_base"
+    }
+  }
+}

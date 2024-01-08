@@ -1,6 +1,7 @@
 package superscary.kinetic.recipe;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -19,13 +20,17 @@ public class CompressorRecipe implements Recipe<SimpleContainer>
 
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
+    private final int energyReq;
+    private final int craftTime;
     private final ResourceLocation id;
 
-    public CompressorRecipe (NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id)
+    public CompressorRecipe (NonNullList<Ingredient> inputItems, ItemStack output, int energyReq, int craftTime, ResourceLocation id)
     {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
+        this.energyReq = energyReq;
+        this.craftTime = craftTime;
     }
 
     @Override
@@ -75,6 +80,16 @@ public class CompressorRecipe implements Recipe<SimpleContainer>
         return Serializer.INSTANCE;
     }
 
+    public int getEnergyReq ()
+    {
+        return energyReq;
+    }
+
+    public int getCraftTime ()
+    {
+        return craftTime;
+    }
+
     @Override
     public RecipeType<?> getType ()
     {
@@ -104,8 +119,10 @@ public class CompressorRecipe implements Recipe<SimpleContainer>
             {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            
-            return new CompressorRecipe(inputs, output, recipeId);
+
+            int craftTime = GsonHelper.getAsInt(serializedRecipe, "craftTime");
+            int energy = GsonHelper.getAsInt(serializedRecipe, "energy");
+            return new CompressorRecipe(inputs, output, energy, craftTime, recipeId);
         }
 
         @Override
@@ -117,8 +134,10 @@ public class CompressorRecipe implements Recipe<SimpleContainer>
                 inputs.set(i, Ingredient.fromNetwork(buffer));
             }
 
+            int craftTime = buffer.readInt();
+            int energy = buffer.readInt();
             ItemStack output = buffer.readItem();
-            return new CompressorRecipe(inputs, output, recipeId);
+            return new CompressorRecipe(inputs, output, energy, craftTime, recipeId);
         }
 
         @Override
@@ -131,6 +150,8 @@ public class CompressorRecipe implements Recipe<SimpleContainer>
                 ingredient.toNetwork(buffer);
             }
 
+            buffer.writeInt(recipe.craftTime);
+            buffer.writeInt(recipe.energyReq);
             buffer.writeItemStack(recipe.getResultItem(null), false);
 
         }

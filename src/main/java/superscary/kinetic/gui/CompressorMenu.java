@@ -21,13 +21,13 @@ public class CompressorMenu extends AbstractContainerMenu
 
     public CompressorMenu (int containerId, Inventory inventory, FriendlyByteBuf extraData)
     {
-        this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
     }
 
     public CompressorMenu (int containerId, Inventory inventory, BlockEntity entity, ContainerData data)
     {
         super(KineticMenus.COMPRESSOR_MENU.get(), containerId);
-        checkContainerSize(inventory, 2);
+        checkContainerSize(inventory, 3);
         blockEntity = ((CompressorBlockEntity) entity);
         this.level = inventory.player.level();
         this.data = data;
@@ -38,6 +38,7 @@ public class CompressorMenu extends AbstractContainerMenu
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 35));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 35));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 21, 57));
         });
 
         addDataSlots(data);
@@ -72,7 +73,7 @@ public class CompressorMenu extends AbstractContainerMenu
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

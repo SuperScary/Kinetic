@@ -9,6 +9,7 @@
     "kinetic:compressor",
     "kinetic:extractor",
     "kinetic:sawmill",
-    "kinetic:crusher"
+    "kinetic:crusher",
+    "kinetic:sulfur_ore"
   ]
 }

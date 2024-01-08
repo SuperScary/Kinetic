@@ -1,18 +1,14 @@
 package superscary.kinetic.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.gui.renderer.EnergyInfoArea;
+import superscary.kinetic.gui.renderer.EnergyDisplayTooltipArea;
 import superscary.kinetic.util.MouseUtil;
 
 import java.util.Optional;
@@ -21,7 +17,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu>
 {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Kinetic.MODID, "textures/gui/compressor_gui.png");
-    private EnergyInfoArea energyInfoArea;
+    private EnergyDisplayTooltipArea energyInfoArea;
 
     public CompressorScreen (CompressorMenu menu, Inventory inventory, Component title)
     {
@@ -39,12 +35,14 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu>
     {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        energyInfoArea = new EnergyInfoArea(x + 10, y +9, menu.blockEntity.getEnergyStorage());
+        this.energyInfoArea = new EnergyDisplayTooltipArea(x + 9, y + 8, menu.blockEntity.getEnergyStorage());
     }
 
     @Override
     protected void renderLabels (GuiGraphics graphics, int mouseX, int mouseY)
     {
+        //graphics.drawString(font, title, titleLabelX, titleLabelY, 4210752, true);
+        //graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 4210752, true);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         renderEnergyAreaTooltips(graphics, mouseX, mouseY, x, y);
@@ -54,7 +52,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu>
     {
         if (isMouseAboveArea(mouseX, mouseY, x, y, 10, 9, 8, 64))
         {
-            //energyInfoArea.fillTooltipOverArea(mouseX - x, mouseY - y, null);
+            guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), mouseX - x, mouseY - y);
         }
     }
 
@@ -70,7 +68,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu>
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         renderProgressArrow(guiGraphics, x, y);
-        energyInfoArea.draw(guiGraphics);
+        energyInfoArea.render(guiGraphics);
     }
 
     private void renderProgressArrow (GuiGraphics guiGraphics, int x, int y)

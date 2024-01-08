@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SRS",
+    "IDI"
+  ],
+  "key": {
+    "S": {
+      "item": "kinetic:steel_ingot"
+    },
+    "R": {
+      "item": "kinetic:capacitor_deluxe"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "kinetic:capacitor_ultimate",
+    "count": 1
+  }
+}

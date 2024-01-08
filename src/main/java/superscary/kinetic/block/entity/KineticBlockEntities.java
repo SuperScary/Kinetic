@@ -20,5 +20,9 @@ public class KineticBlockEntities
             BLOCK_ENTITIES.register("sawmill_be", () -> BlockEntityType.Builder.of(SawmillBlockEntity::new,
                     KineticBlocks.SAWMILL.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<QQBlockEntity>> QQ_BE =
+            BLOCK_ENTITIES.register("qq_be", () -> BlockEntityType.Builder.of(QQBlockEntity::new,
+                    KineticBlocks.QUANTUM_QUARRY.get()).build(null));
+
 
 }

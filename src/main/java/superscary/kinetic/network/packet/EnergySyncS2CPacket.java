@@ -39,16 +39,7 @@ public class EnergySyncS2CPacket
     {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
-            if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof CompressorBlockEntity blockEntity)
-            {
-                blockEntity.setEnergyLevel(energy);
 
-                if (Minecraft.getInstance().player.containerMenu instanceof CompressorMenu menu && menu.blockEntity.getBlockPos().equals(pos))
-                {
-                    blockEntity.setEnergyLevel(energy);
-                }
-
-            }
 
             /*if (Minecraft.getInstance().level.getBlockEntity(pos) instanceof SawmillBlock blockEntity)
             {
