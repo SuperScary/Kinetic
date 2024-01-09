@@ -1,3 +1,3 @@
 {
-  "parent": "kinetic:block/extractor"
+  "parent": "kinetic:block/extractor/extractor_off"
 }

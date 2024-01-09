@@ -17,12 +17,10 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -35,7 +33,7 @@ import superscary.kinetic.block.CompressorBlock;
 import superscary.kinetic.item.CapacitorItem;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.recipe.CompressorRecipe;
-import superscary.kinetic.gui.CompressorMenu;
+import superscary.kinetic.gui.menu.CompressorMenu;
 import superscary.kinetic.util.*;
 
 import java.util.Map;
@@ -79,13 +77,18 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
             };
         }
     };
-
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     private static final int CAPACITOR_SLOT = 2;
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+    private ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+    protected final ContainerData data;
+    private int progress = 0;
+    private int maxProgress = 0;
+    private final int DEFAULT_MAX_PROGRESS = 78;
+    private int energyAmount = 0;
+    private final int DEFAULT_ENERGY_AMOUNT = 128;
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
                     new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
@@ -94,39 +97,6 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
-    protected final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 0;
-    private final int DEFAULT_MAX_PROGRESS = 78;
-    private int energyAmount = 0;
-    private final int DEFAULT_ENERGY_AMOUNT = 128;
-
-    private ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-
-    private ModEnergyStorage createEnergyStorage ()
-    {
-        if (itemHandler.getStackInSlot(CAPACITOR_SLOT) != ItemStack.EMPTY)
-        {
-            CapacitorItem cap = (CapacitorItem) itemHandler.getStackInSlot(CAPACITOR_SLOT).getItem();
-            return new ModEnergyStorage(cap.getMaxCapacity(), cap.getMaxTransfer())
-            {
-                @Override
-                public void onEnergyChanged ()
-                {
-                    setChanged();
-                    getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-                }
-            };
-        } else return new ModEnergyStorage(0, 0)
-        {
-            @Override
-            public void onEnergyChanged ()
-            {
-                setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-        };
-    }
 
     public CompressorBlockEntity (BlockPos pos, BlockState state)
     {
@@ -166,37 +136,40 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
     public @NotNull <T> LazyOptional<T> getCapability (@NotNull Capability<T> cap, @Nullable Direction side)
     {
         if (cap == ForgeCapabilities.ENERGY) return lazyEnergyHandler.cast();
-        if (cap == ForgeCapabilities.ITEM_HANDLER)
-        {
-            if (side == null) return lazyItemHandler.cast();
+        else if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
 
-            if (directionWrappedHandlerMap.containsKey(side))
-            {
-                Direction localDir = this.getBlockState().getValue(CompressorBlock.FACING);
-                if (side == Direction.DOWN || side == Direction.UP) return directionWrappedHandlerMap.get(side).cast();
-                return switch (localDir)
-                {
-                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
-                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
-                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
-                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
-                };
-            }
-        }
         return super.getCapability(cap, side);
+    }
+
+    private ModEnergyStorage createEnergyStorage ()
+    {
+        return new ModEnergyStorage(40000, 1024)
+        {
+            @Override
+            public void onEnergyChanged ()
+            {
+                setChanged();
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+
+            @Override
+            public int receiveEnergy (int max, boolean simulate)
+            {
+                setChanged();
+                return super.receiveEnergy(max, simulate);
+            }
+
+            @Override
+            public boolean canReceive ()
+            {
+                return true;
+            }
+        };
     }
 
     public IEnergyStorage getEnergyStorage ()
     {
         return ENERGY_STORAGE;
-    }
-
-    @Override
-    public void onLoad ()
-    {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
     }
 
     @Override
@@ -249,13 +222,12 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
         progress = tag.getInt(NBTKeys.COMPRESSOR_NBT_PROGRESS);
         maxProgress = tag.getInt(NBTKeys.COMPRESSOR_NBT_MAX_PROGRESS);
         energyAmount = tag.getInt(NBTKeys.COMPRESSOR_RF_AMOUNT);
-        ENERGY_STORAGE.setEnergy(tag.getInt("energy"));
+        ENERGY_STORAGE.setEnergy(tag.getInt(NBTKeys.POWER));
     }
 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
         CompressorBlock block = (CompressorBlock) pState.getBlock();
-        fillUpOnEnergy();
         if (hasRecipe())
         {
             block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.TRUE);
@@ -275,14 +247,6 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
             block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
         }
 
-    }
-
-    private void fillUpOnEnergy ()
-    {
-        if (hasEnergyItemInSlot(CAPACITOR_SLOT))
-        {
-            this.ENERGY_STORAGE.receiveEnergy(3200, false);
-        }
     }
 
     private boolean hasEnergyItemInSlot (int i)

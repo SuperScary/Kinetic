@@ -39,6 +39,17 @@
   "block.kinetic.sawmill": "Sawmill",
   "block.kinetic.crusher": "Crusher",
   "block.kinetic.quantum_quarry": "Quantum Quarry",
+  "block.kinetic.unfilled_quantum_satellite": "Quantum Satellite (Unfilled)",
+  "block.kinetic.filled_quantum_satellite": "Quantum Satellite (Filled)",
+  "block.kinetic.tank_basic": "Basic Fluid Tank",
+  "block.kinetic.tank_standard": "Standard Fluid Tank",
+  "block.kinetic.tank_premium": "Premium Fluid Tank",
+  "block.kinetic.tank_deluxe": "Deluxe Fluid Tank",
+  "block.kinetic.tank_ultimate": "Ultimate Fluid Tank",
+  "block.kinetic.coal_generator": "Coal Generator",
+  "block.kinetic.charger": "Charger",
+  "block.kinetic.cable": "Cable",
+  "block.kinetic.facade": "Cable Facade",
 
   "itemGroup.kinetic": "Kinetic",
 

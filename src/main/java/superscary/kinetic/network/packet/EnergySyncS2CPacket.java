@@ -1,13 +1,8 @@
 package superscary.kinetic.network.packet;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import superscary.kinetic.block.SawmillBlock;
-import superscary.kinetic.block.entity.CompressorBlockEntity;
-import superscary.kinetic.gui.CompressorMenu;
-import superscary.kinetic.gui.SawmillMenu;
 
 import java.util.function.Supplier;
 

@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.recipe.CompressorRecipe;
 import superscary.kinetic.recipe.SawmillRecipe;
-import superscary.kinetic.gui.CompressorScreen;
+import superscary.kinetic.gui.screen.CompressorScreen;
 
 import java.util.List;
 

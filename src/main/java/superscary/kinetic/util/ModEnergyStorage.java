@@ -40,6 +40,26 @@ public abstract class ModEnergyStorage extends EnergyStorage
         return energy;
     }
 
+    public void add (int energy)
+    {
+        this.energy += energy;
+        if (this.energy > getMaxEnergyStored())
+        {
+            this.energy = getMaxEnergyStored();
+        }
+        onEnergyChanged();
+    }
+
+    public void subtract (int energy)
+    {
+        this.energy -= energy;
+        if (this.energy < 0)
+        {
+            this.energy = 0;
+        }
+        onEnergyChanged();
+    }
+
     public abstract void onEnergyChanged();
 
 }

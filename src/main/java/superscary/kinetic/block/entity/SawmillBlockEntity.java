@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.SawmillBlock;
 import superscary.kinetic.recipe.SawmillRecipe;
-import superscary.kinetic.gui.SawmillMenu;
+import superscary.kinetic.gui.menu.SawmillMenu;
 import superscary.kinetic.util.NBTKeys;
 
 import java.util.Optional;

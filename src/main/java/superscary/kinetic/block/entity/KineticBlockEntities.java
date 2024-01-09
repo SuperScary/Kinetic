@@ -6,6 +6,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.block.cables.blocks.entity.CableBlockEntity;
+import superscary.kinetic.block.cables.blocks.entity.FacadeBlockEntity;
 
 public class KineticBlockEntities
 {
@@ -23,6 +25,26 @@ public class KineticBlockEntities
     public static final RegistryObject<BlockEntityType<QQBlockEntity>> QQ_BE =
             BLOCK_ENTITIES.register("qq_be", () -> BlockEntityType.Builder.of(QQBlockEntity::new,
                     KineticBlocks.QUANTUM_QUARRY.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<BasicTankBlockEntity>> BASIC_TANK_BE =
+            BLOCK_ENTITIES.register("basic_tank_be", () -> BlockEntityType.Builder.of(BasicTankBlockEntity::new,
+                    KineticBlocks.TANK_BASIC.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<CoalGeneratorBlockEntity>> COAL_GENERATOR_BE =
+            BLOCK_ENTITIES.register("coal_generator_be", () -> BlockEntityType.Builder.of(CoalGeneratorBlockEntity::new,
+                    KineticBlocks.COAL_GENERATOR.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ChargerBlockEntity>> CHARGER_BE =
+            BLOCK_ENTITIES.register("charger_be", () -> BlockEntityType.Builder.of(ChargerBlockEntity::new,
+                    KineticBlocks.CHARGER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<CableBlockEntity>> CABLE_BE =
+            BLOCK_ENTITIES.register("cable_be", () -> BlockEntityType.Builder.of(CableBlockEntity::new,
+                    KineticBlocks.CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<FacadeBlockEntity>> FACADE_BE =
+            BLOCK_ENTITIES.register("facade_be", () -> BlockEntityType.Builder.of(FacadeBlockEntity::new,
+                    KineticBlocks.FACADE_BLOCK.get()).build(null));
 
 
 }

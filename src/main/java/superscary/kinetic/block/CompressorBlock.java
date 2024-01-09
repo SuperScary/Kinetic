@@ -28,13 +28,11 @@ import superscary.kinetic.block.entity.KineticBlockEntities;
 
 public class CompressorBlock extends BaseEntityBlock
 {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public CompressorBlock (Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, Boolean.FALSE));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(BlockStateProperties.FACING, Direction.NORTH).setValue(BlockStateProperties.POWERED, Boolean.FALSE));
     }
 
     @Override
@@ -97,7 +95,7 @@ public class CompressorBlock extends BaseEntityBlock
     @Override
     public void animateTick (BlockState state, Level level, BlockPos pos, RandomSource randomSource)
     {
-        if (state.getValue(POWERED))
+        if (state.getValue(BlockStateProperties.POWERED))
         {
             level.playLocalSound(pos.getX() + 0.5d, pos.getY(), pos.getZ() + 0.5d, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
         }
@@ -108,13 +106,14 @@ public class CompressorBlock extends BaseEntityBlock
     protected void createBlockStateDefinition (StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, POWERED);
+        builder.add(BlockStateProperties.FACING, BlockStateProperties.POWERED);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement (BlockPlaceContext ctx)
     {
-        return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(POWERED, Boolean.FALSE);
+        return defaultBlockState().setValue(BlockStateProperties.FACING, ctx.getNearestLookingDirection().getOpposite())
+                .setValue(BlockStateProperties.POWERED, Boolean.FALSE);
     }
 }

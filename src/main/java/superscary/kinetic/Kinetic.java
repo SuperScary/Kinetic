@@ -3,6 +3,8 @@ package superscary.kinetic;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,13 +18,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.block.cables.blocks.CableModelLoader;
 import superscary.kinetic.config.Config;
+import superscary.kinetic.gui.screen.CoalGeneratorScreen;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.network.ModMessages;
 import superscary.kinetic.recipe.KineticRecipes;
-import superscary.kinetic.gui.CompressorScreen;
+import superscary.kinetic.gui.screen.CompressorScreen;
 import superscary.kinetic.gui.KineticMenus;
-import superscary.kinetic.gui.SawmillScreen;
+import superscary.kinetic.gui.screen.SawmillScreen;
+import superscary.kinetic.util.FacadeBlockColor;
 
 @Mod(Kinetic.MODID)
 public class Kinetic
@@ -66,6 +71,20 @@ public class Kinetic
         {
             MenuScreens.register(KineticMenus.COMPRESSOR_MENU.get(), CompressorScreen::new);
             MenuScreens.register(KineticMenus.SAWMILL_MENU.get(), SawmillScreen::new);
+            MenuScreens.register(KineticMenus.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
         }
+
+        @SubscribeEvent
+        public static void modelInit (ModelEvent.RegisterGeometryLoaders event)
+        {
+            CableModelLoader.register(event);
+        }
+
+        @SubscribeEvent
+        public static void registerBlockColor (RegisterColorHandlersEvent.Block event)
+        {
+            event.register(new FacadeBlockColor(), KineticBlocks.FACADE_BLOCK.get());
+        }
+
     }
 }
