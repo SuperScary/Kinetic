@@ -3,8 +3,14 @@ package superscary.kinetic.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -12,19 +18,46 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.util.ModEnergyStorage;
-import superscary.kinetic.util.NBTKeys;
+import superscary.kinetic.gui.menu.ChargerMenu;
+import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.helpers.NBTKeys;
 
-public class ChargerBlockEntity extends BlockEntity
+public class ChargerBlockEntity extends BlockEntity implements MenuProvider
 {
 
-    public static final int MAX_TRANSFER = 128;
-    public static final int CAPACITY = 100000;
+    public static final int MAX_TRANSFER = 512;
+    public static final int CAPACITY = 512000;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+    private final ItemStackHandler itemHandler = new ItemStackHandler(3)
+    {
+        @Override
+        protected void onContentsChanged (int slot)
+        {
+            setChanged();
+            if (!level.isClientSide())
+            {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+
+        }
+
+        @Override
+        public boolean isItemValid (int slot, @NotNull ItemStack stack)
+        {
+            return switch (slot)
+            {
+                case 0, 1, 2 -> stack.getCapability(ForgeCapabilities.ENERGY).isPresent();
+                default -> false;
+            };
+        }
+    };
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+    private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
 
     public ChargerBlockEntity (BlockPos pos, BlockState state)
     {
@@ -36,8 +69,58 @@ public class ChargerBlockEntity extends BlockEntity
         boolean powered = ENERGY_STORAGE.getEnergyStored() > 0;
         if (powered != getBlockState().getValue(BlockStateProperties.POWERED))
         {
+
+            if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY)
+            {
+                ItemStack s0 = itemHandler.getStackInSlot(0);
+                s0.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
+                    if (handler.canReceive())
+                    {
+                        chargeItem(s0);
+                    }
+                });
+            }
+
+            if (itemHandler.getStackInSlot(1) != ItemStack.EMPTY)
+            {
+                ItemStack s1 = itemHandler.getStackInSlot(1);
+                s1.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
+                    if (handler.canReceive())
+                    {
+                        chargeItem(s1);
+                    }
+                });
+            }
+
+            if (itemHandler.getStackInSlot(2) != ItemStack.EMPTY)
+            {
+                ItemStack s2 = itemHandler.getStackInSlot(2);
+                s2.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
+                    if (handler.canReceive())
+                    {
+                        chargeItem(s2);
+                    }
+                });
+            }
+
             level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, powered));
         }
+    }
+
+    private void chargeItem (ItemStack stack)
+    {
+        if (ENERGY_STORAGE.getEnergyStored() <= 0) return;
+
+        stack.getCapability(ForgeCapabilities.ENERGY).map(e -> {
+            if (e.canReceive())
+            {
+                int received = e.receiveEnergy(Math.min(ENERGY_STORAGE.getEnergyStored(), MAX_TRANSFER), false);
+                ENERGY_STORAGE.extractEnergy(received, false);
+                setChanged();
+                return received;
+            }
+            return 0;
+        });
     }
 
     private ModEnergyStorage createEnergyStorage ()
@@ -67,17 +150,11 @@ public class ChargerBlockEntity extends BlockEntity
     }
 
     @Override
-    public void onLoad ()
-    {
-        super.onLoad();
-        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
-    }
-
-    @Override
     protected void saveAdditional (CompoundTag tag)
     {
         super.saveAdditional(tag);
         tag.put(NBTKeys.POWER, ENERGY_STORAGE.serializeNBT());
+        tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
     }
 
     @Override
@@ -85,12 +162,47 @@ public class ChargerBlockEntity extends BlockEntity
     {
         super.load(tag);
         if (tag.contains(NBTKeys.POWER)) ENERGY_STORAGE.deserializeNBT(tag.get(NBTKeys.POWER));
+        if (tag.contains(NBTKeys.INVENTORY)) itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
     }
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability (@NotNull Capability<T> cap, @Nullable Direction side)
     {
         if (cap == ForgeCapabilities.ENERGY) return lazyEnergyHandler.cast();
+        else if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
         return super.getCapability(cap, side);
+    }
+
+    public ModEnergyStorage getEnergyStorage ()
+    {
+        return ENERGY_STORAGE;
+    }
+
+    public ItemStackHandler getItems ()
+    {
+        return itemHandler;
+    }
+
+    public void drops ()
+    {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++)
+        {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+        Containers.dropContents(this.level, this.worldPosition, inventory);
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu (int id, Inventory inventory, Player player)
+    {
+        return new ChargerMenu(id, inventory, this);
+    }
+
+    @Override
+    public Component getDisplayName ()
+    {
+        return Component.translatable("block.kinetic.charger");
     }
 }

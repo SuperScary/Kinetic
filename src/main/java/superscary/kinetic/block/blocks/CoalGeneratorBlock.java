@@ -1,4 +1,4 @@
-package superscary.kinetic.block;
+package superscary.kinetic.block.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,29 +10,27 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.CoalGeneratorBlockEntity;
 
-public class CoalGeneratorBlock extends BaseEntityBlock
+import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_BASIC;
+
+public class CoalGeneratorBlock extends KineticBaseEntityBlock
 {
 
-    public CoalGeneratorBlock (Properties properties)
+    public CoalGeneratorBlock ()
     {
-        super(properties.strength(3.5f).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
+        super(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()).noOcclusion().strength(3.5f).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
     }
 
     @Nullable
@@ -49,8 +47,7 @@ public class CoalGeneratorBlock extends BaseEntityBlock
         if (level.isClientSide())
         {
             return null;
-        }
-        else return (lvl, pos, st, be) -> {
+        } else return (lvl, pos, st, be) -> {
             if (be instanceof CoalGeneratorBlockEntity generator) generator.tickServer();
         };
     }
@@ -87,37 +84,17 @@ public class CoalGeneratorBlock extends BaseEntityBlock
         return super.use(state, level, pos, player, hand, hit);
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement (BlockPlaceContext context)
-    {
-        return this.defaultBlockState().setValue(BlockStateProperties.POWERED, false)
-                .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
-    }
-
-    @Override
-    protected void createBlockStateDefinition (StateDefinition.Builder<Block, BlockState> builder)
-    {
-        super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.POWERED, BlockStateProperties.FACING);
-    }
-
-    @Override
-    public RenderShape getRenderShape (BlockState state)
-    {
-        return RenderShape.MODEL;
-    }
-
     @Override
     public void animateTick (BlockState state, Level level, BlockPos pos, RandomSource source)
     {
         super.animateTick(state, level, pos, source);
         if (state.getValue(BlockStateProperties.POWERED))
         {
-            double d0 = (double)pos.getX() + 0.5D;
+            double d0 = (double) pos.getX() + 0.5D;
             double d1 = pos.getY();
-            double d2 = (double)pos.getZ() + 0.5D;
-            if (source.nextDouble() < 0.1D) {
+            double d2 = (double) pos.getZ() + 0.5D;
+            if (source.nextDouble() < 0.1D)
+            {
                 level.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 
@@ -125,9 +102,9 @@ public class CoalGeneratorBlock extends BaseEntityBlock
             Direction.Axis direction$axis = direction.getAxis();
             double d3 = 0.52D;
             double d4 = source.nextDouble() * 0.6D - 0.3D;
-            double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
+            double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d4;
             double d6 = source.nextDouble() * 6.0D / 16.0D;
-            double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
+            double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d4;
             level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             level.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 

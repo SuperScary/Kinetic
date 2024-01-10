@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.entity.KineticBlockEntities;
 import superscary.kinetic.block.cables.blocks.CableBlock;
+import superscary.kinetic.block.entity.KineticBlockEntities;
 
 import javax.annotation.Nonnull;
 
@@ -78,6 +78,13 @@ public class FacadeBlockEntity extends CableBlockEntity
         return mimicBlock;
     }
 
+    public void setMimicBlock (BlockState mimicBlock)
+    {
+        this.mimicBlock = mimicBlock;
+        setChanged();
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS + Block.UPDATE_NEIGHBORS);
+    }
+
     // This is used to build the model data for the cable baked model.
     @Nonnull
     @Override
@@ -86,14 +93,6 @@ public class FacadeBlockEntity extends CableBlockEntity
         return ModelData.builder()
                 .with(CableBlock.FACADEID, mimicBlock)
                 .build();
-    }
-
-
-    public void setMimicBlock (BlockState mimicBlock)
-    {
-        this.mimicBlock = mimicBlock;
-        setChanged();
-        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS + Block.UPDATE_NEIGHBORS);
     }
 
     @Override

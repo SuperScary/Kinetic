@@ -1,4 +1,4 @@
-package superscary.kinetic.util;
+package superscary.kinetic.util.helpers;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.block.model.BakedQuad;

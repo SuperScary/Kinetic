@@ -20,32 +20,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.block.cables.blocks.CableBlock;
-import superscary.kinetic.util.CablePatterns;
+import superscary.kinetic.util.helpers.CablePatterns;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-import static superscary.kinetic.util.BakedModelHelper.quad;
-import static superscary.kinetic.util.BakedModelHelper.v;
-import static superscary.kinetic.util.CablePatterns.SpriteIdx.*;
-import static superscary.kinetic.util.CablePatterns.*;
+import static superscary.kinetic.util.helpers.BakedModelHelper.quad;
+import static superscary.kinetic.util.helpers.BakedModelHelper.v;
+import static superscary.kinetic.util.helpers.CablePatterns.Pattern;
+import static superscary.kinetic.util.helpers.CablePatterns.QuadSetting;
+import static superscary.kinetic.util.helpers.CablePatterns.SpriteIdx.*;
 
 public class CableBakedModel implements IDynamicBakedModel
 {
-
-    private final IGeometryBakingContext context;
-    private final boolean facade;
-
-    private TextureAtlasSprite spriteConnector;
-    private TextureAtlasSprite spriteNoneCable;
-    private TextureAtlasSprite spriteNormalCable;
-    private TextureAtlasSprite spriteEndCable;
-    private TextureAtlasSprite spriteCornerCable;
-    private TextureAtlasSprite spriteThreeCable;
-    private TextureAtlasSprite spriteCrossCable;
-    private TextureAtlasSprite spriteSide;
 
     static
     {
@@ -69,6 +58,17 @@ public class CableBakedModel implements IDynamicBakedModel
         CablePatterns.PATTERNS.put(Pattern.of(true, true, false, true), QuadSetting.of(SPRITE_THREE, 3));
         CablePatterns.PATTERNS.put(Pattern.of(true, true, true, true), QuadSetting.of(SPRITE_CROSS, 0));
     }
+
+    private final IGeometryBakingContext context;
+    private final boolean facade;
+    private TextureAtlasSprite spriteConnector;
+    private TextureAtlasSprite spriteNoneCable;
+    private TextureAtlasSprite spriteNormalCable;
+    private TextureAtlasSprite spriteEndCable;
+    private TextureAtlasSprite spriteCornerCable;
+    private TextureAtlasSprite spriteThreeCable;
+    private TextureAtlasSprite spriteCrossCable;
+    private TextureAtlasSprite spriteSide;
 
     public CableBakedModel (IGeometryBakingContext context, boolean facade)
     {

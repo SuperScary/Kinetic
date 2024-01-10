@@ -13,8 +13,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.entity.KineticBlockEntities;
-import superscary.kinetic.util.ModEnergyStorage;
-import superscary.kinetic.util.NBTKeys;
+import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.helpers.NBTKeys;
 
 import javax.annotation.Nonnull;
 import java.util.HashSet;
@@ -31,6 +31,8 @@ public class CableBlockEntity extends BlockEntity
 
     private final ModEnergyStorage energy = createEnergyStorage();
     private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
+    // Cached outputs
+    private Set<BlockPos> outputs = null;
 
     protected CableBlockEntity (BlockEntityType<?> type, BlockPos pos, BlockState state)
     {
@@ -42,19 +44,12 @@ public class CableBlockEntity extends BlockEntity
         super(KineticBlockEntities.CABLE_BE.get(), pos, state);
     }
 
-    // Cached outputs
-    private Set<BlockPos> outputs = null;
-
-    // This function will cache all outputs for this cable network. It will do this
-    // by traversing all cables connected to this cable and then check for all energy
-    // receivers around those cables.
     private void checkOutputs ()
     {
         if (outputs == null)
         {
             outputs = new HashSet<>();
             traverse(worldPosition, cable -> {
-                // Check for all energy receivers around this position (ignore cables)
                 for (Direction direction : Direction.values())
                 {
                     BlockPos p = cable.getBlockPos().relative(direction);
@@ -78,8 +73,6 @@ public class CableBlockEntity extends BlockEntity
         traverse(worldPosition, cable -> cable.outputs = null);
     }
 
-    // This is a generic function that will traverse all cables connected to this cable
-    // and call the given consumer for each cable.
     private void traverse (BlockPos pos, Consumer<CableBlockEntity> consumer)
     {
         Set<BlockPos> traversed = new HashSet<>();
@@ -109,11 +102,9 @@ public class CableBlockEntity extends BlockEntity
     {
         if (energy.getEnergyStored() > 0)
         {
-            // Only do something if we have energy
             checkOutputs();
             if (!outputs.isEmpty())
             {
-                // Distribute energy over all outputs
                 int amount = energy.getEnergyStored() / outputs.size();
                 for (BlockPos p : outputs)
                 {

@@ -1,5 +1,7 @@
 {
   "type": "kinetic:sawmill",
+  "energy": 150,
+  "craftTime": 600,
   "ingredients": [
     {
       "item": "minecraft:oak_log"

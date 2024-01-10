@@ -9,24 +9,22 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import superscary.kinetic.block.KineticBlocks;
-import superscary.kinetic.block.entity.KineticBlockEntities;
 import superscary.kinetic.block.cables.blocks.CableModelLoader;
-import superscary.kinetic.config.Config;
+import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.gui.screen.ChargerScreen;
 import superscary.kinetic.gui.screen.CoalGeneratorScreen;
+import superscary.kinetic.gui.screen.CompressorScreen;
+import superscary.kinetic.gui.screen.SawmillScreen;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.network.ModMessages;
 import superscary.kinetic.recipe.KineticRecipes;
-import superscary.kinetic.gui.screen.CompressorScreen;
-import superscary.kinetic.gui.KineticMenus;
-import superscary.kinetic.gui.screen.SawmillScreen;
 import superscary.kinetic.util.FacadeBlockColor;
 
 @Mod(Kinetic.MODID)
@@ -48,8 +46,6 @@ public class Kinetic
         KineticRecipes.SERIALIZERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup (final FMLCommonSetupEvent event)
@@ -63,7 +59,7 @@ public class Kinetic
 
     }
 
-    @Mod.EventBusSubscriber (modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
@@ -72,6 +68,7 @@ public class Kinetic
             MenuScreens.register(KineticMenus.COMPRESSOR_MENU.get(), CompressorScreen::new);
             MenuScreens.register(KineticMenus.SAWMILL_MENU.get(), SawmillScreen::new);
             MenuScreens.register(KineticMenus.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
+            MenuScreens.register(KineticMenus.CHARGER_MENU.get(), ChargerScreen::new);
         }
 
         @SubscribeEvent

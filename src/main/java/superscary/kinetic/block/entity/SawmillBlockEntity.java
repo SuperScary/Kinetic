@@ -27,17 +27,21 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.SawmillBlock;
-import superscary.kinetic.recipe.SawmillRecipe;
+import superscary.kinetic.block.blocks.SawmillBlock;
 import superscary.kinetic.gui.menu.SawmillMenu;
-import superscary.kinetic.util.NBTKeys;
+import superscary.kinetic.recipe.SawmillRecipe;
+import superscary.kinetic.util.helpers.NBTKeys;
 
 import java.util.Optional;
 
 public class SawmillBlockEntity extends BlockEntity implements MenuProvider
 {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
+    private static final int INPUT_SLOT = 0;
+    private static final int OUTPUT_SLOT = 1;
+    protected final ContainerData data;
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2)
+    {
         @Override
         protected void onContentsChanged (int slot)
         {
@@ -48,12 +52,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
             }
         }
     };
-
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
-
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
 
@@ -69,7 +68,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
                 {
                     case 0 -> SawmillBlockEntity.this.progress;
                     case 1 -> SawmillBlockEntity.this.maxProgress;
-                    default ->  0;
+                    default -> 0;
                 };
             }
 

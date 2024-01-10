@@ -47,22 +47,83 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
     public static final EnumProperty<ConnectorType> DOWN = EnumProperty.create("down", ConnectorType.class);
 
     public static final ModelProperty<BlockState> FACADEID = new ModelProperty<>();
-
-    private static VoxelShape[] shapeCache = null;
-
     private static final VoxelShape SHAPE_CABLE_NORTH = Shapes.box(.4, .4, 0, .6, .6, .4);
     private static final VoxelShape SHAPE_CABLE_SOUTH = Shapes.box(.4, .4, .6, .6, .6, 1);
     private static final VoxelShape SHAPE_CABLE_WEST = Shapes.box(0, .4, .4, .4, .6, .6);
     private static final VoxelShape SHAPE_CABLE_EAST = Shapes.box(.6, .4, .4, 1, .6, .6);
     private static final VoxelShape SHAPE_CABLE_UP = Shapes.box(.4, .6, .4, .6, 1, .6);
     private static final VoxelShape SHAPE_CABLE_DOWN = Shapes.box(.4, 0, .4, .6, .4, .6);
-
     private static final VoxelShape SHAPE_BLOCK_NORTH = Shapes.box(.2, .2, 0, .8, .8, .1);
     private static final VoxelShape SHAPE_BLOCK_SOUTH = Shapes.box(.2, .2, .9, .8, .8, 1);
     private static final VoxelShape SHAPE_BLOCK_WEST = Shapes.box(0, .2, .2, .1, .8, .8);
     private static final VoxelShape SHAPE_BLOCK_EAST = Shapes.box(.9, .2, .2, 1, .8, .8);
     private static final VoxelShape SHAPE_BLOCK_UP = Shapes.box(.2, .9, .2, .8, 1, .8);
     private static final VoxelShape SHAPE_BLOCK_DOWN = Shapes.box(.2, 0, .2, .8, .1, .8);
+    private static VoxelShape[] shapeCache = null;
+
+    public CableBlock ()
+    {
+        super(BlockBehaviour.Properties.of()
+                .strength(1.0f)
+                .sound(SoundType.METAL)
+                .noOcclusion()
+        );
+        makeShapes();
+        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
+    }
+
+    // Return the connector type for the given position and facing direction
+    private static ConnectorType getConnectorType (BlockGetter world, BlockPos connectorPos, Direction facing)
+    {
+        BlockPos pos = connectorPos.relative(facing);
+        BlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        if (block instanceof CableBlock)
+        {
+            return ConnectorType.CABLE;
+        } else if (isConnectable(world, connectorPos, facing))
+        {
+            return ConnectorType.BLOCK;
+        } else
+        {
+            return ConnectorType.NONE;
+        }
+    }
+
+    public static boolean isConnectable (BlockGetter world, BlockPos connectorPos, Direction facing)
+    {
+        BlockPos pos = connectorPos.relative(facing);
+        BlockState state = world.getBlockState(pos);
+        if (state.isAir())
+        {
+            return false;
+        }
+        BlockEntity te = world.getBlockEntity(pos);
+        if (te == null)
+        {
+            return false;
+        }
+        return te.getCapability(ForgeCapabilities.ENERGY).isPresent();
+    }
+
+    @Nonnull
+    public static BlockState calculateState (LevelAccessor world, BlockPos pos, BlockState state)
+    {
+        ConnectorType north = getConnectorType(world, pos, Direction.NORTH);
+        ConnectorType south = getConnectorType(world, pos, Direction.SOUTH);
+        ConnectorType west = getConnectorType(world, pos, Direction.WEST);
+        ConnectorType east = getConnectorType(world, pos, Direction.EAST);
+        ConnectorType up = getConnectorType(world, pos, Direction.UP);
+        ConnectorType down = getConnectorType(world, pos, Direction.DOWN);
+
+        return state
+                .setValue(NORTH, north)
+                .setValue(SOUTH, south)
+                .setValue(WEST, west)
+                .setValue(EAST, east)
+                .setValue(UP, up)
+                .setValue(DOWN, down);
+    }
 
     private int calculateShapeIndex (ConnectorType north, ConnectorType south, ConnectorType west, ConnectorType east, ConnectorType up, ConnectorType down)
     {
@@ -152,17 +213,6 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
         return calculateState(world, current, state);
     }
 
-    public CableBlock ()
-    {
-        super(BlockBehaviour.Properties.of()
-                .strength(1.0f)
-                .sound(SoundType.METAL)
-                .noOcclusion()
-        );
-        makeShapes();
-        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
-    }
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity (BlockPos blockPos, BlockState blockState)
@@ -213,42 +263,6 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
         }
     }
 
-    // Return the connector type for the given position and facing direction
-    private static ConnectorType getConnectorType (BlockGetter world, BlockPos connectorPos, Direction facing)
-    {
-        BlockPos pos = connectorPos.relative(facing);
-        BlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        if (block instanceof CableBlock)
-        {
-            return ConnectorType.CABLE;
-        } else if (isConnectable(world, connectorPos, facing))
-        {
-            return ConnectorType.BLOCK;
-        } else
-        {
-            return ConnectorType.NONE;
-        }
-    }
-
-    // Return true if the block at the given position is connectable to a cable. This is the
-    // case if the block supports forge energy
-    public static boolean isConnectable (BlockGetter world, BlockPos connectorPos, Direction facing)
-    {
-        BlockPos pos = connectorPos.relative(facing);
-        BlockState state = world.getBlockState(pos);
-        if (state.isAir())
-        {
-            return false;
-        }
-        BlockEntity te = world.getBlockEntity(pos);
-        if (te == null)
-        {
-            return false;
-        }
-        return te.getCapability(ForgeCapabilities.ENERGY).isPresent();
-    }
-
     @Override
     protected void createBlockStateDefinition (@Nonnull StateDefinition.Builder<Block, BlockState> builder)
     {
@@ -264,25 +278,6 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
         BlockPos pos = context.getClickedPos();
         return calculateState(world, pos, defaultBlockState())
                 .setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER);
-    }
-
-    @Nonnull
-    public static BlockState calculateState (LevelAccessor world, BlockPos pos, BlockState state)
-    {
-        ConnectorType north = getConnectorType(world, pos, Direction.NORTH);
-        ConnectorType south = getConnectorType(world, pos, Direction.SOUTH);
-        ConnectorType west = getConnectorType(world, pos, Direction.WEST);
-        ConnectorType east = getConnectorType(world, pos, Direction.EAST);
-        ConnectorType up = getConnectorType(world, pos, Direction.UP);
-        ConnectorType down = getConnectorType(world, pos, Direction.DOWN);
-
-        return state
-                .setValue(NORTH, north)
-                .setValue(SOUTH, south)
-                .setValue(WEST, west)
-                .setValue(EAST, east)
-                .setValue(UP, up)
-                .setValue(DOWN, down);
     }
 
     @Nonnull

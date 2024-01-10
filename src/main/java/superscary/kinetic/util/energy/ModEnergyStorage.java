@@ -1,4 +1,4 @@
-package superscary.kinetic.util;
+package superscary.kinetic.util.energy;
 
 import net.minecraftforge.energy.EnergyStorage;
 
@@ -60,6 +60,6 @@ public abstract class ModEnergyStorage extends EnergyStorage
         onEnergyChanged();
     }
 
-    public abstract void onEnergyChanged();
+    public abstract void onEnergyChanged ();
 
 }

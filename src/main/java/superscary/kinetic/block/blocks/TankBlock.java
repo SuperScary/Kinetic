@@ -1,4 +1,4 @@
-package superscary.kinetic.block;
+package superscary.kinetic.block.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -16,9 +16,8 @@ import superscary.kinetic.block.entity.BasicTankBlockEntity;
 public class TankBlock extends BaseEntityBlock
 {
 
-    private final int capacity;
-
     public static final VoxelShape SHAPE = TankBlock.box(3, 0, 3, 13, 16, 13);
+    private final int capacity;
 
     public TankBlock (int capacity)
     {

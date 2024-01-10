@@ -1,14 +1,11 @@
 package superscary.kinetic.item;
 
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.checkerframework.checker.units.qual.C;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
-import superscary.kinetic.block.KineticBlocks;
 
 import java.util.function.Supplier;
 

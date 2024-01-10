@@ -14,12 +14,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -27,17 +24,17 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.SawmillBlock;
-import superscary.kinetic.gui.menu.SawmillMenu;
-import superscary.kinetic.recipe.SawmillRecipe;
-import superscary.kinetic.util.NBTKeys;
-
-import java.util.Optional;
+import superscary.kinetic.block.blocks.QuantumQuarryBlock;
+import superscary.kinetic.util.helpers.NBTKeys;
 
 public class QQBlockEntity extends BlockEntity implements MenuProvider
 {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
+    private static final int INPUT_SLOT = 0;
+    private static final int OUTPUT_SLOT = 1;
+    protected final ContainerData data;
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2)
+    {
         @Override
         protected void onContentsChanged (int slot)
         {
@@ -48,18 +45,13 @@ public class QQBlockEntity extends BlockEntity implements MenuProvider
             }
         }
     };
-
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
-
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
 
     public QQBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.COMPRESSOR_BE.get(), pos, state);
+        super(KineticBlockEntities.QQ_BE.get(), pos, state);
         this.data = new ContainerData()
         {
             @Override
@@ -69,7 +61,7 @@ public class QQBlockEntity extends BlockEntity implements MenuProvider
                 {
                     case 0 -> QQBlockEntity.this.progress;
                     case 1 -> QQBlockEntity.this.maxProgress;
-                    default ->  0;
+                    default -> 0;
                 };
             }
 
@@ -135,14 +127,14 @@ public class QQBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public AbstractContainerMenu createMenu (int containerId, Inventory inventory, Player player)
     {
-        return new SawmillMenu(containerId, inventory, this, this.data);
+        return null;
     }
 
     @Override
     protected void saveAdditional (CompoundTag tag)
     {
         tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
-        tag.putInt(NBTKeys.COMPRESSOR_NBT_PROGRESS, progress);
+        tag.putInt(NBTKeys.QUARRY_NBT_PROGRESS, progress);
         super.saveAdditional(tag);
     }
 
@@ -151,86 +143,14 @@ public class QQBlockEntity extends BlockEntity implements MenuProvider
     {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
-        progress = tag.getInt(NBTKeys.SAWMILL_NBT_PROGRESS);
+        progress = tag.getInt(NBTKeys.QUARRY_NBT_PROGRESS);
     }
 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
-        SawmillBlock block = (SawmillBlock) pState.getBlock();
-        if (hasRecipe())
-        {
-            block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.TRUE);
-            increaseCraftingProgress();
-            setChanged(pLevel, pPos, pState);
+        QuantumQuarryBlock block = (QuantumQuarryBlock) pState.getBlock();
 
-            if (hasProgressFinished())
-            {
-                craftItem();
-                resetProgress();
-                block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
-            }
 
-        } else
-        {
-            resetProgress();
-            block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
-        }
-
-    }
-
-    private void resetProgress ()
-    {
-        progress = 0;
-    }
-
-    private void craftItem ()
-    {
-        Optional<SawmillRecipe> recipe = getCurrentRecipe();
-        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-
-        this.itemHandler.extractItem(INPUT_SLOT, 1, false);
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(), this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
-    }
-
-    private boolean hasRecipe ()
-    {
-        Optional<SawmillRecipe> recipe = getCurrentRecipe();
-
-        if (recipe.isEmpty()) return false;
-        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-
-        return canInsertAmount(result.getCount()) && canInsertItem(result.getItem());
-    }
-
-    private Optional<SawmillRecipe> getCurrentRecipe ()
-    {
-        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++)
-        {
-            inventory.setItem(i, this.itemHandler.getStackInSlot(i));
-        }
-
-        return this.level.getRecipeManager().getRecipeFor(SawmillRecipe.Type.INSTANCE, inventory, level);
-    }
-
-    private boolean canInsertItem (Item item)
-    {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
-    }
-
-    private boolean canInsertAmount (int count)
-    {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count <= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
-    }
-
-    private boolean hasProgressFinished ()
-    {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftingProgress ()
-    {
-        progress++;
     }
 
     @Nullable

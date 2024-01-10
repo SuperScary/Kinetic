@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import superscary.kinetic.block.MachineBlock;
+import superscary.kinetic.block.blocks.MachineBlock;
 
 public class WrenchItem extends Item
 {

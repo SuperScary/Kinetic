@@ -1,4 +1,4 @@
-package superscary.kinetic.util;
+package superscary.kinetic.util.helpers;
 
 import superscary.kinetic.block.cables.ConnectorType;
 

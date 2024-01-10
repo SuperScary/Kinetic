@@ -13,14 +13,14 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.TankBlock;
+import superscary.kinetic.block.blocks.TankBlock;
 
 public class KineticTankBase extends BlockEntity
 {
 
     private final int capacity;
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
     private final FluidTank FLUID_TANK = createFluidTank();
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
     public KineticTankBase (BlockPos pos, BlockState state)
     {
@@ -30,7 +30,8 @@ public class KineticTankBase extends BlockEntity
 
     private FluidTank createFluidTank ()
     {
-        return new FluidTank(capacity) {
+        return new FluidTank(capacity)
+        {
             @Override
             protected void onContentsChanged ()
             {

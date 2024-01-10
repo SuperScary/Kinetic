@@ -18,7 +18,8 @@ public class ModMessages
     private static SimpleChannel INSTANCE;
 
     private static int packetId = 0;
-    private static int id()
+
+    private static int id ()
     {
         return packetId++;
     }
@@ -59,15 +60,18 @@ public class ModMessages
                 .add();
     }
 
-    public static <MSG> void sendToServer(MSG message) {
+    public static <MSG> void sendToServer (MSG message)
+    {
         INSTANCE.sendToServer(message);
     }
 
-    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
+    public static <MSG> void sendToPlayer (MSG message, ServerPlayer player)
+    {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
-    public static <MSG> void sendToClients(MSG message) {
+    public static <MSG> void sendToClients (MSG message)
+    {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
 

@@ -10,6 +10,7 @@ public class CapacitorItem extends Item
     private final int maxCap;
     private final int maxTrans;
     private final int rarity;
+
     public CapacitorItem (Properties properties, int maxCap, int maxTrans, int rarity)
     {
         super(properties);

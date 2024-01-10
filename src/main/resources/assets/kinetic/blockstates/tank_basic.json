@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "kinetic:block/tank_basic"
+      "model": "kinetic:block/tank/tank_basic"
     }
   }
 }

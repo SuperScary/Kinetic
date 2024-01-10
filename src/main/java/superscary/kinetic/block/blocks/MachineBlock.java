@@ -1,4 +1,4 @@
-package superscary.kinetic.block;
+package superscary.kinetic.block.blocks;
 
 import net.minecraft.world.level.block.Block;
 

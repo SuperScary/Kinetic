@@ -1,47 +1,32 @@
-package superscary.kinetic.block;
+package superscary.kinetic.block.blocks;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.KineticBlockEntities;
 import superscary.kinetic.block.entity.QQBlockEntity;
 
-public class QuantumQuarryBlock extends BaseEntityBlock
+import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_ULTIMATE;
+
+public class QuantumQuarryBlock extends KineticBaseEntityBlock
 {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-
-    public QuantumQuarryBlock (Properties properties)
+    public QuantumQuarryBlock ()
     {
-        super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, Boolean.FALSE));
-    }
-
-    @Override
-    public RenderShape getRenderShape (BlockState state)
-    {
-        return RenderShape.MODEL;
+        super(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get()));
     }
 
     @Override
@@ -99,20 +84,6 @@ public class QuantumQuarryBlock extends BaseEntityBlock
     public void animateTick (BlockState state, Level level, BlockPos pos, RandomSource randomSource)
     {
         super.animateTick(state, level, pos, randomSource);
-    }
-
-    @Override
-    protected void createBlockStateDefinition (StateDefinition.Builder<Block, BlockState> builder)
-    {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING, POWERED);
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement (BlockPlaceContext ctx)
-    {
-        return defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(POWERED, Boolean.FALSE);
     }
 
 }

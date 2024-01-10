@@ -37,6 +37,11 @@ public class FacadeBlockItem extends BlockItem
 
     public static final String FACADE_IS_MIMICING = "kinetic.facade.is_mimicing";
 
+    public FacadeBlockItem (FacadeBlock block, Item.Properties properties)
+    {
+        super(block, properties);
+    }
+
     private static String getMimickingString (ItemStack stack)
     {
         CompoundTag tag = stack.getTag();
@@ -52,12 +57,6 @@ public class FacadeBlockItem extends BlockItem
             }
         }
         return "<unset>";
-    }
-
-
-    public FacadeBlockItem (FacadeBlock block, Item.Properties properties)
-    {
-        super(block, properties);
     }
 
     private static void userSetMimicBlock (@Nonnull ItemStack item, BlockState mimicBlock, UseOnContext context)

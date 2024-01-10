@@ -1,8 +1,9 @@
-package superscary.kinetic.util;
+package superscary.kinetic.util.helpers;
 
 import net.minecraft.core.Direction;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import superscary.kinetic.util.WrappedHandler;
 
 import java.util.HashMap;
 import java.util.Map;

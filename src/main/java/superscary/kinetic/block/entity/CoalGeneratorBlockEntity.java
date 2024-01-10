@@ -30,12 +30,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.CoalGeneratorBlock;
-import superscary.kinetic.block.CompressorBlock;
 import superscary.kinetic.gui.menu.CoalGeneratorMenu;
-import superscary.kinetic.util.*;
-
-import java.util.Map;
+import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.helpers.NBTKeys;
 
 public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvider
 {
@@ -46,7 +43,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
     public static int SLOT_COUNT = 1;
     public static int SLOT = 0;
-
+    protected final ContainerData data;
     private final ItemStackHandler itemHandler = new ItemStackHandler(SLOT_COUNT)
     {
         @Override
@@ -60,12 +57,10 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
         }
     };
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
     private int burnTime;
-    protected final ContainerData data;
 
     public CoalGeneratorBlockEntity (BlockPos pos, BlockState state)
     {
@@ -78,7 +73,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
                 return switch (index)
                 {
                     case 0 -> CoalGeneratorBlockEntity.this.burnTime;
-                    default ->  0;
+                    default -> 0;
                 };
             }
 
@@ -252,7 +247,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public AbstractContainerMenu createMenu (int containerId, Inventory inventory, Player player)
     {
-        return new CoalGeneratorMenu(containerId, inventory, this, this.data);
+        return new CoalGeneratorMenu(containerId, inventory, this);
     }
 
     @Nullable

@@ -29,12 +29,15 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.CompressorBlock;
-import superscary.kinetic.item.CapacitorItem;
+import superscary.kinetic.block.blocks.CompressorBlock;
+import superscary.kinetic.gui.menu.CompressorMenu;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.recipe.CompressorRecipe;
-import superscary.kinetic.gui.menu.CompressorMenu;
-import superscary.kinetic.util.*;
+import superscary.kinetic.util.WrappedHandler;
+import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.helpers.InventoryDirectionEntry;
+import superscary.kinetic.util.helpers.InventoryDirectionWrapper;
+import superscary.kinetic.util.helpers.NBTKeys;
 
 import java.util.Map;
 import java.util.Optional;
@@ -42,7 +45,15 @@ import java.util.Optional;
 public class CompressorBlockEntity extends BlockEntity implements MenuProvider
 {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
+    private static final int INPUT_SLOT = 0;
+    private static final int OUTPUT_SLOT = 1;
+    private static final int CAPACITOR_SLOT = 2;
+    protected final ContainerData data;
+    private final int DEFAULT_MAX_PROGRESS = 78;
+    private final int DEFAULT_ENERGY_AMOUNT = 128;
+    private ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+    private final ItemStackHandler itemHandler = new ItemStackHandler(3)
+    {
         @Override
         protected void onContentsChanged (int slot)
         {
@@ -77,18 +88,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
             };
         }
     };
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
-    private static final int CAPACITOR_SLOT = 2;
-    private ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
-    protected final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 0;
-    private final int DEFAULT_MAX_PROGRESS = 78;
-    private int energyAmount = 0;
-    private final int DEFAULT_ENERGY_AMOUNT = 128;
+    private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
             new InventoryDirectionWrapper(itemHandler,
                     new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
@@ -97,6 +97,10 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
                     new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, false),
                     new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+    private int progress = 0;
+    private int maxProgress = 0;
+    private int energyAmount = 0;
 
     public CompressorBlockEntity (BlockPos pos, BlockState state)
     {
@@ -110,7 +114,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
                 {
                     case 0 -> CompressorBlockEntity.this.progress;
                     case 1 -> CompressorBlockEntity.this.maxProgress;
-                    default ->  0;
+                    default -> 0;
                 };
             }
 

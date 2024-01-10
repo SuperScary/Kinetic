@@ -104,7 +104,7 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
             {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
-            
+
             return new SawmillRecipe(inputs, output, recipeId);
         }
 
