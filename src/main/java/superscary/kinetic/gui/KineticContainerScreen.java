@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.energy.IEnergyStorage;
 import superscary.kinetic.gui.renderer.EnergyDisplayTooltipArea;
 import superscary.kinetic.util.helpers.MouseUtil;

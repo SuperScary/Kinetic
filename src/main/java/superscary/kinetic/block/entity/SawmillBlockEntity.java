@@ -3,6 +3,7 @@ package superscary.kinetic.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -14,33 +15,35 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.blocks.SawmillBlock;
 import superscary.kinetic.gui.menu.SawmillMenu;
-import superscary.kinetic.recipe.SawmillRecipe;
+import superscary.kinetic.item.KineticItems;
+import superscary.kinetic.util.SizedInventory;
+import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
-import java.util.Optional;
-
-public class SawmillBlockEntity extends BlockEntity implements MenuProvider
+public class SawmillBlockEntity extends BlockEntity implements MenuProvider, SizedInventory
 {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     protected final ContainerData data;
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2)
+    private final int DEFAULT_MAX_PROGRESS = 78;
+    private final int DEFAULT_ENERGY_AMOUNT = 128;
+    private EnergyStorage energy = createEnergyStorage();
+    private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
     {
         @Override
         protected void onContentsChanged (int slot)
@@ -50,11 +53,30 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
             {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+
+        }
+
+        @Override
+        public boolean isItemValid (int slot, @NotNull ItemStack stack)
+        {
+            return switch (slot)
+            {
+                case 0 -> true;
+                case 1 -> false;
+                case 2 -> stack.getItem() == KineticItems.CAPACITOR_BASIC.get()
+                        || stack.getItem() == KineticItems.CAPACITOR_STANDARD.get()
+                        || stack.getItem() == KineticItems.CAPACITOR_PREMIUM.get()
+                        || stack.getItem() == KineticItems.CAPACITOR_DELUXE.get()
+                        || stack.getItem() == KineticItems.CAPACITOR_ULTIMATE.get();
+                default -> super.isItemValid(slot, stack);
+            };
         }
     };
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     private int progress = 0;
-    private int maxProgress = 78;
+    private int maxProgress = 0;
+    private int energyAmount = 0;
 
     public SawmillBlockEntity (BlockPos pos, BlockState state)
     {
@@ -85,7 +107,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
             @Override
             public int getCount ()
             {
-                return 2;
+                return 3;
             }
         };
     }
@@ -93,18 +115,19 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public @NotNull <T> LazyOptional<T> getCapability (@NotNull Capability<T> cap, @Nullable Direction side)
     {
-        if (cap == ForgeCapabilities.ITEM_HANDLER)
-        {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap, side);
+        if (cap == ForgeCapabilities.ENERGY) return lazyEnergyHandler.cast();
+        else if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
+        else return super.getCapability(cap, side);
     }
 
-    @Override
-    public void onLoad ()
+    private EnergyStorage createEnergyStorage ()
     {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        return new EnergyStorage(64000, 128, 128);
+    }
+
+    public IEnergyStorage getEnergyStorage ()
+    {
+        return energy;
     }
 
     @Override
@@ -112,6 +135,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
     {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyEnergyHandler.invalidate();
     }
 
     public void drops ()
@@ -127,7 +151,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public Component getDisplayName ()
     {
-        return Component.translatable("block.kinetic.compressor");
+        return Component.translatable("block.kinetic.sawmill");
     }
 
     @Nullable
@@ -141,7 +165,10 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
     protected void saveAdditional (CompoundTag tag)
     {
         tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
-        tag.putInt(NBTKeys.COMPRESSOR_NBT_PROGRESS, progress);
+        tag.putInt(NBTKeys.SAWMILL_NBT_PROGRESS, progress);
+        tag.putInt(NBTKeys.SAWMILL_NBT_MAX_PROGRESS, maxProgress);
+        tag.putInt(NBTKeys.POWER, energyAmount);
+        tag.putInt(NBTKeys.POWER, energy.getEnergyStored());
         super.saveAdditional(tag);
     }
 
@@ -151,85 +178,14 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
         progress = tag.getInt(NBTKeys.SAWMILL_NBT_PROGRESS);
+        maxProgress = tag.getInt(NBTKeys.SAWMILL_NBT_MAX_PROGRESS);
+        energyAmount = tag.getInt(NBTKeys.POWER);
+        energy.deserializeNBT(tag.get(NBTKeys.POWER));
     }
 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
-        SawmillBlock block = (SawmillBlock) pState.getBlock();
-        if (hasRecipe())
-        {
-            block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.TRUE);
-            increaseCraftingProgress();
-            setChanged(pLevel, pPos, pState);
 
-            if (hasProgressFinished())
-            {
-                craftItem();
-                resetProgress();
-                block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
-            }
-
-        } else
-        {
-            resetProgress();
-            block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
-        }
-
-    }
-
-    private void resetProgress ()
-    {
-        progress = 0;
-    }
-
-    private void craftItem ()
-    {
-        Optional<SawmillRecipe> recipe = getCurrentRecipe();
-        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-
-        this.itemHandler.extractItem(INPUT_SLOT, 1, false);
-        this.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(result.getItem(), this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + result.getCount()));
-    }
-
-    private boolean hasRecipe ()
-    {
-        Optional<SawmillRecipe> recipe = getCurrentRecipe();
-
-        if (recipe.isEmpty()) return false;
-        ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-
-        return canInsertAmount(result.getCount()) && canInsertItem(result.getItem());
-    }
-
-    private Optional<SawmillRecipe> getCurrentRecipe ()
-    {
-        SimpleContainer inventory = new SimpleContainer(this.itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++)
-        {
-            inventory.setItem(i, this.itemHandler.getStackInSlot(i));
-        }
-
-        return this.level.getRecipeManager().getRecipeFor(SawmillRecipe.Type.INSTANCE, inventory, level);
-    }
-
-    private boolean canInsertItem (Item item)
-    {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).isEmpty() || this.itemHandler.getStackInSlot(OUTPUT_SLOT).is(item);
-    }
-
-    private boolean canInsertAmount (int count)
-    {
-        return this.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + count <= this.itemHandler.getStackInSlot(OUTPUT_SLOT).getMaxStackSize();
-    }
-
-    private boolean hasProgressFinished ()
-    {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftingProgress ()
-    {
-        progress++;
     }
 
     @Nullable
@@ -244,4 +200,22 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider
     {
         return saveWithoutMetadata();
     }
+
+    @Override
+    public void onDataPacket (Connection net, ClientboundBlockEntityDataPacket pkt)
+    {
+        super.onDataPacket(net, pkt);
+    }
+
+    @Override
+    public int getInventorySize ()
+    {
+        return 3;
+    }
+
+    public int getStoredPower ()
+    {
+        return energy.getEnergyStored();
+    }
+
 }

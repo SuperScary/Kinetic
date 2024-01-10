@@ -25,16 +25,18 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.gui.menu.CoalGeneratorMenu;
-import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.SizedInventory;
+import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
-public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvider
+public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvider, SizedInventory
 {
 
     public static final int GENERATE = 50;
@@ -44,7 +46,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     public static int SLOT_COUNT = 1;
     public static int SLOT = 0;
     protected final ContainerData data;
-    private final ItemStackHandler itemHandler = new ItemStackHandler(SLOT_COUNT)
+    private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
     {
         @Override
         protected void onContentsChanged (int slot)
@@ -57,9 +59,9 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
         }
     };
-    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
+    private final EnergyStorage energy = createEnergyStorage();
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     private int burnTime;
 
     public CoalGeneratorBlockEntity (BlockPos pos, BlockState state)
@@ -109,7 +111,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
 
     private void generateEnergy ()
     {
-        if (ENERGY_STORAGE.getEnergyStored() < ENERGY_STORAGE.getMaxEnergyStored())
+        if (energy.getEnergyStored() < energy.getMaxEnergyStored())
         {
             if (burnTime <= 0)
             {
@@ -123,7 +125,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
             } else
             {
                 setBurnTime(burnTime - 1);
-                ENERGY_STORAGE.receiveEnergy(GENERATE, false);
+                energy.receiveEnergy(GENERATE, false);
             }
             setChanged();
         }
@@ -145,15 +147,15 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     {
         for (Direction direction : Direction.values())
         {
-            if (ENERGY_STORAGE.getEnergyStored() <= 0) return;
+            if (energy.getEnergyStored() <= 0) return;
             BlockEntity be = level.getBlockEntity(getBlockPos().relative(direction));
             if (be != null)
             {
                 be.getCapability(ForgeCapabilities.ENERGY).map(e -> {
                     if (e.canReceive())
                     {
-                        int received = e.receiveEnergy(Math.min(ENERGY_STORAGE.getEnergyStored(), MAX_TRANSFER), false);
-                        ENERGY_STORAGE.extractEnergy(received, false);
+                        int received = e.receiveEnergy(Math.min(energy.getEnergyStored(), MAX_TRANSFER), false);
+                        energy.extractEnergy(received, false);
                         setChanged();
                         return received;
                     }
@@ -168,22 +170,14 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
         return itemHandler;
     }
 
-    public ModEnergyStorage getEnergyStorage ()
+    public EnergyStorage getEnergyStorage ()
     {
-        return ENERGY_STORAGE;
+        return energy;
     }
 
-    private ModEnergyStorage createEnergyStorage ()
+    private EnergyStorage createEnergyStorage ()
     {
-        return new ModEnergyStorage(CAPACITY, MAX_TRANSFER)
-        {
-            @Override
-            public void onEnergyChanged ()
-            {
-                setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-        };
+        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER);
     }
 
     public void drops ()
@@ -201,7 +195,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+        lazyEnergyHandler = LazyOptional.of(() -> energy);
     }
 
     @Override
@@ -209,7 +203,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     {
         super.saveAdditional(tag);
         tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
-        tag.put(NBTKeys.POWER, ENERGY_STORAGE.serializeNBT());
+        tag.put(NBTKeys.POWER, energy.serializeNBT());
     }
 
     @Override
@@ -217,7 +211,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     {
         super.load(tag);
         if (tag.contains(NBTKeys.INVENTORY)) itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
-        if (tag.contains(NBTKeys.POWER)) ENERGY_STORAGE.setEnergy(tag.getInt(NBTKeys.POWER));
+        if (tag.contains(NBTKeys.POWER)) energy.deserializeNBT(tag.get(NBTKeys.POWER));
     }
 
     @Override
@@ -267,6 +261,17 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     public void onDataPacket (Connection net, ClientboundBlockEntityDataPacket pkt)
     {
         super.onDataPacket(net, pkt);
+    }
+
+    @Override
+    public int getInventorySize ()
+    {
+        return 1;
+    }
+
+    public int getStoredPower ()
+    {
+        return energy.getEnergyStored();
     }
 
 }

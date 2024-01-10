@@ -34,6 +34,7 @@ public abstract class KineticContainerMenu extends AbstractContainerMenu
 
     private final Level level;
     private final BlockPos pos;
+    protected int power;
 
     protected KineticContainerMenu (@Nullable MenuType<?> menu, int id, Inventory inventory, BlockPos pos)
     {
@@ -44,11 +45,13 @@ public abstract class KineticContainerMenu extends AbstractContainerMenu
 
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
+        addDataSlots(inventory.player, getBlockPos());
     }
 
     public abstract int getContainerSize ();
 
     public abstract Block getBlock ();
+    public abstract void addDataSlots (Player player, BlockPos pos);
 
     public Level getLevel ()
     {
@@ -58,6 +61,11 @@ public abstract class KineticContainerMenu extends AbstractContainerMenu
     public BlockPos getBlockPos ()
     {
         return pos;
+    }
+
+    public int getPower ()
+    {
+        return power;
     }
 
     @Override

@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -31,28 +32,27 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.blocks.CompressorBlock;
 import superscary.kinetic.gui.menu.CompressorMenu;
+import superscary.kinetic.item.CapacitorItem;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.recipe.CompressorRecipe;
-import superscary.kinetic.util.WrappedHandler;
-import superscary.kinetic.util.energy.ModEnergyStorage;
-import superscary.kinetic.util.helpers.InventoryDirectionEntry;
-import superscary.kinetic.util.helpers.InventoryDirectionWrapper;
+import superscary.kinetic.util.SizedInventory;
+import superscary.kinetic.util.energy.CapacitorModifiable;
+import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.util.helpers.InventoryHelper;
 import superscary.kinetic.util.helpers.NBTKeys;
 
-import java.util.Map;
 import java.util.Optional;
 
-public class CompressorBlockEntity extends BlockEntity implements MenuProvider
+public class CompressorBlockEntity extends BlockEntity implements MenuProvider, SizedInventory, CapacitorModifiable
 {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
-    private static final int CAPACITOR_SLOT = 2;
     protected final ContainerData data;
     private final int DEFAULT_MAX_PROGRESS = 78;
     private final int DEFAULT_ENERGY_AMOUNT = 128;
-    private ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3)
+    private EnergyStorage energy = createEnergyStorage();
+    private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
     {
         @Override
         protected void onContentsChanged (int slot)
@@ -63,10 +63,10 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
 
-            if (slot == CAPACITOR_SLOT)
+            if (slot == getCapacitorSlot())
             {
                 setChanged();
-                ENERGY_STORAGE = createEnergyStorage();
+                energy = createEnergyStorage();
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
 
@@ -89,15 +89,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap =
-            new InventoryDirectionWrapper(itemHandler,
-                    new InventoryDirectionEntry(Direction.DOWN, OUTPUT_SLOT, false),
-                    new InventoryDirectionEntry(Direction.NORTH, INPUT_SLOT, true),
-                    new InventoryDirectionEntry(Direction.SOUTH, OUTPUT_SLOT, false),
-                    new InventoryDirectionEntry(Direction.EAST, OUTPUT_SLOT, false),
-                    new InventoryDirectionEntry(Direction.WEST, INPUT_SLOT, false),
-                    new InventoryDirectionEntry(Direction.UP, INPUT_SLOT, true)).directionsMap;
-    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     private int progress = 0;
     private int maxProgress = 0;
     private int energyAmount = 0;
@@ -141,39 +133,18 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
     {
         if (cap == ForgeCapabilities.ENERGY) return lazyEnergyHandler.cast();
         else if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
-
-        return super.getCapability(cap, side);
+        else return super.getCapability(cap, side);
     }
 
-    private ModEnergyStorage createEnergyStorage ()
+    private EnergyStorage createEnergyStorage ()
     {
-        return new ModEnergyStorage(40000, 1024)
-        {
-            @Override
-            public void onEnergyChanged ()
-            {
-                setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-
-            @Override
-            public int receiveEnergy (int max, boolean simulate)
-            {
-                setChanged();
-                return super.receiveEnergy(max, simulate);
-            }
-
-            @Override
-            public boolean canReceive ()
-            {
-                return true;
-            }
-        };
+        if (capacitorSlotValid()) return new EnergyStorage(getCapacitor().getMaxCapacity(), getCapacitor().getMaxTransfer(), getCapacitor().getMaxTransfer());
+        else return new EnergyStorage(0, 0, 0);
     }
 
     public IEnergyStorage getEnergyStorage ()
     {
-        return ENERGY_STORAGE;
+        return energy;
     }
 
     @Override
@@ -214,7 +185,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
         tag.putInt(NBTKeys.COMPRESSOR_NBT_PROGRESS, progress);
         tag.putInt(NBTKeys.COMPRESSOR_NBT_MAX_PROGRESS, maxProgress);
         tag.putInt(NBTKeys.COMPRESSOR_RF_AMOUNT, energyAmount);
-        tag.putInt("energy", ENERGY_STORAGE.getEnergyStored());
+        tag.putInt("energy", energy.getEnergyStored());
         super.saveAdditional(tag);
     }
 
@@ -226,16 +197,17 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
         progress = tag.getInt(NBTKeys.COMPRESSOR_NBT_PROGRESS);
         maxProgress = tag.getInt(NBTKeys.COMPRESSOR_NBT_MAX_PROGRESS);
         energyAmount = tag.getInt(NBTKeys.COMPRESSOR_RF_AMOUNT);
-        ENERGY_STORAGE.setEnergy(tag.getInt(NBTKeys.POWER));
+        energy.deserializeNBT(tag.get(NBTKeys.POWER));
     }
 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
         CompressorBlock block = (CompressorBlock) pState.getBlock();
-        if (hasRecipe())
+        if (hasRecipe() && capacitorSlotValid())
         {
             block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.TRUE);
             increaseCraftingProgress();
+            energy.extractEnergy(energyAmount, false);
             setChanged(pLevel, pPos, pState);
 
             if (hasProgressFinished())
@@ -251,16 +223,6 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
             block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.FALSE);
         }
 
-    }
-
-    private boolean hasEnergyItemInSlot (int i)
-    {
-        ItemStack stack = this.itemHandler.getStackInSlot(i);
-        return !this.itemHandler.getStackInSlot(i).isEmpty() && (stack.getItem() == KineticItems.CAPACITOR_BASIC.get()
-                || stack.getItem() == KineticItems.CAPACITOR_STANDARD.get()
-                || stack.getItem() == KineticItems.CAPACITOR_PREMIUM.get()
-                || stack.getItem() == KineticItems.CAPACITOR_DELUXE.get()
-                || stack.getItem() == KineticItems.CAPACITOR_ULTIMATE.get());
     }
 
     private void resetProgress ()
@@ -291,8 +253,8 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
 
     private boolean hasEnoughEnergy (int req)
     {
-        boolean b = this.ENERGY_STORAGE.getEnergyStored() >= req * maxProgress;
-        if (b) this.ENERGY_STORAGE.extractEnergy(req, false);
+        boolean b = this.energy.getEnergyStored() >= req * maxProgress;
+        if (b) this.energy.extractEnergy(req, false);
         return b;
     }
 
@@ -345,4 +307,34 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider
     {
         super.onDataPacket(net, pkt);
     }
+
+    @Override
+    public int getInventorySize ()
+    {
+        return 3;
+    }
+
+    @Override
+    public int getCapacitorSlot ()
+    {
+        return 2;
+    }
+
+    @Override
+    public boolean capacitorSlotValid ()
+    {
+        return InventoryHelper.capacitorIsValid(itemHandler, getCapacitorSlot());
+    }
+
+    @Override
+    public CapacitorItem getCapacitor ()
+    {
+        return capacitorSlotValid() ? (CapacitorItem) itemHandler.getStackInSlot(getCapacitorSlot()).getItem() : null;
+    }
+
+    public int getStoredPower ()
+    {
+        return energy.getEnergyStored();
+    }
+
 }

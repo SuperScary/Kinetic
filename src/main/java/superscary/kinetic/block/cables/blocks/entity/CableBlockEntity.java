@@ -9,11 +9,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.entity.KineticBlockEntities;
-import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 import javax.annotation.Nonnull;
@@ -25,12 +26,11 @@ public class CableBlockEntity extends BlockEntity
 {
 
     public static final String ENERGY_TAG = NBTKeys.POWER;
-
-    public static final int MAXTRANSFER = 100;
+    public static final int MAX_TRANSFER = 100;
     public static final int CAPACITY = 1000;
 
-    private final ModEnergyStorage energy = createEnergyStorage();
-    private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> energy);
+    private final EnergyStorage energy = createEnergyStorage();
+    private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     // Cached outputs
     private Set<BlockPos> outputs = null;
 
@@ -142,17 +142,9 @@ public class CableBlockEntity extends BlockEntity
     }
 
     @Nonnull
-    private ModEnergyStorage createEnergyStorage ()
+    private EnergyStorage createEnergyStorage ()
     {
-        return new ModEnergyStorage(CAPACITY, MAXTRANSFER)
-        {
-            @Override
-            public void onEnergyChanged ()
-            {
-                setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-        };
+        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER);
     }
 
     @NotNull

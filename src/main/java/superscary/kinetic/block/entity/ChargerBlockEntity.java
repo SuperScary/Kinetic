@@ -17,23 +17,25 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.gui.menu.ChargerMenu;
-import superscary.kinetic.util.energy.ModEnergyStorage;
+import superscary.kinetic.util.SizedInventory;
+import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
-public class ChargerBlockEntity extends BlockEntity implements MenuProvider
+public class ChargerBlockEntity extends BlockEntity implements MenuProvider, SizedInventory
 {
 
     public static final int MAX_TRANSFER = 512;
-    public static final int CAPACITY = 512000;
+    public static final int CAPACITY = 20000;
 
-    private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3)
+    private final EnergyStorage energy = createEnergyStorage();
+    private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
     {
         @Override
         protected void onContentsChanged (int slot)
@@ -56,7 +58,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
             };
         }
     };
-    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> ENERGY_STORAGE);
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
 
     public ChargerBlockEntity (BlockPos pos, BlockState state)
@@ -66,7 +68,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
 
     public void tickServer ()
     {
-        boolean powered = ENERGY_STORAGE.getEnergyStored() > 0;
+        boolean powered = energy.getEnergyStored() > 0;
         if (powered != getBlockState().getValue(BlockStateProperties.POWERED))
         {
 
@@ -109,13 +111,13 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
 
     private void chargeItem (ItemStack stack)
     {
-        if (ENERGY_STORAGE.getEnergyStored() <= 0) return;
+        if (energy.getEnergyStored() <= 0) return;
 
         stack.getCapability(ForgeCapabilities.ENERGY).map(e -> {
             if (e.canReceive())
             {
-                int received = e.receiveEnergy(Math.min(ENERGY_STORAGE.getEnergyStored(), MAX_TRANSFER), false);
-                ENERGY_STORAGE.extractEnergy(received, false);
+                int received = e.receiveEnergy(Math.min(energy.getEnergyStored(), MAX_TRANSFER), false);
+                energy.extractEnergy(received, false);
                 setChanged();
                 return received;
             }
@@ -123,37 +125,16 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
         });
     }
 
-    private ModEnergyStorage createEnergyStorage ()
+    private EnergyStorage createEnergyStorage ()
     {
-        return new ModEnergyStorage(CAPACITY, MAX_TRANSFER)
-        {
-            @Override
-            public void onEnergyChanged ()
-            {
-                setChanged();
-                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-
-            @Override
-            public int receiveEnergy (int max, boolean simulate)
-            {
-                setChanged();
-                return super.receiveEnergy(max, simulate);
-            }
-
-            @Override
-            public boolean canReceive ()
-            {
-                return true;
-            }
-        };
+        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER);
     }
 
     @Override
     protected void saveAdditional (CompoundTag tag)
     {
         super.saveAdditional(tag);
-        tag.put(NBTKeys.POWER, ENERGY_STORAGE.serializeNBT());
+        tag.put(NBTKeys.POWER, energy.serializeNBT());
         tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
     }
 
@@ -161,7 +142,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
     public void load (CompoundTag tag)
     {
         super.load(tag);
-        if (tag.contains(NBTKeys.POWER)) ENERGY_STORAGE.deserializeNBT(tag.get(NBTKeys.POWER));
+        if (tag.contains(NBTKeys.POWER)) energy.deserializeNBT(tag.get(NBTKeys.POWER));
         if (tag.contains(NBTKeys.INVENTORY)) itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
     }
 
@@ -173,9 +154,9 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
         return super.getCapability(cap, side);
     }
 
-    public ModEnergyStorage getEnergyStorage ()
+    public EnergyStorage getEnergyStorage ()
     {
-        return ENERGY_STORAGE;
+        return energy;
     }
 
     public ItemStackHandler getItems ()
@@ -204,5 +185,16 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider
     public Component getDisplayName ()
     {
         return Component.translatable("block.kinetic.charger");
+    }
+
+    @Override
+    public int getInventorySize ()
+    {
+        return 3;
+    }
+
+    public int getStoredPower ()
+    {
+        return energy.getEnergyStored();
     }
 }
