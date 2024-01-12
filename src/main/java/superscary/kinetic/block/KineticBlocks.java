@@ -13,6 +13,10 @@ import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
 import superscary.kinetic.block.blocks.*;
+import superscary.kinetic.block.blocks.reactor.ReactorCoreBlock;
+import superscary.kinetic.block.blocks.reactor.ReactorFluidPortBlock;
+import superscary.kinetic.block.blocks.reactor.ReactorFrameBlock;
+import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
 import superscary.kinetic.block.cables.blocks.CableBlock;
 import superscary.kinetic.block.cables.blocks.FacadeBlock;
 import superscary.kinetic.item.KineticItems;
@@ -49,8 +53,12 @@ public class KineticBlocks
     public static final RegistryObject<Block> CRUSHER = reg("crusher", CrusherBlock::new);
     public static final RegistryObject<Block> COAL_GENERATOR = reg("coal_generator", CoalGeneratorBlock::new);
     public static final RegistryObject<Block> CHARGER = reg("charger", ChargerBlock::new);
-    public static final RegistryObject<CableBlock> CABLE_BLOCK = reg("cable", CableBlock::new);
-    public static final RegistryObject<FacadeBlock> FACADE_BLOCK = reg("facade", FacadeBlock::new);
+    public static final RegistryObject<Block> CABLE_BLOCK = reg("cable", CableBlock::new);
+    public static final RegistryObject<Block> FACADE_BLOCK = reg("facade", FacadeBlock::new);
+    public static final RegistryObject<Block> REACTOR_FRAME = reg("reactor_frame", ReactorFrameBlock::new);
+    public static final RegistryObject<Block> REACTOR_CORE = reg("reactor_core_block", ReactorCoreBlock::new);
+    public static final RegistryObject<Block> REACTOR_POWER_TAP_BLOCK = reg("reactor_power_tap", ReactorPowerTapBlock::new);
+    public static final RegistryObject<Block> REACTOR_FLUID_PORT = reg("reactor_fluid_port", ReactorFluidPortBlock::new);
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

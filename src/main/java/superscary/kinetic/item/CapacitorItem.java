@@ -1,8 +1,14 @@
 package superscary.kinetic.item;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.Nullable;
 
 public class CapacitorItem extends Item
 {
@@ -10,6 +16,9 @@ public class CapacitorItem extends Item
     private final int maxCap;
     private final int maxTrans;
     private final int rarity;
+
+    private final IEnergyStorage energy = createEnergyStorage();
+    private final LazyOptional<IEnergyStorage> lazyEnergyStorage = LazyOptional.of(() -> energy);
 
     public CapacitorItem (Properties properties, int maxCap, int maxTrans, int rarity)
     {
@@ -20,7 +29,7 @@ public class CapacitorItem extends Item
     }
 
     @Override
-    public Rarity getRarity (ItemStack p_41461_)
+    public Rarity getRarity (ItemStack pStack)
     {
         return switch (rarity)
         {
@@ -29,6 +38,11 @@ public class CapacitorItem extends Item
             case 3 -> Rarity.RARE;
             case 4 -> Rarity.EPIC;
         };
+    }
+
+    private IEnergyStorage createEnergyStorage ()
+    {
+        return new EnergyStorage(getMaxCapacity(), getMaxTransfer(), getMaxTransfer());
     }
 
     public int getMaxCapacity ()

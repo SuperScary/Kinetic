@@ -36,6 +36,9 @@ public class KineticItems
     public static final RegistryObject<Item> CAPACITOR_PREMIUM = reg("capacitor_premium", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 256000, 512, 2));
     public static final RegistryObject<Item> CAPACITOR_DELUXE = reg("capacitor_deluxe", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 512000, 1024, 3));
     public static final RegistryObject<Item> CAPACITOR_ULTIMATE = reg("capacitor_ultimate", () -> new CapacitorItem(new Item.Properties().stacksTo(1), 1024000, 2048, 4));
+    public static final RegistryObject<Item> UPGRADE_BASE = reg("upgrade_base", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SPEED_UPGRADE = reg("upgrade_speed", UpgradeItem::new);
+    public static final RegistryObject<Item> POWER_EFFICIENCY_UPGRADE = reg("upgrade_power_efficiency", UpgradeItem::new);
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));
