@@ -22,7 +22,7 @@ public class CapacitorItem extends Item
 
     public CapacitorItem (Properties properties, int maxCap, int maxTrans, int rarity)
     {
-        super(properties);
+        super(properties.durability(maxCap).defaultDurability(0));
         this.maxCap = maxCap;
         this.maxTrans = maxTrans;
         this.rarity = rarity;

@@ -4,10 +4,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.item.KineticItems;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class KineticTabs
     public static final RegistryObject<CreativeModeTab> TAB = TABS.register("kinetic_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.kinetic"))
-                    .icon(KineticItems.DURACITE_INGOT.get()::getDefaultInstance)
+                    .icon(() -> new ItemStack(KineticBlocks.COMPRESSOR.get()))
                     .displayItems((displayParams, output) -> {
                         TAB_ITEMS.forEach(itemLike -> output.accept(itemLike.get()));
                     })
