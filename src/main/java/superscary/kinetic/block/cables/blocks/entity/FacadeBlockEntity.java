@@ -12,12 +12,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.cables.blocks.CableBlock;
-import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.block.cables.blocks.KineticBaseCable;
+import superscary.kinetic.block.cables.blocks.entity.power.BasicPowerCableBlockEntity;
 
 import javax.annotation.Nonnull;
 
-public class FacadeBlockEntity extends CableBlockEntity
+public class FacadeBlockEntity extends BasicPowerCableBlockEntity
 {
 
     public static final String MIMIC_TAG = "mimic";
@@ -91,7 +92,7 @@ public class FacadeBlockEntity extends CableBlockEntity
     public ModelData getModelData ()
     {
         return ModelData.builder()
-                .with(CableBlock.FACADEID, mimicBlock)
+                .with(KineticBaseCable.FACADEID, mimicBlock)
                 .build();
     }
 

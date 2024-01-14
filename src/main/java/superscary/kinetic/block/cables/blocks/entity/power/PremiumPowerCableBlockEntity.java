@@ -1,4 +1,4 @@
-package superscary.kinetic.block.cables.blocks.entity;
+package superscary.kinetic.block.cables.blocks.entity.power;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,7 +13,7 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
@@ -22,26 +22,26 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class CableBlockEntity extends BlockEntity
+public class PremiumPowerCableBlockEntity extends BlockEntity
 {
 
     public static final String ENERGY_TAG = NBTKeys.POWER;
-    public static final int MAX_TRANSFER = 100;
-    public static final int CAPACITY = 1000;
+    public static final int MAX_TRANSFER = 5000;
+    public static final int CAPACITY = 5120;
 
     private final EnergyStorage energy = createEnergyStorage();
     private final LazyOptional<IEnergyStorage> energyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
     // Cached outputs
     private Set<BlockPos> outputs = null;
 
-    protected CableBlockEntity (BlockEntityType<?> type, BlockPos pos, BlockState state)
+    protected PremiumPowerCableBlockEntity (BlockEntityType<?> type, BlockPos pos, BlockState state)
     {
         super(type, pos, state);
     }
 
-    public CableBlockEntity (BlockPos pos, BlockState state)
+    public PremiumPowerCableBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.CABLE_BE.get(), pos, state);
+        super(KineticBlockEntities.PREMIUM_POWER_CABLE_BE.get(), pos, state);
     }
 
     private void checkOutputs ()
@@ -54,7 +54,7 @@ public class CableBlockEntity extends BlockEntity
                 {
                     BlockPos p = cable.getBlockPos().relative(direction);
                     BlockEntity te = level.getBlockEntity(p);
-                    if (te != null && !(te instanceof CableBlockEntity))
+                    if (te != null && !(te instanceof PremiumPowerCableBlockEntity))
                     {
                         te.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
                             if (handler.canReceive())
@@ -73,7 +73,7 @@ public class CableBlockEntity extends BlockEntity
         traverse(worldPosition, cable -> cable.outputs = null);
     }
 
-    private void traverse (BlockPos pos, Consumer<CableBlockEntity> consumer)
+    private void traverse (BlockPos pos, Consumer<PremiumPowerCableBlockEntity> consumer)
     {
         Set<BlockPos> traversed = new HashSet<>();
         traversed.add(pos);
@@ -81,7 +81,7 @@ public class CableBlockEntity extends BlockEntity
         traverse(pos, traversed, consumer);
     }
 
-    private void traverse (BlockPos pos, Set<BlockPos> traversed, Consumer<CableBlockEntity> consumer)
+    private void traverse (BlockPos pos, Set<BlockPos> traversed, Consumer<PremiumPowerCableBlockEntity> consumer)
     {
         for (Direction direction : Direction.values())
         {
@@ -89,7 +89,7 @@ public class CableBlockEntity extends BlockEntity
             if (!traversed.contains(p))
             {
                 traversed.add(p);
-                if (level.getBlockEntity(p) instanceof CableBlockEntity cable)
+                if (level.getBlockEntity(p) instanceof PremiumPowerCableBlockEntity cable)
                 {
                     consumer.accept(cable);
                     cable.traverse(p, traversed, consumer);

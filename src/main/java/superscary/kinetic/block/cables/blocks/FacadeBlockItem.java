@@ -30,7 +30,7 @@ import superscary.kinetic.util.ReplaceBlockItemUseContext;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static superscary.kinetic.block.cables.blocks.CableBlock.*;
+import static superscary.kinetic.block.cables.blocks.power.BasicPowerCableBlock.*;
 
 public class FacadeBlockItem extends BlockItem
 {
@@ -113,7 +113,7 @@ public class FacadeBlockItem extends BlockItem
         if (!itemstack.isEmpty())
         {
 
-            if (block == KineticBlocks.CABLE_BLOCK.get())
+            if (block instanceof KineticBaseCable)
             {
                 // We are hitting a cable block. We want to replace it with a facade block
                 FacadeBlock facadeBlock = (FacadeBlock) this.getBlock();

@@ -17,8 +17,8 @@ import superscary.kinetic.block.blocks.reactor.ReactorCoreBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorFluidPortBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorFrameBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
-import superscary.kinetic.block.cables.blocks.CableBlock;
-import superscary.kinetic.block.cables.blocks.FacadeBlock;
+import superscary.kinetic.block.cables.blocks.*;
+import superscary.kinetic.block.cables.blocks.power.*;
 import superscary.kinetic.item.KineticItems;
 
 import java.util.function.Supplier;
@@ -53,12 +53,18 @@ public class KineticBlocks
     public static final RegistryObject<Block> CRUSHER = reg("crusher", CrusherBlock::new);
     public static final RegistryObject<Block> COAL_GENERATOR = reg("coal_generator", CoalGeneratorBlock::new);
     public static final RegistryObject<Block> CHARGER = reg("charger", ChargerBlock::new);
-    public static final RegistryObject<Block> CABLE_BLOCK = reg("cable", CableBlock::new);
+    public static final RegistryObject<Block> BASIC_POWER_CABLE_BLOCK = reg("basic_power_cable", BasicPowerCableBlock::new);
+    public static final RegistryObject<Block> STANDARD_POWER_CABLE_BLOCK = reg("standard_power_cable", StandardPowerCableBlock::new);
+    public static final RegistryObject<Block> PREMIUM_POWER_CABLE_BLOCK = reg("premium_power_cable", PremiumPowerCableBlock::new);
+    public static final RegistryObject<Block> DELUXE_POWER_CABLE_BLOCK = reg("deluxe_power_cable", DeluxePowerCableBlock::new);
+    public static final RegistryObject<Block> ULTIMATE_POWER_CABLE_BLOCK = reg("ultimate_power_cable", UltimatePowerCableBlock::new);
     public static final RegistryObject<Block> FACADE_BLOCK = reg("facade", FacadeBlock::new);
     public static final RegistryObject<Block> REACTOR_FRAME = reg("reactor_frame", ReactorFrameBlock::new);
-    public static final RegistryObject<Block> REACTOR_CORE = reg("reactor_core_block", ReactorCoreBlock::new);
+    public static final RegistryObject<Block> REACTOR_CORE = reg("reactor_core", ReactorCoreBlock::new);
     public static final RegistryObject<Block> REACTOR_POWER_TAP_BLOCK = reg("reactor_power_tap", ReactorPowerTapBlock::new);
     public static final RegistryObject<Block> REACTOR_FLUID_PORT = reg("reactor_fluid_port", ReactorFluidPortBlock::new);
+    public static final RegistryObject<Block> PRINTER_BLOCK = reg("printer", PrinterBlock::new);
+    public static final RegistryObject<Block> INSCRIBER_BLOCK = reg("inscriber", InscriberBlock::new);
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

@@ -2,8 +2,6 @@ package superscary.kinetic.block.cables.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -11,10 +9,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -30,13 +25,12 @@ import net.minecraftforge.client.model.data.ModelProperty;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.cables.ConnectorType;
-import superscary.kinetic.block.cables.blocks.entity.CableBlockEntity;
 
 import javax.annotation.Nonnull;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityBlock
+public abstract class KineticBaseCable extends Block implements SimpleWaterloggedBlock, EntityBlock
 {
 
     public static final EnumProperty<ConnectorType> NORTH = EnumProperty.create("north", ConnectorType.class);
@@ -61,24 +55,19 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
     private static final VoxelShape SHAPE_BLOCK_DOWN = Shapes.box(.2, 0, .2, .8, .1, .8);
     private static VoxelShape[] shapeCache = null;
 
-    public CableBlock ()
+    public KineticBaseCable (BlockBehaviour.Properties properties)
     {
-        super(BlockBehaviour.Properties.of()
-                .strength(1.0f)
-                .sound(SoundType.METAL)
-                .noOcclusion()
-        );
+        super(properties);
         makeShapes();
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 
-    // Return the connector type for the given position and facing direction
     private static ConnectorType getConnectorType (BlockGetter world, BlockPos connectorPos, Direction facing)
     {
         BlockPos pos = connectorPos.relative(facing);
         BlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block instanceof CableBlock)
+        if (block instanceof KineticBaseCable)
         {
             return ConnectorType.CABLE;
         } else if (isConnectable(world, connectorPos, facing))
@@ -208,59 +197,9 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
     {
         if (state.getValue(WATERLOGGED))
         {
-            world.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, current, Fluids.WATER.getTickDelay(world), 0L));   // @todo 1.18 what is this last parameter exactly?
+            world.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, current, Fluids.WATER.getTickDelay(world), 0L));
         }
         return calculateState(world, current, state);
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity (BlockPos blockPos, BlockState blockState)
-    {
-        return new CableBlockEntity(blockPos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker (Level level, BlockState state, BlockEntityType<T> type)
-    {
-        if (level.isClientSide)
-        {
-            return null;
-        } else
-        {
-            return (lvl, pos, st, be) -> {
-                if (be instanceof CableBlockEntity cable)
-                {
-                    cable.tickServer();
-                }
-            };
-        }
-    }
-
-    @Override
-    public void neighborChanged (BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving)
-    {
-        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof CableBlockEntity cable)
-        {
-            cable.markDirty();
-        }
-    }
-
-    @Override
-    public void setPlacedBy (@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack)
-    {
-        super.setPlacedBy(level, pos, state, placer, stack);
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof CableBlockEntity cable)
-        {
-            cable.markDirty();
-        }
-        BlockState blockState = calculateState(level, pos, state);
-        if (state != blockState)
-        {
-            level.setBlockAndUpdate(pos, blockState);
-        }
     }
 
     @Override
@@ -286,6 +225,5 @@ public class CableBlock extends Block implements SimpleWaterloggedBlock, EntityB
     {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
+
 }
-
-

@@ -24,6 +24,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.block.blocks.QuantumQuarryBlock;
 import superscary.kinetic.util.helpers.NBTKeys;
 

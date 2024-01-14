@@ -15,13 +15,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import superscary.kinetic.block.KineticBlocks;
-import superscary.kinetic.block.cables.blocks.CableModelLoader;
-import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.block.cables.util.power.basic.BasicPowerCableModelLoader;
+import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.block.cables.util.power.deluxe.DeluxePowerCableModelLoader;
+import superscary.kinetic.block.cables.util.power.premium.PremiumPowerCableModelLoader;
+import superscary.kinetic.block.cables.util.power.standard.StandardPowerCableModelLoader;
+import superscary.kinetic.block.cables.util.power.ultimate.UltimatePowerCableModelLoader;
 import superscary.kinetic.gui.KineticMenus;
-import superscary.kinetic.gui.screen.ChargerScreen;
-import superscary.kinetic.gui.screen.CoalGeneratorScreen;
-import superscary.kinetic.gui.screen.CompressorScreen;
-import superscary.kinetic.gui.screen.SawmillScreen;
+import superscary.kinetic.gui.screen.*;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.network.ModMessages;
 import superscary.kinetic.recipe.KineticRecipes;
@@ -69,12 +70,18 @@ public class Kinetic
             MenuScreens.register(KineticMenus.SAWMILL_MENU.get(), SawmillScreen::new);
             MenuScreens.register(KineticMenus.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
             MenuScreens.register(KineticMenus.CHARGER_MENU.get(), ChargerScreen::new);
+            MenuScreens.register(KineticMenus.PRINTER_MENU.get(), PrinterScreen::new);
+            MenuScreens.register(KineticMenus.INSCRIBER_MENU.get(), InscriberScreen::new);
         }
 
         @SubscribeEvent
         public static void modelInit (ModelEvent.RegisterGeometryLoaders event)
         {
-            CableModelLoader.register(event);
+            BasicPowerCableModelLoader.register(event);
+            StandardPowerCableModelLoader.register(event);
+            PremiumPowerCableModelLoader.register(event);
+            DeluxePowerCableModelLoader.register(event);
+            UltimatePowerCableModelLoader.register(event);
         }
 
         @SubscribeEvent

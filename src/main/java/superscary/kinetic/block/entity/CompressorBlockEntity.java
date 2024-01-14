@@ -31,6 +31,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.blocks.CompressorBlock;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.CompressorMenu;
 import superscary.kinetic.item.CapacitorItem;
 import superscary.kinetic.item.KineticItems;

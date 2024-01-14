@@ -1,13 +1,13 @@
-package superscary.kinetic.block.entity;
+package superscary.kinetic.block;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.block.KineticBlocks;
-import superscary.kinetic.block.cables.blocks.entity.CableBlockEntity;
-import superscary.kinetic.block.cables.blocks.entity.FacadeBlockEntity;
+import superscary.kinetic.block.cables.blocks.entity.*;
+import superscary.kinetic.block.cables.blocks.entity.power.*;
+import superscary.kinetic.block.entity.*;
 
 public class KineticBlockEntities
 {
@@ -38,13 +38,37 @@ public class KineticBlockEntities
             BLOCK_ENTITIES.register("charger_be", () -> BlockEntityType.Builder.of(ChargerBlockEntity::new,
                     KineticBlocks.CHARGER.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<CableBlockEntity>> CABLE_BE =
-            BLOCK_ENTITIES.register("cable_be", () -> BlockEntityType.Builder.of(CableBlockEntity::new,
-                    KineticBlocks.CABLE_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BasicPowerCableBlockEntity>> BASIC_POWER_CABLE_BE =
+            BLOCK_ENTITIES.register("basic_cable_be", () -> BlockEntityType.Builder.of(BasicPowerCableBlockEntity::new,
+                    KineticBlocks.BASIC_POWER_CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<StandardPowerCableBlockEntity>> STANDARD_POWER_CABLE_BE =
+            BLOCK_ENTITIES.register("standard_cable_be", () -> BlockEntityType.Builder.of(StandardPowerCableBlockEntity::new,
+                    KineticBlocks.STANDARD_POWER_CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<PremiumPowerCableBlockEntity>> PREMIUM_POWER_CABLE_BE =
+            BLOCK_ENTITIES.register("premium_cable_be", () -> BlockEntityType.Builder.of(PremiumPowerCableBlockEntity::new,
+                    KineticBlocks.PREMIUM_POWER_CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<DeluxePowerCableBlockEntity>> DELUXE_POWER_CABLE_BE =
+            BLOCK_ENTITIES.register("deluxe_cable_be", () -> BlockEntityType.Builder.of(DeluxePowerCableBlockEntity::new,
+                    KineticBlocks.DELUXE_POWER_CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<UltimatePowerCableBlockEntity>> ULTIMATE_POWER_CABLE_BE =
+            BLOCK_ENTITIES.register("ultimate_cable_be", () -> BlockEntityType.Builder.of(UltimatePowerCableBlockEntity::new,
+                    KineticBlocks.ULTIMATE_POWER_CABLE_BLOCK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<FacadeBlockEntity>> FACADE_BE =
             BLOCK_ENTITIES.register("facade_be", () -> BlockEntityType.Builder.of(FacadeBlockEntity::new,
                     KineticBlocks.FACADE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<PrinterBlockEntity>> PRINTER_BE =
+            BLOCK_ENTITIES.register("printer_be", () -> BlockEntityType.Builder.of(PrinterBlockEntity::new,
+                    KineticBlocks.PRINTER_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<InscriberBlockEntity>> INSCRIBER_BE =
+            BLOCK_ENTITIES.register("inscriber_be", () -> BlockEntityType.Builder.of(InscriberBlockEntity::new,
+                    KineticBlocks.INSCRIBER_BLOCK.get()).build(null));
 
 
 }

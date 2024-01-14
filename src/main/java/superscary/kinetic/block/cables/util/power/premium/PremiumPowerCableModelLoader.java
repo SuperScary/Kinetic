@@ -1,4 +1,4 @@
-package superscary.kinetic.block.cables.blocks;
+package superscary.kinetic.block.cables.util.power.premium;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -15,18 +15,17 @@ import net.minecraftforge.client.model.geometry.IGeometryBakingContext;
 import net.minecraftforge.client.model.geometry.IGeometryLoader;
 import net.minecraftforge.client.model.geometry.IUnbakedGeometry;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.block.cables.CableBakedModel;
 
 import java.util.function.Function;
 
-public class CableModelLoader implements IGeometryLoader<CableModelLoader.CableModelGeometry>
+public class PremiumPowerCableModelLoader implements IGeometryLoader<PremiumPowerCableModelLoader.CableModelGeometry>
 {
 
-    public static final ResourceLocation GENERATOR_LOADER = new ResourceLocation(Kinetic.MODID, "cableloader");
+    public static final ResourceLocation GENERATOR_LOADER = new ResourceLocation(Kinetic.MODID, "premiumcableloader");
 
     public static void register (ModelEvent.RegisterGeometryLoaders event)
     {
-        event.register("cableloader", new CableModelLoader());
+        event.register("premiumcableloader", new PremiumPowerCableModelLoader());
     }
 
 
@@ -50,7 +49,7 @@ public class CableModelLoader implements IGeometryLoader<CableModelLoader.CableM
         @Override
         public BakedModel bake (IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation)
         {
-            return new CableBakedModel(context, facade);
+            return new PremiumPowerCableBakedModel(context, facade);
         }
     }
 }

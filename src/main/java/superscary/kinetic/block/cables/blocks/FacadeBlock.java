@@ -18,10 +18,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.block.cables.blocks.entity.FacadeBlockEntity;
+import superscary.kinetic.block.cables.blocks.power.BasicPowerCableBlock;
 
 import javax.annotation.Nonnull;
 
-public class FacadeBlock extends CableBlock implements EntityBlock
+public class FacadeBlock extends BasicPowerCableBlock implements EntityBlock
 {
 
     public FacadeBlock ()
@@ -73,8 +74,8 @@ public class FacadeBlock extends CableBlock implements EntityBlock
     @Override
     public boolean onDestroyedByPlayer (BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
     {
-        BlockState defaultState = KineticBlocks.CABLE_BLOCK.get().defaultBlockState();
-        BlockState newState = CableBlock.calculateState(world, pos, defaultState);
+        BlockState defaultState = state.getBlock().defaultBlockState();
+        BlockState newState = KineticBaseCable.calculateState(world, pos, defaultState);
         return ((LevelAccessor) world).setBlock(pos, newState, ((LevelAccessor) world).isClientSide()
                 ? Block.UPDATE_ALL + Block.UPDATE_IMMEDIATE
                 : Block.UPDATE_ALL);

@@ -28,6 +28,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.SawmillMenu;
 import superscary.kinetic.item.KineticItems;
 import superscary.kinetic.util.SizedInventory;

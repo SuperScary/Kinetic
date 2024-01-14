@@ -16,7 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
-import superscary.kinetic.block.entity.KineticBlockEntities;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.block.entity.QQBlockEntity;
 
 import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_ULTIMATE;

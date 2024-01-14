@@ -25,6 +25,7 @@ public class KineticItems
     public static final RegistryObject<Item> WOOD_GEAR = reg("wood_gear", KineticItem::new);
     public static final RegistryObject<Item> STONE_GEAR = reg("stone_gear", KineticItem::new);
     public static final RegistryObject<Item> IRON_GEAR = reg("iron_gear", KineticItem::new);
+    public static final RegistryObject<Item> STEEL_GEAR = reg("steel_gear", KineticItem::new);
     public static final RegistryObject<Item> PLASTIC = reg("plastic", KineticItem::new);
     public static final RegistryObject<Item> RAW_PLASTIC = reg("raw_plastic", KineticItem::new);
     public static final RegistryObject<Item> RUBBER = reg("rubber", KineticItem::new);
@@ -41,6 +42,8 @@ public class KineticItems
     public static final RegistryObject<Item> POWER_EFFICIENCY_UPGRADE = reg("upgrade_power_efficiency", UpgradeItem::new);
     public static final RegistryObject<Item> MAGNET = reg("magnet", MagnetItem::new);
     public static final RegistryObject<Item> CONFIGURATION_WIZARD = reg("configuration_wizard", ConfigurationWizardItem::new);
+    public static final RegistryObject<Item> SD_CARD = reg("sd_card", SDCardItem::new);
+    public static final RegistryObject<Item> BLUEPRINT = reg("blueprint", BlueprintItem::new);
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));

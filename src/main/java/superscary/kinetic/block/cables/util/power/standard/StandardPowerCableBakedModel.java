@@ -1,4 +1,4 @@
-package superscary.kinetic.block.cables;
+package superscary.kinetic.block.cables.util.power.standard;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
@@ -19,7 +19,8 @@ import net.minecraftforge.client.model.geometry.IGeometryBakingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.block.cables.blocks.CableBlock;
+import superscary.kinetic.block.cables.ConnectorType;
+import superscary.kinetic.block.cables.blocks.KineticBaseCable;
 import superscary.kinetic.util.helpers.CablePatterns;
 
 import javax.annotation.Nonnull;
@@ -33,7 +34,7 @@ import static superscary.kinetic.util.helpers.CablePatterns.Pattern;
 import static superscary.kinetic.util.helpers.CablePatterns.QuadSetting;
 import static superscary.kinetic.util.helpers.CablePatterns.SpriteIdx.*;
 
-public class CableBakedModel implements IDynamicBakedModel
+public class StandardPowerCableBakedModel implements IDynamicBakedModel
 {
 
     static
@@ -70,7 +71,7 @@ public class CableBakedModel implements IDynamicBakedModel
     private TextureAtlasSprite spriteCrossCable;
     private TextureAtlasSprite spriteSide;
 
-    public CableBakedModel (IGeometryBakingContext context, boolean facade)
+    public StandardPowerCableBakedModel (IGeometryBakingContext context, boolean facade)
     {
         this.context = context;
         this.facade = facade;
@@ -80,14 +81,14 @@ public class CableBakedModel implements IDynamicBakedModel
     {
         if (spriteConnector == null)
         {
-            spriteConnector = getTexture("block/cable/connector");
-            spriteNormalCable = getTexture("block/cable/normal");
-            spriteNoneCable = getTexture("block/cable/none");
-            spriteEndCable = getTexture("block/cable/end");
-            spriteCornerCable = getTexture("block/cable/corner");
-            spriteThreeCable = getTexture("block/cable/three");
-            spriteCrossCable = getTexture("block/cable/cross");
-            spriteSide = getTexture("block/cable/side");
+            spriteConnector = getTexture("block/cable/power/standard/connector");
+            spriteNormalCable = getTexture("block/cable/power/standard/normal");
+            spriteNoneCable = getTexture("block/cable/power/standard/none");
+            spriteEndCable = getTexture("block/cable/power/standard/end");
+            spriteCornerCable = getTexture("block/cable/power/standard/corner");
+            spriteThreeCable = getTexture("block/cable/power/standard/three");
+            spriteCrossCable = getTexture("block/cable/power/standard/cross");
+            spriteSide = getTexture("block/cable/power/standard/side");
         }
     }
 
@@ -131,12 +132,12 @@ public class CableBakedModel implements IDynamicBakedModel
             ConnectorType north, south, west, east, up, down;
             if (state != null)
             {
-                north = state.getValue(CableBlock.NORTH);
-                south = state.getValue(CableBlock.SOUTH);
-                west = state.getValue(CableBlock.WEST);
-                east = state.getValue(CableBlock.EAST);
-                up = state.getValue(CableBlock.UP);
-                down = state.getValue(CableBlock.DOWN);
+                north = state.getValue(KineticBaseCable.NORTH);
+                south = state.getValue(KineticBaseCable.SOUTH);
+                west = state.getValue(KineticBaseCable.WEST);
+                east = state.getValue(KineticBaseCable.EAST);
+                up = state.getValue(KineticBaseCable.UP);
+                down = state.getValue(KineticBaseCable.DOWN);
             } else
             {
                 // If we are a facade and we are an item then we render as the 'side' texture as a full block
@@ -321,7 +322,7 @@ public class CableBakedModel implements IDynamicBakedModel
 
         // Render the facade if we have one in addition to the cable above. Note that the facade comes from the model data property
         // (FACADEID)
-        BlockState facadeId = extraData.get(CableBlock.FACADEID);
+        BlockState facadeId = extraData.get(KineticBaseCable.FACADEID);
         if (facadeId != null)
         {
             BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(facadeId);

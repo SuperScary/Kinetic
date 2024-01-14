@@ -31,6 +31,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.CoalGeneratorMenu;
 import superscary.kinetic.util.SizedInventory;
 import superscary.kinetic.util.energy.KineticEnergyStorage;

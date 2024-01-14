@@ -8,10 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.gui.menu.ChargerMenu;
-import superscary.kinetic.gui.menu.CoalGeneratorMenu;
-import superscary.kinetic.gui.menu.CompressorMenu;
-import superscary.kinetic.gui.menu.SawmillMenu;
+import superscary.kinetic.gui.menu.*;
 
 public class KineticMenus
 {
@@ -27,6 +24,8 @@ public class KineticMenus
     public static final RegistryObject<MenuType<SawmillMenu>> SAWMILL_MENU = registerMenuType("sawmill_menu", SawmillMenu::new);
     public static final RegistryObject<MenuType<CoalGeneratorMenu>> COAL_GENERATOR_MENU = registerMenuType("coal_generator_menu", CoalGeneratorMenu::new);
     public static final RegistryObject<MenuType<ChargerMenu>> CHARGER_MENU = registerMenuType("charger_menu", ChargerMenu::new);
+    public static final RegistryObject<MenuType<PrinterMenu>> PRINTER_MENU = registerMenuType("printer_menu", PrinterMenu::new);
+    public static final RegistryObject<MenuType<InscriberMenu>> INSCRIBER_MENU = registerMenuType("inscriber_menu", InscriberMenu::new);
 
 
 }
