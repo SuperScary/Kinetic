@@ -96,8 +96,6 @@ public class FacadeBlockItem extends BlockItem
         return true;
     }
 
-    // This function is called when our block item is right clicked on something. When this happens
-    // we want to either set the minic block or place the facade block
     @Nonnull
     @Override
     public InteractionResult useOn (UseOnContext context)
@@ -115,7 +113,6 @@ public class FacadeBlockItem extends BlockItem
 
             if (block instanceof KineticBaseCable)
             {
-                // We are hitting a cable block. We want to replace it with a facade block
                 FacadeBlock facadeBlock = (FacadeBlock) this.getBlock();
                 BlockPlaceContext blockContext = new ReplaceBlockItemUseContext(context);
                 BlockState placementState = facadeBlock.getStateForPlacement(blockContext)
@@ -140,7 +137,6 @@ public class FacadeBlockItem extends BlockItem
                 }
             } else if (block == KineticBlocks.FACADE_BLOCK.get())
             {
-                // We are hitting a facade block. We want to copy the block it is mimicing
                 BlockEntity te = world.getBlockEntity(pos);
                 if (!(te instanceof FacadeBlockEntity facade))
                 {
@@ -153,7 +149,6 @@ public class FacadeBlockItem extends BlockItem
                 userSetMimicBlock(itemstack, facade.getMimicBlock(), context);
             } else
             {
-                // We are hitting something else. We want to set that block as what we are going to mimic
                 userSetMimicBlock(itemstack, state, context);
             }
             return InteractionResult.SUCCESS;

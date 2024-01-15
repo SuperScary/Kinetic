@@ -20,8 +20,6 @@ import javax.annotation.Nonnull;
 public class BasicPowerCableBlock extends KineticBaseCable
 {
 
-
-
     public BasicPowerCableBlock ()
     {
         super(BlockBehaviour.Properties.of()
@@ -30,9 +28,6 @@ public class BasicPowerCableBlock extends KineticBaseCable
                 .noOcclusion()
         );
     }
-
-    // Return the connector type for the given position and facing direction
-
 
     @Nullable
     @Override

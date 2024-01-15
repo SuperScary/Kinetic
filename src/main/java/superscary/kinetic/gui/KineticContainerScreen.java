@@ -22,6 +22,7 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
     public KineticContainerScreen (T menu, Inventory inventory, Component title)
     {
         super(menu, inventory, title);
+        this.imageWidth = 203;
     }
 
     public abstract ResourceLocation getTexture ();

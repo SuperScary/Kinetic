@@ -12,6 +12,7 @@ import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.block.entity.ChargerBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
 import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.gui.UpgradeSlot;
 
 public class ChargerMenu extends KineticContainerMenu
 {
@@ -33,6 +34,10 @@ public class ChargerMenu extends KineticContainerMenu
             this.addSlot(new SlotItemHandler(generator.getItems(), 0, 43, 33));
             this.addSlot(new SlotItemHandler(generator.getItems(), 1, 80, 33));
             this.addSlot(new SlotItemHandler(generator.getItems(), 2, 117, 33));
+            this.addSlot(new UpgradeSlot(generator.getItems(), 3, 182, 5));
+            this.addSlot(new UpgradeSlot(generator.getItems(), 4, 182, 23));
+            this.addSlot(new UpgradeSlot(generator.getItems(), 5, 182, 41));
+            this.addSlot(new UpgradeSlot(generator.getItems(), 6, 182, 59));
         }
 
     }
@@ -45,7 +50,7 @@ public class ChargerMenu extends KineticContainerMenu
     @Override
     public int getContainerSize ()
     {
-        return 3;
+        return 7;
     }
 
     @Override

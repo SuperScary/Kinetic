@@ -14,11 +14,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.block.cables.blocks.KineticBaseCable;
+import superscary.kinetic.block.cables.blocks.entity.power.BasePowerCableBlockEntity;
 import superscary.kinetic.block.cables.blocks.entity.power.BasicPowerCableBlockEntity;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
+import java.util.function.Consumer;
 
-public class FacadeBlockEntity extends BasicPowerCableBlockEntity
+public class FacadeBlockEntity extends BasePowerCableBlockEntity
 {
 
     public static final String MIMIC_TAG = "mimic";
@@ -112,6 +115,12 @@ public class FacadeBlockEntity extends BasicPowerCableBlockEntity
         {
             mimicBlock = null;
         }
+    }
+
+    @Override
+    public void traverse (BlockPos pos, Set<BlockPos> traversed, Consumer<BasePowerCableBlockEntity> consumer)
+    {
+
     }
 
     @Override

@@ -31,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.SawmillMenu;
 import superscary.kinetic.item.KineticItems;
+import superscary.kinetic.item.UpgradeItem;
 import superscary.kinetic.util.SizedInventory;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
@@ -69,6 +70,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider, Siz
                         || stack.getItem() == KineticItems.CAPACITOR_PREMIUM.get()
                         || stack.getItem() == KineticItems.CAPACITOR_DELUXE.get()
                         || stack.getItem() == KineticItems.CAPACITOR_ULTIMATE.get();
+                case 3, 4, 5, 6 -> stack.getItem() instanceof UpgradeItem;
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -186,7 +188,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider, Siz
 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
-
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     @Nullable

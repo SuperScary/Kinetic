@@ -58,7 +58,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> PREMIUM_POWER_CABLE_BLOCK = reg("premium_power_cable", PremiumPowerCableBlock::new);
     public static final RegistryObject<Block> DELUXE_POWER_CABLE_BLOCK = reg("deluxe_power_cable", DeluxePowerCableBlock::new);
     public static final RegistryObject<Block> ULTIMATE_POWER_CABLE_BLOCK = reg("ultimate_power_cable", UltimatePowerCableBlock::new);
-    public static final RegistryObject<Block> FACADE_BLOCK = reg("facade", FacadeBlock::new);
+    public static final RegistryObject<FacadeBlock> FACADE_BLOCK = KineticTabs.addBlockToTab(BLOCKS.register("facade", FacadeBlock::new));
     public static final RegistryObject<Block> REACTOR_FRAME = reg("reactor_frame", ReactorFrameBlock::new);
     public static final RegistryObject<Block> REACTOR_CORE = reg("reactor_core", ReactorCoreBlock::new);
     public static final RegistryObject<Block> REACTOR_POWER_TAP_BLOCK = reg("reactor_power_tap", ReactorPowerTapBlock::new);

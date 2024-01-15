@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.InscriberMenu;
+import superscary.kinetic.item.UpgradeItem;
 import superscary.kinetic.util.SizedInventory;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
@@ -55,6 +56,7 @@ public class InscriberBlockEntity extends BlockEntity implements MenuProvider, S
             return switch (slot)
             {
                 case 0, 1, 2 -> stack.getCapability(ForgeCapabilities.ENERGY).isPresent();
+                case 3, 4, 5, 6 -> stack.getItem() instanceof UpgradeItem;
                 default -> false;
             };
         }
@@ -69,61 +71,7 @@ public class InscriberBlockEntity extends BlockEntity implements MenuProvider, S
 
     public void tickServer ()
     {
-        boolean powered = energy.getEnergyStored() > 0;
-        if (powered != getBlockState().getValue(BlockStateProperties.POWERED))
-        {
-
-            if (itemHandler.getStackInSlot(0) != ItemStack.EMPTY)
-            {
-                ItemStack s0 = itemHandler.getStackInSlot(0);
-                s0.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
-                    if (handler.canReceive())
-                    {
-                        chargeItem(s0);
-                    }
-                });
-            }
-
-            if (itemHandler.getStackInSlot(1) != ItemStack.EMPTY)
-            {
-                ItemStack s1 = itemHandler.getStackInSlot(1);
-                s1.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
-                    if (handler.canReceive())
-                    {
-                        chargeItem(s1);
-                    }
-                });
-            }
-
-            if (itemHandler.getStackInSlot(2) != ItemStack.EMPTY)
-            {
-                ItemStack s2 = itemHandler.getStackInSlot(2);
-                s2.getCapability(ForgeCapabilities.ENERGY).ifPresent(handler -> {
-                    if (handler.canReceive())
-                    {
-                        chargeItem(s2);
-                    }
-                });
-            }
-
-            level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, powered));
-        }
-    }
-
-    private void chargeItem (ItemStack stack)
-    {
-        if (energy.getEnergyStored() <= 0) return;
-
-        stack.getCapability(ForgeCapabilities.ENERGY).map(e -> {
-            if (e.canReceive())
-            {
-                int received = e.receiveEnergy(Math.min(energy.getEnergyStored(), MAX_TRANSFER), false);
-                energy.extractEnergy(received, false);
-                setChanged();
-                return received;
-            }
-            return 0;
-        });
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     private EnergyStorage createEnergyStorage ()
@@ -191,7 +139,7 @@ public class InscriberBlockEntity extends BlockEntity implements MenuProvider, S
     @Override
     public int getInventorySize ()
     {
-        return 3;
+        return 7;
     }
 
     public int getStoredPower ()

@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.gui.menu.ChargerMenu;
+import superscary.kinetic.item.UpgradeItem;
 import superscary.kinetic.util.SizedInventory;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
@@ -55,11 +56,18 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Siz
             return switch (slot)
             {
                 case 0, 1, 2 -> stack.getCapability(ForgeCapabilities.ENERGY).isPresent();
+                case 3, 4, 5, 6 -> stack.getItem() instanceof UpgradeItem;
                 default -> false;
             };
         }
     };
-    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy) {
+        @Override
+        public boolean canReceive ()
+        {
+            return true;
+        }
+    });
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
 
     public ChargerBlockEntity (BlockPos pos, BlockState state)
@@ -108,6 +116,8 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Siz
 
             level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.POWERED, powered));
         }
+        setChanged();
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     private void chargeItem (ItemStack stack)
@@ -191,7 +201,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Siz
     @Override
     public int getInventorySize ()
     {
-        return 3;
+        return 7;
     }
 
     public int getStoredPower ()

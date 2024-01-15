@@ -15,6 +15,7 @@ import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.block.entity.CompressorBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
 import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.gui.UpgradeSlot;
 
 public class CompressorMenu extends KineticContainerMenu
 {
@@ -35,6 +36,10 @@ public class CompressorMenu extends KineticContainerMenu
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 35));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 35));
             this.addSlot(new SlotItemHandler(iItemHandler, 2, 21, 57));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 5));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 41));
+            this.addSlot(new UpgradeSlot(iItemHandler, 6, 182, 59));
         });
 
         addDataSlots(data);
@@ -43,7 +48,7 @@ public class CompressorMenu extends KineticContainerMenu
     @Override
     public int getContainerSize ()
     {
-        return 3;
+        return 7;
     }
 
     @Override

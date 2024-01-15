@@ -43,8 +43,6 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     public static final int GENERATE = 50;
     public static final int MAX_TRANSFER = 1024;
     public static final int CAPACITY = 100000;
-
-    public static int SLOT_COUNT = 1;
     public static int SLOT = 0;
     protected final ContainerData data;
     private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
@@ -92,7 +90,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
             @Override
             public int getCount ()
             {
-                return SLOT_COUNT;
+                return getInventorySize();
             }
         };
     }
@@ -107,6 +105,8 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
         {
             level.setBlock(worldPosition, blockState.setValue(BlockStateProperties.POWERED, burnTime > 0), Block.UPDATE_ALL);
         }
+
+        getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
 
     }
 
@@ -267,7 +267,7 @@ public class CoalGeneratorBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public int getInventorySize ()
     {
-        return 1;
+        return 5;
     }
 
     public int getStoredPower ()

@@ -16,6 +16,7 @@ import superscary.kinetic.block.entity.CompressorBlockEntity;
 import superscary.kinetic.block.entity.SawmillBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
 import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.gui.UpgradeSlot;
 
 public class SawmillMenu extends KineticContainerMenu
 {
@@ -35,13 +36,17 @@ public class SawmillMenu extends KineticContainerMenu
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59));
+            this.addSlot(new UpgradeSlot(iItemHandler, 2, 182, 5));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 41));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 59));
         });
     }
 
     @Override
     public int getContainerSize ()
     {
-        return blockEntity.getInventorySize();
+        return 7;
     }
 
     @Override

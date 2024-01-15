@@ -15,6 +15,7 @@ import superscary.kinetic.block.KineticBlocks;
 import superscary.kinetic.block.entity.CoalGeneratorBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
 import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.gui.UpgradeSlot;
 
 public class CoalGeneratorMenu extends KineticContainerMenu
 {
@@ -33,6 +34,10 @@ public class CoalGeneratorMenu extends KineticContainerMenu
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 33));
+            this.addSlot(new UpgradeSlot(iItemHandler, 1, 182, 5));
+            this.addSlot(new UpgradeSlot(iItemHandler, 2, 182, 23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 41));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 59));
         });
 
     }
@@ -40,7 +45,7 @@ public class CoalGeneratorMenu extends KineticContainerMenu
     @Override
     public int getContainerSize ()
     {
-        return 1;
+        return 5;
     }
 
     @Override
