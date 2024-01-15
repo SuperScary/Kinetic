@@ -82,5 +82,7 @@
   "itemGroup.kinetic": "Kinetic",
 
   "chat.ore_found": "Found %s at %s, %s, %s.",
-  "chat.ore_not_found": "No ores found."
+  "chat.ore_not_found": "No ores found.",
+
+  "kinetic.facade.is_mimicing": "Facade Set to %s"
 }

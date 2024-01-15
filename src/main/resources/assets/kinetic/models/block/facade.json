@@ -1,5 +1,5 @@
 {
   "parent": "minecraft:block/cube",
   "facade": true,
-  "loader": "kinetic:cableloader"
+  "loader": "kinetic:basiccableloader"
 }

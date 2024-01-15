@@ -66,7 +66,7 @@ public class FacadeBlockItem extends BlockItem
         setMimicBlock(item, mimicBlock);
         if (world.isClientSide)
         {
-            player.displayClientMessage(Component.translatable(FACADE_IS_MIMICING, mimicBlock.getBlock().getDescriptionId()), false);
+            player.displayClientMessage(Component.translatable(FACADE_IS_MIMICING, mimicBlock.getBlock().getName()), false);
         }
     }
 
