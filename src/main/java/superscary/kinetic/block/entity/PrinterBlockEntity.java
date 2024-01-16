@@ -61,7 +61,28 @@ public class PrinterBlockEntity extends BlockEntity implements MenuProvider, Siz
             };
         }
     };
-    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy) {
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return 0;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            setChanged();
+            return super.receiveEnergy(maxReceive, simulate);
+        }
+
+        @Override
+        public boolean canExtract() {
+            return false;
+        }
+
+        @Override
+        public boolean canReceive() {
+            return true;
+        }
+    });
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
 
     public PrinterBlockEntity (BlockPos pos, BlockState state)

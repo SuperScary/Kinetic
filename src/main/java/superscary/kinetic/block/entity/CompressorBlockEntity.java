@@ -45,7 +45,7 @@ import superscary.kinetic.util.helpers.NBTKeys;
 
 import java.util.Optional;
 
-public class CompressorBlockEntity extends BlockEntity implements MenuProvider, SizedInventory, CapacitorModifiable
+public class CompressorBlockEntity extends BlockEntity implements MenuProvider, SizedInventory
 {
 
     private static final int INPUT_SLOT = 0;
@@ -62,13 +62,6 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
             setChanged();
             if (!level.isClientSide())
             {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
-            }
-
-            if (slot == getCapacitorSlot())
-            {
-                setChanged();
-                energy = createEnergyStorage();
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
 
@@ -92,7 +85,28 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
         }
     };
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
+    private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy) {
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return 0;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            setChanged();
+            return super.receiveEnergy(maxReceive, simulate);
+        }
+
+        @Override
+        public boolean canExtract() {
+            return false;
+        }
+
+        @Override
+        public boolean canReceive() {
+            return true;
+        }
+    });
     private int progress = 0;
     private int maxProgress = 0;
     private int energyAmount = 0;
@@ -141,8 +155,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
 
     private EnergyStorage createEnergyStorage ()
     {
-        if (capacitorSlotValid()) return new EnergyStorage(getCapacitor().getMaxCapacity(), getCapacitor().getMaxTransfer(), getCapacitor().getMaxTransfer());
-        else return new EnergyStorage(0, 0, 0);
+        return new EnergyStorage(40_000, 128, 128);
     }
 
     public IEnergyStorage getEnergyStorage ()
@@ -206,7 +219,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
     public void tick (Level pLevel, BlockPos pPos, BlockState pState)
     {
         CompressorBlock block = (CompressorBlock) pState.getBlock();
-        if (hasRecipe() && capacitorSlotValid())
+        if (hasRecipe())
         {
             block.defaultBlockState().setValue(BlockStateProperties.POWERED, Boolean.TRUE);
             increaseCraftingProgress();
@@ -258,7 +271,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
 
     private boolean hasEnoughEnergy (int req)
     {
-        boolean b = this.energy.getEnergyStored() >= req * maxProgress;
+        boolean b = this.energy.getEnergyStored() >= req;
         if (b) this.energy.extractEnergy(req, false);
         return b;
     }
@@ -316,25 +329,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     public int getInventorySize ()
     {
-        return 7;
-    }
-
-    @Override
-    public int getCapacitorSlot ()
-    {
-        return 2;
-    }
-
-    @Override
-    public boolean capacitorSlotValid ()
-    {
-        return InventoryHelper.capacitorIsValid(itemHandler, getCapacitorSlot());
-    }
-
-    @Override
-    public CapacitorItem getCapacitor ()
-    {
-        return capacitorSlotValid() ? (CapacitorItem) itemHandler.getStackInSlot(getCapacitorSlot()).getItem() : null;
+        return 6;
     }
 
     public int getStoredPower ()

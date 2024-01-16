@@ -34,7 +34,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Siz
 {
 
     public static final int MAX_TRANSFER = 512;
-    public static final int CAPACITY = 20000;
+    public static final int CAPACITY = 200_000;
 
     private final EnergyStorage energy = createEnergyStorage();
     private final ItemStackHandler itemHandler = new ItemStackHandler(getInventorySize())
@@ -63,8 +63,23 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Siz
     };
     private final LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy) {
         @Override
-        public boolean canReceive ()
-        {
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            return 0;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            setChanged();
+            return super.receiveEnergy(maxReceive, simulate);
+        }
+
+        @Override
+        public boolean canExtract() {
+            return false;
+        }
+
+        @Override
+        public boolean canReceive() {
             return true;
         }
     });

@@ -61,6 +61,5 @@ public class CompressorCategory implements IRecipeCategory<CompressorRecipe>
     {
         builder.addSlot(RecipeIngredientRole.INPUT, 56, 35).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 116, 35).addItemStack(recipe.getResultItem(null));
-        builder.addSlot(RecipeIngredientRole.CATALYST, 21, 57).addItemStack(new ItemStack(KineticItems.CAPACITOR_BASIC.get()));
     }
 }

@@ -13,7 +13,7 @@ public class PremiumPowerCableBlockEntity extends BasePowerCableBlockEntity
 
     public PremiumPowerCableBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.PREMIUM_POWER_CABLE_BE.get(), pos, state);
+        super(KineticBlockEntities.PREMIUM_POWER_CABLE_BE.get(), pos, state, PowerCableType.PREMIUM);
     }
 
     @Override

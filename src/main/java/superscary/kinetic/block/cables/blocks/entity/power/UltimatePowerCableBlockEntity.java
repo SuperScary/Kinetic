@@ -13,7 +13,7 @@ public class UltimatePowerCableBlockEntity extends BasePowerCableBlockEntity
 
     public UltimatePowerCableBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.ULTIMATE_POWER_CABLE_BE.get(), pos, state);
+        super(KineticBlockEntities.ULTIMATE_POWER_CABLE_BE.get(), pos, state, PowerCableType.ULTIMATE);
     }
 
     @Override

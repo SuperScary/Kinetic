@@ -6,7 +6,7 @@
 		"north": "kinetic:block/charger/charger_off",
 		"particle": "kinetic:block/machine_side",
 		"south": "kinetic:block/machine_side",
-		"up": "kinetic:block/charger/charger_top_off",
+		"up": "kinetic:block/machine_top",
 		"west": "kinetic:block/machine_side"
 	}
 }

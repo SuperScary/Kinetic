@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
 import superscary.kinetic.block.cables.blocks.KineticBaseCable;
 import superscary.kinetic.block.cables.blocks.entity.power.BasePowerCableBlockEntity;
-import superscary.kinetic.block.cables.blocks.entity.power.BasicPowerCableBlockEntity;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -31,7 +30,7 @@ public class FacadeBlockEntity extends BasePowerCableBlockEntity
 
     public FacadeBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.FACADE_BE.get(), pos, state);
+        super(KineticBlockEntities.FACADE_BE.get(), pos, state, PowerCableType.FACADE);
     }
 
     // The default onDataPacket() will call load() to load the data from the packet.

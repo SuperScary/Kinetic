@@ -21,25 +21,26 @@ public class CompressorMenu extends KineticContainerMenu
 {
 
     public final CompressorBlockEntity blockEntity;
+    private final ContainerData data;
 
     public CompressorMenu (int containerId, Inventory inventory, FriendlyByteBuf extraData)
     {
-        this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(3));
+        this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(6));
     }
 
     public CompressorMenu (int containerId, Inventory inventory, BlockEntity entity, ContainerData data)
     {
         super(KineticMenus.COMPRESSOR_MENU.get(), containerId, inventory, entity.getBlockPos());
         blockEntity = ((CompressorBlockEntity) entity);
+        this.data = data;
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 35));
             this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 35));
-            this.addSlot(new SlotItemHandler(iItemHandler, 2, 21, 57));
-            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 5));
-            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 23));
-            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 41));
-            this.addSlot(new UpgradeSlot(iItemHandler, 6, 182, 59));
+            this.addSlot(new UpgradeSlot(iItemHandler, 2, 182, 5));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 41));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 59));
         });
 
         addDataSlots(data);
@@ -48,7 +49,7 @@ public class CompressorMenu extends KineticContainerMenu
     @Override
     public int getContainerSize ()
     {
-        return 7;
+        return 6;
     }
 
     @Override
@@ -89,6 +90,19 @@ public class CompressorMenu extends KineticContainerMenu
     public CompressorBlockEntity getBlockEntity ()
     {
         return this.blockEntity;
+    }
+
+    public boolean isCrafting ()
+    {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledProgress ()
+    {
+        int progress = this.data.get(0);
+        int max = this.data.get(1);
+        int arrowSize = 26;
+        return max != 0 && progress != 0 ? progress * arrowSize / max : 0;
     }
 
 }

@@ -13,7 +13,7 @@ public class DeluxePowerCableBlockEntity extends BasePowerCableBlockEntity
 
     public DeluxePowerCableBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.DELUXE_POWER_CABLE_BE.get(), pos, state);
+        super(KineticBlockEntities.DELUXE_POWER_CABLE_BE.get(), pos, state, PowerCableType.DELUXE);
     }
 
     @Override

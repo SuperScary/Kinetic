@@ -13,7 +13,7 @@ public class StandardPowerCableBlockEntity extends BasePowerCableBlockEntity
 
     public StandardPowerCableBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.STANDARD_POWER_CABLE_BE.get(), pos, state);
+        super(KineticBlockEntities.STANDARD_POWER_CABLE_BE.get(), pos, state, PowerCableType.STANDARD);
     }
 
     @Override

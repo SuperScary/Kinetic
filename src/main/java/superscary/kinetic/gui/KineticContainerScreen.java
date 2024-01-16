@@ -7,15 +7,20 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.energy.IEnergyStorage;
 import superscary.kinetic.gui.renderer.EnergyDisplayTooltipArea;
 import superscary.kinetic.util.helpers.MouseUtil;
 
+import java.util.List;
 import java.util.Optional;
 
 public abstract class KineticContainerScreen<T extends KineticContainerMenu> extends AbstractContainerScreen<T>
 {
+
+    private static final int ENERGY_LEFT = 10;
+    private static final int ENERGY_WIDTH = 8;
+    private static final int ENERGY_TOP = 9;
+    private static final int ENERGY_HEIGHT = 64;
 
     private EnergyDisplayTooltipArea energyInfoArea;
 
@@ -46,7 +51,7 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
     @Override
     protected void renderLabels (GuiGraphics graphics, int mouseX, int mouseY)
     {
-        graphics.drawString(font, title, (imageWidth / 2) - font.width(title) / 2, titleLabelY, 4210752, false);
+        graphics.drawString(font, title, ((imageWidth / 2) - font.width(title) / 2) - 15, titleLabelY, 4210752, false);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         renderEnergyAreaTooltips(graphics, mouseX, mouseY, x, y);
@@ -56,7 +61,7 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
     {
         if (isMouseAboveArea(mouseX, mouseY, x, y, 10, 9, 8, 64))
         {
-            guiGraphics.renderTooltip(this.font, energyInfoArea.getTooltips(), Optional.empty(), mouseX - x, mouseY - y);
+            guiGraphics.renderTooltip(this.font, getTooltips(), Optional.empty(), mouseX - x, mouseY - y);
         }
     }
 
@@ -69,8 +74,27 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+        renderArrow(guiGraphics, x, y);
+
         guiGraphics.blit(getTexture(), x, y, 0, 0, imageWidth, imageHeight);
-        energyInfoArea.render(guiGraphics);
+        int power = menu.getPower();
+        int p = (int) ((power / (float) getEnergyStorage().getMaxEnergyStored()) * ENERGY_HEIGHT);
+        int left = leftPos + ENERGY_LEFT;
+        int top = topPos + ENERGY_TOP;
+        int e_left = left + ENERGY_WIDTH;
+        int e_top = top + ENERGY_HEIGHT;
+        guiGraphics.fillGradient(e_left, e_top, left, e_top - p, 0xff000000, 0xffff0000);
+        guiGraphics.fill(left, top, e_left, e_top - p, 0xff330000);
+    }
+
+    /**
+     * Optional for rendering a progress arrow
+     * @param guiGraphics
+     * @param x
+     * @param y
+     */
+    public void renderArrow (GuiGraphics guiGraphics, int x, int y)
+    {
     }
 
     @Override
@@ -84,6 +108,11 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
     private boolean isMouseAboveArea (int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height)
     {
         return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
+    }
+
+    public List<Component> getTooltips ()
+    {
+        return List.of(Component.literal(menu.getPower() + " / " + getEnergyStorage().getMaxEnergyStored() + " FE"));
     }
 
 }
