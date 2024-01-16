@@ -30,6 +30,7 @@
   "item.kinetic.configuration_wizard": "ConfigurationWizard™",
   "item.kinetic.sd_card": "SD Card",
   "item.kinetic.blueprint": "Blueprint",
+  "item.kinetic.photovoltaic_cell": "Photovoltaic Cell",
 
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
@@ -78,6 +79,11 @@
   "block.kinetic.reactor_fluid_port": "Reactor Fluid Port",
   "block.kinetic.printer": "3D Printer",
   "block.kinetic.inscriber": "Inscriber",
+  "block.kinetic.basic_solar_panel": "Basic Solar Panel",
+  "block.kinetic.standard_solar_panel": "Standard Solar Panel",
+  "block.kinetic.premium_solar_panel": "Premium Solar Panel",
+  "block.kinetic.deluxe_solar_panel": "Deluxe Solar Panel",
+  "block.kinetic.ultimate_solar_panel": "Ultimate Solar Panel",
 
   "itemGroup.kinetic": "Kinetic",
 

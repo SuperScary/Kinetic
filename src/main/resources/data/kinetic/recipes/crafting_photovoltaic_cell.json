@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "SRS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "kinetic:steel_ingot"
+    },
+    "G": {
+      "item": "minecraft:blue_stained_glass_pane"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "kinetic:photovoltaic_cell",
+    "count": 2
+  }
+}

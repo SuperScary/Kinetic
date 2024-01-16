@@ -46,6 +46,7 @@ public class KineticItems
     public static final RegistryObject<Item> CONFIGURATION_WIZARD = reg("configuration_wizard", ConfigurationWizardItem::new);
     public static final RegistryObject<Item> SD_CARD = reg("sd_card", SDCardItem::new);
     public static final RegistryObject<Item> BLUEPRINT = reg("blueprint", BlueprintItem::new);
+    public static final RegistryObject<Item> PHOTOVOLTAIC_CELL = reg("photovoltaic_cell", KineticItem::new);
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));

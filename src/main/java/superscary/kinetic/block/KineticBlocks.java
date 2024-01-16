@@ -65,6 +65,11 @@ public class KineticBlocks
     public static final RegistryObject<Block> REACTOR_FLUID_PORT = reg("reactor_fluid_port", ReactorFluidPortBlock::new);
     public static final RegistryObject<Block> PRINTER_BLOCK = reg("printer", PrinterBlock::new);
     public static final RegistryObject<Block> INSCRIBER_BLOCK = reg("inscriber", InscriberBlock::new);
+    public static final RegistryObject<Block> BASIC_SOLAR_PANEL = reg("basic_solar_panel", BasicSolarPanelBlock::new);
+    public static final RegistryObject<Block> STANDARD_SOLAR_PANEL = reg("standard_solar_panel", StandardSolarPanelBlock::new);
+    public static final RegistryObject<Block> PREMIUM_SOLAR_PANEL = reg("premium_solar_panel", PremiumSolarPanelBlock::new);
+    public static final RegistryObject<Block> DELUXE_SOLAR_PANEL = reg("deluxe_solar_panel", DeluxeSolarPanelBlock::new);
+    public static final RegistryObject<Block> ULTIMATE_SOLAR_PANEL = reg("ultimate_solar_panel", UltimateSolarPanelBlock::new);
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

@@ -69,6 +69,21 @@ public class KineticBlockEntities
     public static final RegistryObject<BlockEntityType<InscriberBlockEntity>> INSCRIBER_BE =
             BLOCK_ENTITIES.register("inscriber_be", () -> BlockEntityType.Builder.of(InscriberBlockEntity::new,
                     KineticBlocks.INSCRIBER_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BasicSolarPanelBlockEntity>> BASIC_SOLAR_PANEL_BE =
+            BLOCK_ENTITIES.register("basic_solar_panel_be", () -> BlockEntityType.Builder.of(BasicSolarPanelBlockEntity::new,
+                    KineticBlocks.BASIC_SOLAR_PANEL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<StandardSolarPanelBlockEntity>> STANDARD_SOLAR_PANEL_BE =
+            BLOCK_ENTITIES.register("standard_solar_panel_be", () -> BlockEntityType.Builder.of(StandardSolarPanelBlockEntity::new,
+                    KineticBlocks.STANDARD_SOLAR_PANEL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<PremiumSolarPanelBlockEntity>> PREMIUM_SOLAR_PANEL_BE =
+            BLOCK_ENTITIES.register("premium_solar_panel_be", () -> BlockEntityType.Builder.of(PremiumSolarPanelBlockEntity::new,
+                    KineticBlocks.PREMIUM_SOLAR_PANEL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DeluxeSolarPanelBlockEntity>> DELUXE_SOLAR_PANEL_BE =
+            BLOCK_ENTITIES.register("deluxe_solar_panel_be", () -> BlockEntityType.Builder.of(DeluxeSolarPanelBlockEntity::new,
+                    KineticBlocks.DELUXE_SOLAR_PANEL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<UltimateSolarPanelBlockEntity>> ULTIMATE_SOLAR_PANEL_BE =
+            BLOCK_ENTITIES.register("ultimate_solar_panel_be", () -> BlockEntityType.Builder.of(UltimateSolarPanelBlockEntity::new,
+                    KineticBlocks.ULTIMATE_SOLAR_PANEL.get()).build(null));
 
 
 }
