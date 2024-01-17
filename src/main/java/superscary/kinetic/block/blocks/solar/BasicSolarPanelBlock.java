@@ -1,4 +1,4 @@
-package superscary.kinetic.block.blocks;
+package superscary.kinetic.block.blocks.solar;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -9,15 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
-import superscary.kinetic.block.entity.DeluxeSolarPanelBlockEntity;
-import superscary.kinetic.block.entity.UltimateSolarPanelBlockEntity;
+import superscary.kinetic.block.entity.BasicSolarPanelBlockEntity;
 
 import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_BASIC;
 
-public class UltimateSolarPanelBlock extends KineticBaseEntityBlock
+public class BasicSolarPanelBlock extends KineticBaseEntityBlock
 {
 
-    public UltimateSolarPanelBlock ()
+    public BasicSolarPanelBlock ()
     {
         super(Properties.copy(MACHINE_BASE_BASIC.get()).noOcclusion().strength(3.5f).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
     }
@@ -26,7 +25,7 @@ public class UltimateSolarPanelBlock extends KineticBaseEntityBlock
     @Override
     public BlockEntity newBlockEntity (BlockPos pos, BlockState state)
     {
-        return new UltimateSolarPanelBlockEntity(pos, state);
+        return new BasicSolarPanelBlockEntity(pos, state);
     }
 
     @Nullable
@@ -37,7 +36,7 @@ public class UltimateSolarPanelBlock extends KineticBaseEntityBlock
         {
             return null;
         } else return (lvl, pos, st, be) -> {
-            if (be instanceof UltimateSolarPanelBlockEntity generator) generator.tickServer();
+            if (be instanceof BasicSolarPanelBlockEntity generator) generator.tickServer();
         };
     }
 

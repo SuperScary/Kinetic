@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "SMS",
+    "SFS"
+  ],
+  "key": {
+    "P": {
+      "item": "kinetic:basic_photovoltaic_cell"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    },
+    "M": {
+      "item": "kinetic:machine_base_basic"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "kinetic:basic_solar_panel",
+    "count": 1
+  }
+}

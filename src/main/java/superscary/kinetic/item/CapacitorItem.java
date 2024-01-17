@@ -28,6 +28,11 @@ public class CapacitorItem extends Item
         this.rarity = rarity;
     }
 
+    public CapacitorItem (int maxCap, int maxTrans, int rarity)
+    {
+        this (new Item.Properties().stacksTo(1), maxCap, maxTrans, rarity);
+    }
+
     @Override
     public Rarity getRarity (ItemStack pStack)
     {

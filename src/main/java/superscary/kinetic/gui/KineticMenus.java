@@ -26,6 +26,7 @@ public class KineticMenus
     public static final RegistryObject<MenuType<ChargerMenu>> CHARGER_MENU = registerMenuType("charger_menu", ChargerMenu::new);
     public static final RegistryObject<MenuType<PrinterMenu>> PRINTER_MENU = registerMenuType("printer_menu", PrinterMenu::new);
     public static final RegistryObject<MenuType<InscriberMenu>> INSCRIBER_MENU = registerMenuType("inscriber_menu", InscriberMenu::new);
+    public static final RegistryObject<MenuType<BasicBatteryMenu>> BASIC_BATTERY_MENU = registerMenuType("basic_battery_menu", BasicBatteryMenu::new);
 
 
 }

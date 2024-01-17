@@ -30,7 +30,11 @@
   "item.kinetic.configuration_wizard": "ConfigurationWizard™",
   "item.kinetic.sd_card": "SD Card",
   "item.kinetic.blueprint": "Blueprint",
-  "item.kinetic.photovoltaic_cell": "Photovoltaic Cell",
+  "item.kinetic.basic_photovoltaic_cell": "Basic Photovoltaic Cell",
+  "item.kinetic.standard_photovoltaic_cell": "Standard Photovoltaic Cell",
+  "item.kinetic.premium_photovoltaic_cell": "Premium Photovoltaic Cell",
+  "item.kinetic.deluxe_photovoltaic_cell": "Deluxe Photovoltaic Cell",
+  "item.kinetic.ultimate_photovoltaic_cell": "Ultimate Photovoltaic Cell",
 
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
@@ -84,6 +88,8 @@
   "block.kinetic.premium_solar_panel": "Premium Solar Panel",
   "block.kinetic.deluxe_solar_panel": "Deluxe Solar Panel",
   "block.kinetic.ultimate_solar_panel": "Ultimate Solar Panel",
+  "block.kinetic.battery_frame": "Battery Frame",
+  "block.kinetic.basic_battery": "Basic Battery",
 
   "itemGroup.kinetic": "Kinetic",
 

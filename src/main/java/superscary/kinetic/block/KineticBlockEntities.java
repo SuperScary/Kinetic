@@ -84,6 +84,9 @@ public class KineticBlockEntities
     public static final RegistryObject<BlockEntityType<UltimateSolarPanelBlockEntity>> ULTIMATE_SOLAR_PANEL_BE =
             BLOCK_ENTITIES.register("ultimate_solar_panel_be", () -> BlockEntityType.Builder.of(UltimateSolarPanelBlockEntity::new,
                     KineticBlocks.ULTIMATE_SOLAR_PANEL.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BasicBatteryBlockEntity>> BASIC_BATTERY_BE =
+            BLOCK_ENTITIES.register("basic_battery_be", () -> BlockEntityType.Builder.of(BasicBatteryBlockEntity::new,
+                    KineticBlocks.BASIC_BATTERY.get()).build(null));
 
 
 }

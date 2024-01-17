@@ -72,6 +72,7 @@ public class Kinetic
             MenuScreens.register(KineticMenus.CHARGER_MENU.get(), ChargerScreen::new);
             MenuScreens.register(KineticMenus.PRINTER_MENU.get(), PrinterScreen::new);
             MenuScreens.register(KineticMenus.INSCRIBER_MENU.get(), InscriberScreen::new);
+            MenuScreens.register(KineticMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
         }
 
         @SubscribeEvent

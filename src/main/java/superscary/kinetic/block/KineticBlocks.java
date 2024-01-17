@@ -13,10 +13,12 @@ import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
 import superscary.kinetic.block.blocks.*;
+import superscary.kinetic.block.blocks.battery.BasicBatteryBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorCoreBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorFluidPortBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorFrameBlock;
 import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
+import superscary.kinetic.block.blocks.solar.*;
 import superscary.kinetic.block.cables.blocks.*;
 import superscary.kinetic.block.cables.blocks.power.*;
 import superscary.kinetic.item.KineticItems;
@@ -34,6 +36,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> DURACITE_BLOCK = reg("duracite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> SULFUR_ORE = reg("sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE).requiresCorrectToolForDrops(), UniformInt.of(2, 3)));
     public static final RegistryObject<Block> STEEL_BLOCK = reg("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> BATTERY_FRAME = reg("battery_frame", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> MACHINE_BASE_BASIC = reg("machine_base_basic", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), 1));
     public static final RegistryObject<Block> MACHINE_BASE_STANDARD = reg("machine_base_standard", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()), 1));
     public static final RegistryObject<Block> MACHINE_BASE_PREMIUM = reg("machine_base_premium", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_STANDARD.get()), 2));
@@ -70,6 +73,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> PREMIUM_SOLAR_PANEL = reg("premium_solar_panel", PremiumSolarPanelBlock::new);
     public static final RegistryObject<Block> DELUXE_SOLAR_PANEL = reg("deluxe_solar_panel", DeluxeSolarPanelBlock::new);
     public static final RegistryObject<Block> ULTIMATE_SOLAR_PANEL = reg("ultimate_solar_panel", UltimateSolarPanelBlock::new);
+    public static final RegistryObject<Block> BASIC_BATTERY = reg("basic_battery", BasicBatteryBlock::new);
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

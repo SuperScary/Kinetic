@@ -12,10 +12,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -24,59 +22,44 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
-import superscary.kinetic.gui.menu.CoalGeneratorMenu;
-import superscary.kinetic.util.BlockUtils;
+import superscary.kinetic.gui.menu.BasicBatteryMenu;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
-public class BasicSolarPanelBlockEntity extends BlockEntity
+public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider
 {
 
-    public static final int GENERATE_DAY = 16;
-    public static final int GENERATE_NIGHT = 0;
-    public static final int MAX_TRANSFER = 1024;
-    public static final int CAPACITY = 100000;
+    public static final int MAX_TRANSFER = 64;
+    public static final int CAPACITY = 1_000_000;
     private final EnergyStorage energy = createEnergyStorage();
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy)
     {
+
         @Override
-        public boolean canReceive ()
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            setChanged();
+            return super.receiveEnergy(maxReceive, simulate);
+        }
+
+        @Override
+        public int extractEnergy (int maxExtract, boolean simulate)
         {
-            return false;
+            setChanged();
+            return super.extractEnergy(maxExtract, simulate);
         }
     });
 
-    public BasicSolarPanelBlockEntity (BlockPos pos, BlockState state)
+    public BasicBatteryBlockEntity (BlockPos pos, BlockState state)
     {
-        super(KineticBlockEntities.BASIC_SOLAR_PANEL_BE.get(), pos, state);
+        super(KineticBlockEntities.BASIC_BATTERY_BE.get(), pos, state);
     }
 
     public void tickServer ()
     {
-        generateEnergy();
         distributeEnergy();
 
         getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
 
-    }
-
-    private void generateEnergy ()
-    {
-        if (energy.getEnergyStored() < energy.getMaxEnergyStored())
-        {
-            BlockState blockState = level.getBlockState(worldPosition);
-            if (BlockUtils.solarPanelPlacementValid(level, getBlockPos()))
-            {
-                energy.receiveEnergy(GENERATE_DAY, false);
-                level.setBlock(worldPosition, blockState.setValue(BlockStateProperties.POWERED, true), Block.UPDATE_ALL);
-            }
-            else
-            {
-                energy.receiveEnergy(GENERATE_NIGHT, false);
-                level.setBlock(worldPosition, blockState.setValue(BlockStateProperties.POWERED, false), Block.UPDATE_ALL);
-            }
-            setChanged();
-        }
     }
 
     private void distributeEnergy ()
@@ -108,7 +91,7 @@ public class BasicSolarPanelBlockEntity extends BlockEntity
 
     private EnergyStorage createEnergyStorage ()
     {
-        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER);
+        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER, 500000);
     }
 
     @Override
@@ -171,4 +154,16 @@ public class BasicSolarPanelBlockEntity extends BlockEntity
         return energy.getEnergyStored();
     }
 
+    @Override
+    public Component getDisplayName ()
+    {
+        return Component.translatable("block.kinetic.basic_battery");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu (int i, Inventory inventory, Player player)
+    {
+        return new BasicBatteryMenu(i, inventory, this);
+    }
 }

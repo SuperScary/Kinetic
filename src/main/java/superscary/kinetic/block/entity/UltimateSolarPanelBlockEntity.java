@@ -19,6 +19,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.util.BlockUtils;
 import superscary.kinetic.util.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
@@ -30,7 +31,14 @@ public class UltimateSolarPanelBlockEntity extends BlockEntity
     public static final int MAX_TRANSFER = 16384;
     public static final int CAPACITY = 300_000;
     private final EnergyStorage energy = createEnergyStorage();
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy));
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.of(() -> new KineticEnergyStorage(energy)
+    {
+        @Override
+        public boolean canReceive ()
+        {
+            return false;
+        }
+    });
 
     public UltimateSolarPanelBlockEntity (BlockPos pos, BlockState state)
     {
@@ -51,7 +59,7 @@ public class UltimateSolarPanelBlockEntity extends BlockEntity
         if (energy.getEnergyStored() < energy.getMaxEnergyStored())
         {
             BlockState blockState = level.getBlockState(worldPosition);
-            if (getLevel().isDay())
+            if (BlockUtils.solarPanelPlacementValid(level, getBlockPos()))
             {
                 energy.receiveEnergy(GENERATE_DAY, false);
                 level.setBlock(worldPosition, blockState.setValue(BlockStateProperties.POWERED, true), Block.UPDATE_ALL);
