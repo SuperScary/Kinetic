@@ -1,4 +1,4 @@
-package superscary.kinetic.gui;
+package superscary.kinetic.register;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;

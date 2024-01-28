@@ -1,10 +1,12 @@
-package superscary.kinetic.recipe;
+package superscary.kinetic.register;
 
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
+import superscary.kinetic.recipe.CompressorRecipe;
+import superscary.kinetic.recipe.SawmillRecipe;
 
 public class KineticRecipes
 {

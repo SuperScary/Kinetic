@@ -21,9 +21,9 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.gui.menu.BasicBatteryMenu;
-import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.api.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider

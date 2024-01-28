@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.block.cables.blocks.KineticBaseCable;
 import superscary.kinetic.block.cables.blocks.entity.power.BasePowerCableBlockEntity;
 

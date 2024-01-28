@@ -9,8 +9,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import superscary.kinetic.block.KineticBlocks;
-import superscary.kinetic.item.KineticItems;
+import superscary.kinetic.register.KineticBlocks;
 
 import java.util.ArrayList;
 import java.util.List;

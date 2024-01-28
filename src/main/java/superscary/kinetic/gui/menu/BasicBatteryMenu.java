@@ -7,10 +7,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.entity.BasicBatteryBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
-import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.register.KineticMenus;
 
 public class BasicBatteryMenu extends KineticContainerMenu
 {

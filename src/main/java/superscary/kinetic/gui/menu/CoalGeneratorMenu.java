@@ -4,17 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.DataSlot;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.entity.CoalGeneratorBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
-import superscary.kinetic.gui.KineticMenus;
+import superscary.kinetic.register.KineticMenus;
 import superscary.kinetic.gui.UpgradeSlot;
 
 public class CoalGeneratorMenu extends KineticContainerMenu

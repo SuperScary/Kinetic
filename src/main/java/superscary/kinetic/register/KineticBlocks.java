@@ -1,4 +1,4 @@
-package superscary.kinetic.block;
+package superscary.kinetic.register;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -21,7 +21,6 @@ import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
 import superscary.kinetic.block.blocks.solar.*;
 import superscary.kinetic.block.cables.blocks.*;
 import superscary.kinetic.block.cables.blocks.power.*;
-import superscary.kinetic.item.KineticItems;
 
 import java.util.function.Supplier;
 

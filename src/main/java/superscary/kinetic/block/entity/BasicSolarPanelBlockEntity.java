@@ -4,14 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,10 +18,9 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlockEntities;
-import superscary.kinetic.gui.menu.CoalGeneratorMenu;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.util.BlockUtils;
-import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.api.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 public class BasicSolarPanelBlockEntity extends BlockEntity

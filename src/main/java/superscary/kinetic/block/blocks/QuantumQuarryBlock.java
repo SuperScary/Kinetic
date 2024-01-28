@@ -16,10 +16,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
-import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.block.entity.QQBlockEntity;
 
-import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_ULTIMATE;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_ULTIMATE;
 
 public class QuantumQuarryBlock extends KineticBaseEntityBlock
 {

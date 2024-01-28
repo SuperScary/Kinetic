@@ -13,7 +13,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -23,11 +22,11 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.gui.menu.InscriberMenu;
 import superscary.kinetic.item.UpgradeItem;
 import superscary.kinetic.util.SizedInventory;
-import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.api.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 public class InscriberBlockEntity extends BlockEntity implements MenuProvider, SizedInventory

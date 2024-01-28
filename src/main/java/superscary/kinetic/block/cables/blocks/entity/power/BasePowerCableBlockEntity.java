@@ -13,7 +13,7 @@ import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.api.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 import javax.annotation.Nonnull;

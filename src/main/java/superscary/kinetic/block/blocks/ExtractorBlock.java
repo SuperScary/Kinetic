@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 
-import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
 
 public class ExtractorBlock extends KineticBaseEntityBlock
 {

@@ -1,4 +1,4 @@
-package superscary.kinetic.block;
+package superscary.kinetic.register;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -8,6 +8,7 @@ import superscary.kinetic.Kinetic;
 import superscary.kinetic.block.cables.blocks.entity.*;
 import superscary.kinetic.block.cables.blocks.entity.power.*;
 import superscary.kinetic.block.entity.*;
+import superscary.kinetic.register.KineticBlocks;
 
 public class KineticBlockEntities
 {

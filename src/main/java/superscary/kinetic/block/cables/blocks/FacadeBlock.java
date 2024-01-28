@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.cables.blocks.entity.FacadeBlockEntity;
 
 import javax.annotation.Nonnull;

@@ -28,12 +28,12 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import superscary.kinetic.block.KineticBlockEntities;
+import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.gui.menu.SawmillMenu;
-import superscary.kinetic.item.KineticItems;
+import superscary.kinetic.register.KineticItems;
 import superscary.kinetic.item.UpgradeItem;
 import superscary.kinetic.util.SizedInventory;
-import superscary.kinetic.util.energy.KineticEnergyStorage;
+import superscary.kinetic.api.energy.KineticEnergyStorage;
 import superscary.kinetic.util.helpers.NBTKeys;
 
 public class SawmillBlockEntity extends BlockEntity implements MenuProvider, SizedInventory

@@ -14,7 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.entity.InscriberBlockEntity;
 
 public class InscriberBlock extends KineticBaseEntityBlock

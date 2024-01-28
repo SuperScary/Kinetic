@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import superscary.kinetic.Kinetic;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.recipe.SawmillRecipe;
 
 public class SawmillCategory implements IRecipeCategory<SawmillRecipe>

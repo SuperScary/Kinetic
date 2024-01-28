@@ -1,4 +1,4 @@
-package superscary.kinetic.util.energy;
+package superscary.kinetic.api.energy;
 
 import net.minecraftforge.energy.IEnergyStorage;
 

@@ -10,9 +10,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.DeluxeSolarPanelBlockEntity;
-import superscary.kinetic.block.entity.PremiumSolarPanelBlockEntity;
 
-import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
 
 public class DeluxeSolarPanelBlock extends KineticBaseEntityBlock
 {

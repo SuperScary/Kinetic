@@ -1,4 +1,4 @@
-package superscary.kinetic.item;
+package superscary.kinetic.register;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -6,7 +6,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
-import superscary.kinetic.block.KineticBlocks;
+import superscary.kinetic.item.*;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.cables.blocks.FacadeBlockItem;
 
 import java.util.function.Supplier;
@@ -27,6 +28,7 @@ public class KineticItems
     public static final RegistryObject<Item> STONE_GEAR = reg("stone_gear", KineticItem::new);
     public static final RegistryObject<Item> IRON_GEAR = reg("iron_gear", KineticItem::new);
     public static final RegistryObject<Item> STEEL_GEAR = reg("steel_gear", KineticItem::new);
+    public static final RegistryObject<Item> PLASTIC_GEAR = reg("plastic_gear", KineticItem::new);
     public static final RegistryObject<Item> PLASTIC = reg("plastic", KineticItem::new);
     public static final RegistryObject<Item> RAW_PLASTIC = reg("raw_plastic", KineticItem::new);
     public static final RegistryObject<Item> RUBBER = reg("rubber", KineticItem::new);

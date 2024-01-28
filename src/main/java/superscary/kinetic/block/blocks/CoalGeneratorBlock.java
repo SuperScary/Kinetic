@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.CoalGeneratorBlockEntity;
 
-import static superscary.kinetic.block.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
 
 public class CoalGeneratorBlock extends KineticBaseEntityBlock
 {
