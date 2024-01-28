@@ -78,6 +78,7 @@
   "block.kinetic.deluxe_item_cable": "Deluxe Item Cable",
   "block.kinetic.ultimate_item_cable": "Ultimate Item Cable",
   "block.kinetic.facade": "Cable Facade",
+  "block.kinetic.drafting_table": "Drafting Table",
   "block.kinetic.reactor_frame": "Reactor Frame",
   "block.kinetic.reactor_core": "Reactor Core",
   "block.kinetic.reactor_power_tap": "Reactor Power Tap",
@@ -97,5 +98,8 @@
   "chat.ore_found": "Found %s at %s, %s, %s.",
   "chat.ore_not_found": "No ores found.",
 
-  "kinetic.facade.is_mimicing": "Facade Set to %s"
+  "kinetic.facade.is_mimicing": "Facade Set to %s",
+
+  "entity.minecraft.villager.kinetic.engineer": "Engineer"
+
 }

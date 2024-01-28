@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "kinetic:filled_quantum_satellite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "kinetic:blocks/filled_quantum_satellite"
+}

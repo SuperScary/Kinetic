@@ -11,12 +11,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
-import superscary.kinetic.register.KineticBlocks;
-import superscary.kinetic.register.KineticBlockEntities;
-import superscary.kinetic.register.KineticMenus;
-import superscary.kinetic.register.KineticItems;
+import superscary.kinetic.register.*;
 import superscary.kinetic.network.ModMessages;
-import superscary.kinetic.register.KineticRecipes;
+
+import java.util.Random;
 
 @Mod(Kinetic.MODID)
 public class Kinetic
@@ -35,6 +33,8 @@ public class Kinetic
         KineticTabs.TABS.register(modEventBus);
         KineticMenus.MENUS.register(modEventBus);
         KineticRecipes.SERIALIZERS.register(modEventBus);
+        KineticEntities.POI_TYPES.register(modEventBus);
+        KineticEntities.VILLAGER_PROFESSIONS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -53,6 +53,11 @@ public class Kinetic
     public static ResourceLocation getResource (String name)
     {
         return new ResourceLocation(MODID, name);
+    }
+
+    public static Random getRandom ()
+    {
+        return new Random();
     }
 
 }
