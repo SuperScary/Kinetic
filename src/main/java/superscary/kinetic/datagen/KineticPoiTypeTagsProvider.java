@@ -23,5 +23,6 @@ public class KineticPoiTypeTagsProvider extends PoiTypeTagsProvider
     protected void addTags (HolderLookup.Provider pProvider)
     {
         tag(PoiTypeTags.ACQUIRABLE_JOB_SITE).addOptional(Kinetic.getResource("engineer_poi"));
+        tag(PoiTypeTags.ACQUIRABLE_JOB_SITE).addOptional(Kinetic.getResource("tinkerer_poi"));
     }
 }

@@ -25,14 +25,22 @@ public class KineticEvents
         {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
-            //Level 1
+            // Level 1
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(new ItemStack(Items.EMERALD, Kinetic.getRandom().nextInt(10,22)),
                     new ItemStack(KineticItems.BLUEPRINT.get(), 1), 10, 2, 0.02f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(new ItemStack(Items.EMERALD, Kinetic.getRandom().nextInt(15,19)),
                     new ItemStack(KineticItems.SD_CARD.get(), 1), 10, 2, 0.02f));
+        }
+
+        if (event.getType() == KineticEntities.TINKERER.get())
+        {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+
+            // Level 1
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(new ItemStack(Items.EMERALD, Kinetic.getRandom().nextInt(4,11)),
                     new ItemStack(KineticItems.WRENCH.get(), 1), 3, 2, 0.02f));
         }
+
     }
 
 }

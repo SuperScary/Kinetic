@@ -3,6 +3,10 @@
     {
       "id": "kinetic:engineer_poi",
       "required": false
+    },
+    {
+      "id": "kinetic:tinkerer_poi",
+      "required": false
     }
   ]
 }

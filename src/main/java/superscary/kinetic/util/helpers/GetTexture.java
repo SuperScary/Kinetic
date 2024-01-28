@@ -8,12 +8,12 @@ public class GetTexture
 
     public static ResourceLocation ofGui (String name)
     {
-        return new ResourceLocation(Kinetic.MODID, "textures/gui/" + name + "_gui.png");
+        return Kinetic.getResource("textures/gui/" + name + "_gui.png");
     }
 
     public static ResourceLocation ofCustom (String name)
     {
-        return new ResourceLocation(Kinetic.MODID, name);
+        return Kinetic.getResource(name);
     }
 
 }

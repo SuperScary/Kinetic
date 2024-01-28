@@ -100,6 +100,7 @@
 
   "kinetic.facade.is_mimicing": "Facade Set to %s",
 
-  "entity.minecraft.villager.kinetic.engineer": "Engineer"
+  "entity.minecraft.villager.kinetic.engineer": "Engineer",
+  "entity.minecraft.villager.kinetic.tinkerer": "Tinkerer"
 
 }
