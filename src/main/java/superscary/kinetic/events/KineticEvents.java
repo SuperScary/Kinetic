@@ -30,6 +30,11 @@ public class KineticEvents
                     new ItemStack(KineticItems.BLUEPRINT.get(), 1), 10, 2, 0.02f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(new ItemStack(Items.EMERALD, Kinetic.getRandom().nextInt(15,19)),
                     new ItemStack(KineticItems.SD_CARD.get(), 1), 10, 2, 0.02f));
+
+            // Level 2
+            trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(new ItemStack(KineticItems.BLUEPRINT.get(), 1),
+                    new ItemStack(Items.EMERALD, Kinetic.getRandom().nextInt(1, 4)), 5, 2, 0.02f));
+
         }
 
         if (event.getType() == KineticEntities.TINKERER.get())

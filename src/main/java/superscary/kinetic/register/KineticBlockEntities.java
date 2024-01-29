@@ -38,6 +38,9 @@ public class KineticBlockEntities
     public static final RegistryObject<BlockEntityType<ChargerBlockEntity>> CHARGER_BE =
             BLOCK_ENTITIES.register("charger_be", () -> BlockEntityType.Builder.of(ChargerBlockEntity::new,
                     KineticBlocks.CHARGER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DraftingTableBlockEntity>> DRAFTING_TABLE_BE =
+            BLOCK_ENTITIES.register("drafting_table_be", () -> BlockEntityType.Builder.of(DraftingTableBlockEntity::new,
+                    KineticBlocks.DRAFTING_TABLE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<BasicPowerCableBlockEntity>> BASIC_POWER_CABLE_BE =
             BLOCK_ENTITIES.register("basic_cable_be", () -> BlockEntityType.Builder.of(BasicPowerCableBlockEntity::new,

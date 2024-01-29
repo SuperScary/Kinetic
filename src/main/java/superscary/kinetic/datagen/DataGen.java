@@ -4,11 +4,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import superscary.kinetic.Kinetic;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = Kinetic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -26,7 +28,11 @@ public class DataGen
         generator.addProvider(event.includeServer(), KineticLootTableProvider.create(packOutput));
         generator.addProvider(event.includeClient(), new KineticPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeClient(), new KineticBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+
+        generator.addProvider(event.includeClient(), new KineticBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new KineticItemModelProvider(packOutput, existingFileHelper));
+
+        generator.addProvider(event.includeClient(), new ForgeAdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new KineticAdvancementProvider())));
     }
 
 }

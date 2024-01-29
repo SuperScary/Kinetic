@@ -1,12 +1,14 @@
 package superscary.kinetic.register;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -43,7 +45,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> MACHINE_BASE_ULTIMATE = reg("machine_base_ultimate", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_DELUXE.get()), 4));
     public static final RegistryObject<Block> UNFILLED_QUANTUM_SATELLITE = reg("unfilled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
     public static final RegistryObject<Block> FILLED_QUANTUM_SATELLITE = reg("filled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
-    public static final RegistryObject<Block> DRAFTING_TABLE = reg("drafting_table", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get())));
+    public static final RegistryObject<Block> DRAFTING_TABLE = reg("drafting_table", DraftingTableBlock::new);
     public static final RegistryObject<Block> TANK_BASIC = reg("tank_basic", () -> new TankBlock(64));
     public static final RegistryObject<Block> TANK_STANDARD = reg("tank_standard", () -> new TankBlock(128));
     public static final RegistryObject<Block> TANK_PREMIUM = reg("tank_premium", () -> new TankBlock(256));
@@ -74,6 +76,54 @@ public class KineticBlocks
     public static final RegistryObject<Block> DELUXE_SOLAR_PANEL = reg("deluxe_solar_panel", DeluxeSolarPanelBlock::new);
     public static final RegistryObject<Block> ULTIMATE_SOLAR_PANEL = reg("ultimate_solar_panel", UltimateSolarPanelBlock::new);
     public static final RegistryObject<Block> BASIC_BATTERY = reg("basic_battery", BasicBatteryBlock::new);
+
+
+    public static final RegistryObject<Block> RUBBER_LOG = reg("rubber_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));
+    public static final RegistryObject<Block> RUBBER_WOOD = reg("rubber_wood", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_RUBBER_LOG = reg("stripped_rubber_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+    public static final RegistryObject<Block> STRIPPED_RUBBER_WOOD = reg("stripped_rubber_wood", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+    public static final RegistryObject<Block> RUBBER_PLANKS = reg("rubber_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS))
+    {
+        @Override
+        public boolean isFlammable (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return true;
+        }
+
+        @Override
+        public int getFlammability (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return 20;
+        }
+
+        @Override
+        public int getFireSpreadSpeed (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return 5;
+        }
+    });
+    public static final RegistryObject<Block> RUBBER_LEAVES = reg("rubber_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))
+    {
+        @Override
+        public boolean isFlammable (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return true;
+        }
+
+        @Override
+        public int getFlammability (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return 60;
+        }
+
+        @Override
+        public int getFireSpreadSpeed (BlockState state, BlockGetter level, BlockPos pos, Direction direction)
+        {
+            return 30;
+        }
+    });
+    public static final RegistryObject<Block> RUBBER_SAPLING = reg("rubber_sapling", () -> new SaplingBlock(null, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

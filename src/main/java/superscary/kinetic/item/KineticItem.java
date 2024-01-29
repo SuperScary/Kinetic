@@ -7,7 +7,12 @@ public class KineticItem extends Item
 
     public KineticItem ()
     {
-        super(new Properties());
+        this(new Properties());
+    }
+
+    public KineticItem (Properties properties)
+    {
+        super(properties);
     }
 
 }

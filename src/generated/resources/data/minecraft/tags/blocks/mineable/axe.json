@@ -1,5 +1,10 @@
 {
   "values": [
-    "kinetic:drafting_table"
+    "kinetic:drafting_table",
+    "kinetic:rubber_log",
+    "kinetic:rubber_wood",
+    "kinetic:stripped_rubber_log",
+    "kinetic:stripped_rubber_wood",
+    "kinetic:rubber_planks"
   ]
 }

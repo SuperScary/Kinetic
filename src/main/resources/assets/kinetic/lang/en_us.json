@@ -36,6 +36,8 @@
   "item.kinetic.premium_photovoltaic_cell": "Premium Photovoltaic Cell",
   "item.kinetic.deluxe_photovoltaic_cell": "Deluxe Photovoltaic Cell",
   "item.kinetic.ultimate_photovoltaic_cell": "Ultimate Photovoltaic Cell",
+  "item.kinetic.honey_bun": "Honey Bun",
+  "item.kinetic.hard_boiled_egg": "Hard Boiled Egg",
 
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
@@ -92,6 +94,13 @@
   "block.kinetic.ultimate_solar_panel": "Ultimate Solar Panel",
   "block.kinetic.battery_frame": "Battery Frame",
   "block.kinetic.basic_battery": "Basic Battery",
+  "block.kinetic.rubber_log": "Rubber Log",
+  "block.kinetic.rubber_wood": "Rubber Wood",
+  "block.kinetic.stripped_rubber_log": "Stripped Rubber Log",
+  "block.kinetic.stripped_rubber_wood": "Stripped Rubber Wood",
+  "block.kinetic.rubber_planks": "Rubber Planks",
+  "block.kinetic.rubber_leaves": "Rubber Leaves",
+  "block.kinetic.rubber_sapling": "Rubber Sapling",
 
   "itemGroup.kinetic": "Kinetic",
 

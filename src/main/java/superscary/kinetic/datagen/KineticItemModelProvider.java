@@ -62,6 +62,8 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.ORE_FINDER);
         simpleItem(KineticItems.WRENCH);
         //simpleItem(KineticItems.FACADE_BLOCK_ITEM);
+        simpleItem(KineticItems.HONEY_BUN);
+        simpleItem(KineticItems.HARD_BOILED_EGG);
 
         simpleBlockItem(KineticBlocks.DURACITE_ORE);
         simpleBlockItem(KineticBlocks.DEEPSLATE_DURACITE_ORE);
@@ -106,8 +108,10 @@ public class KineticItemModelProvider extends ItemModelProvider
         solarPanel(KineticBlocks.PREMIUM_SOLAR_PANEL.get(), "premium");
         solarPanel(KineticBlocks.DELUXE_SOLAR_PANEL.get(), "deluxe");
         solarPanel(KineticBlocks.ULTIMATE_SOLAR_PANEL.get(), "ultimate");
-        battery(KineticBlocks.BASIC_BATTERY, "basic");
+        simpleBlockItem(KineticBlocks.BASIC_BATTERY);
         simpleBlockItem(KineticBlocks.DRAFTING_TABLE);
+
+        saplingItem(KineticBlocks.RUBBER_SAPLING);
 
     }
 
@@ -133,12 +137,7 @@ public class KineticItemModelProvider extends ItemModelProvider
 
     private ItemModelBuilder reactor (RegistryObject<Block> item)
     {
-        return withExistingParent(ForgeRegistries.BLOCKS.getKey(item.get()).getPath(), Kinetic.getResource("block/reactor/" + ForgeRegistries.BLOCKS.getKey(item.get()).getPath()));
-    }
-
-    private ItemModelBuilder battery (RegistryObject<Block> item, String simple)
-    {
-        return withExistingParent(ForgeRegistries.BLOCKS.getKey(item.get()).getPath(), Kinetic.getResource("block/battery/" + simple));
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(item.get()).getPath(), Kinetic.getResource("block/" + ForgeRegistries.BLOCKS.getKey(item.get()).getPath()));
     }
 
     private ItemModelBuilder simpleItem (RegistryObject<Item> item)
@@ -153,6 +152,12 @@ public class KineticItemModelProvider extends ItemModelProvider
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 Kinetic.getResource("item/upgrades/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder saplingItem (RegistryObject<Block> item)
+    {
+        return withExistingParent(item.getId().getPath(), new ResourceLocation("item/generated")).texture("layer0",
+                Kinetic.getResource("block/" + item.getId().getPath()));
     }
 
 }

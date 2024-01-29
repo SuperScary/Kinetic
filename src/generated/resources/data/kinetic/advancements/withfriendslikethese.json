@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "craft_wrench": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kinetic:wrench"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "kinetic:textures/block/steel_block.png",
+    "description": {
+      "text": "Your New Best Friend"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "kinetic:wrench",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "With Friends Like These.."
+    }
+  },
+  "requirements": [
+    [
+      "craft_wrench"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

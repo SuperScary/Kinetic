@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kinetic:item/hard_boiled_egg"
+  }
+}

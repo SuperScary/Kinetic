@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-28T02:24:06.2772633	Loot Tables
+// 1.20.1	2024-01-28T17:19:10.7371042	Loot Tables
 56fa12272390fd1401dd72d32cd26d8e43aa27fc data/kinetic/loot_tables/blocks/basic_battery.json
 5808fe27e0379d413577f95aae1e0b58e1d53595 data/kinetic/loot_tables/blocks/basic_power_cable.json
 7357da55446827ff89bdee4ef5a82fd6489725fe data/kinetic/loot_tables/blocks/basic_solar_panel.json
@@ -31,10 +31,17 @@ c1de877422514c16ba3a621f9bb4fb2cd4a6b4c5 data/kinetic/loot_tables/blocks/raw_dur
 ca0a5e71fd136e3ee060227b02239da65a9fd155 data/kinetic/loot_tables/blocks/reactor_fluid_port.json
 82d269d815243125cb5eb7d7e2c0bd6a13b60b41 data/kinetic/loot_tables/blocks/reactor_frame.json
 5c9f76a8075fa21212e658b16e7765466a005011 data/kinetic/loot_tables/blocks/reactor_power_tap.json
+a6c05da387583341f3af2f71327de634aa1bb75a data/kinetic/loot_tables/blocks/rubber_leaves.json
+f171cec7d6fac5676c4982c0a5aea1af8e956f47 data/kinetic/loot_tables/blocks/rubber_log.json
+84453d986d733d7df842ef3668a52c5a2684950f data/kinetic/loot_tables/blocks/rubber_planks.json
+0c1ba1dd4fb5c591382af120eee6bc509016a9de data/kinetic/loot_tables/blocks/rubber_sapling.json
+9c48ea1edac792b97285b85f9d77b6097aec8b64 data/kinetic/loot_tables/blocks/rubber_wood.json
 1a483596afd2ea9e9145f19d9845ef9891b8ac69 data/kinetic/loot_tables/blocks/sawmill.json
 d56ce73dba825857d60c1282fe6c434e40052dfd data/kinetic/loot_tables/blocks/standard_power_cable.json
 57cf13208868115bd14d88fbec835e8ba9af959d data/kinetic/loot_tables/blocks/standard_solar_panel.json
 53c73ffb01d3f0225a77b6aea22decde4ede97b3 data/kinetic/loot_tables/blocks/steel_block.json
+15feb048ce3c3c05b342c9e74349edb18d80637f data/kinetic/loot_tables/blocks/stripped_rubber_log.json
+5b1f6ba76e47e00bd52e1a1e0f4db6106814b3c3 data/kinetic/loot_tables/blocks/stripped_rubber_wood.json
 0d9321749103bdcc3c5095e562f2ad9e49970a2e data/kinetic/loot_tables/blocks/sulfur_ore.json
 5d5fa912c13597309c96c1aa9d10e4c74ec4e141 data/kinetic/loot_tables/blocks/tank_basic.json
 97024a6284e50daadff51dceb11b8f3dd3bb93ff data/kinetic/loot_tables/blocks/tank_deluxe.json

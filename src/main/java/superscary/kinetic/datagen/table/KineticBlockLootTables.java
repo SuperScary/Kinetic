@@ -65,6 +65,15 @@ public class KineticBlockLootTables extends BlockLootSubProvider
         this.dropSelf(KineticBlocks.ULTIMATE_SOLAR_PANEL.get());
         this.dropSelf(KineticBlocks.BASIC_BATTERY.get());
         this.dropSelf(KineticBlocks.DRAFTING_TABLE.get());
+        this.dropSelf(KineticBlocks.RUBBER_LOG.get());
+        this.dropSelf(KineticBlocks.RUBBER_WOOD.get());
+        this.dropSelf(KineticBlocks.STRIPPED_RUBBER_LOG.get());
+        this.dropSelf(KineticBlocks.STRIPPED_RUBBER_WOOD.get());
+        this.dropSelf(KineticBlocks.RUBBER_PLANKS.get());
+        this.dropSelf(KineticBlocks.RUBBER_SAPLING.get());
+
+        this.add(KineticBlocks.RUBBER_LEAVES.get(), block -> createLeavesDrops(block, KineticBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
     }
 
     @Override

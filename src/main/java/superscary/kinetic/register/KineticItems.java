@@ -7,6 +7,7 @@ import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
 import superscary.kinetic.item.*;
+import superscary.kinetic.item.properties.FoodProp;
 import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.cables.blocks.FacadeBlockItem;
 
@@ -56,6 +57,9 @@ public class KineticItems
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));
     public static final RegistryObject<Item> FACADE_BLOCK_ITEM = KineticTabs.addItemToTab(ITEMS.register("facade", () -> new FacadeBlockItem(KineticBlocks.FACADE_BLOCK.get(), new Item.Properties())));
+
+    public static final RegistryObject<Item> HONEY_BUN = reg("honey_bun", () -> new KineticItem(new Item.Properties().food(FoodProp.HONEY_BUN)));
+    public static final RegistryObject<Item> HARD_BOILED_EGG = reg("hard_boiled_egg", () -> new KineticItem(new Item.Properties().food(FoodProp.HARD_BOILED_EGG)));
 
     public static <T extends Item> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

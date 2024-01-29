@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "kinetic:block/machine_bottom",
+    "east": "kinetic:block/machine_side",
+    "north": "kinetic:block/compressor/compressor_on",
+    "particle": "kinetic:block/machine_side",
+    "south": "kinetic:block/machine_side",
+    "up": "kinetic:block/machine_top",
+    "west": "kinetic:block/machine_side"
+  }
+}

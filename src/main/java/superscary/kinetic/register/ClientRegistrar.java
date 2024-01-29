@@ -31,6 +31,7 @@ public class ClientRegistrar
         MenuScreens.register(KineticMenus.PRINTER_MENU.get(), PrinterScreen::new);
         MenuScreens.register(KineticMenus.INSCRIBER_MENU.get(), InscriberScreen::new);
         MenuScreens.register(KineticMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
+        MenuScreens.register(KineticMenus.DRAFTING_TABLE_MENU.get(), DraftingTableScreen::new);
     }
 
     @SubscribeEvent

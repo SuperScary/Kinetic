@@ -1,27 +1,31 @@
-[28Jan2024 04:02:50.250] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\Fylow\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.2.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, kinetic, --all, --output, D:\Minecraft Forge\Projects\Kinetic\src\generated\resources, --existing, D:\Minecraft Forge\Projects\Kinetic\src\main\resources]
-[28Jan2024 04:02:50.254] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.8 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[28Jan2024 04:02:50.333] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[28Jan2024 04:02:50.361] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Fylow/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[28Jan2024 04:02:50.558] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.2.0\7f9181f85acc66547685a72020713fc8cbde98\javafmllanguage-1.20.1-47.2.0.jar is missing mods.toml file
-[28Jan2024 04:02:50.560] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.2.0\7872f5205685fdd26fae39b1be79b0e60ca5b7bd\lowcodelanguage-1.20.1-47.2.0.jar is missing mods.toml file
-[28Jan2024 04:02:50.561] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.2.0\d501d161cabed08b3c139a2c6217b02a39f3c3e9\mclanguage-1.20.1-47.2.0.jar is missing mods.toml file
-[28Jan2024 04:02:50.563] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.2.0\ffd3c6debac0a388c9e33ac43c9f5eafb91cb466\fmlcore-1.20.1-47.2.0.jar is missing mods.toml file
-[28Jan2024 04:02:50.621] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[28Jan2024 04:02:51.375] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\Fylow\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, kinetic, --all, --output, D:\Minecraft Forge\Projects\Kinetic\src\generated\resources, --existing, D:\Minecraft Forge\Projects\Kinetic\src\main\resources]
-[28Jan2024 04:02:51.633] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [kinetic]
-[28Jan2024 04:02:53.825] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.2.0, for MC 1.20.1 with MCP 20230612.114412
-[28Jan2024 04:02:53.825] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.2.0 Initialized
-[28Jan2024 04:02:53.953] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[28Jan2024 04:02:53.957] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 2.068 ms
-[28Jan2024 04:02:54.225] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Fylow/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0_mapped_official_1.20.1/forge-1.20.1-47.2.0_mapped_official_1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[28Jan2024 04:02:54.225] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Fylow/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0_mapped_official_1.20.1/forge-1.20.1-47.2.0_mapped_official_1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[28Jan2024 04:02:54.331] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[28Jan2024 04:02:54.384] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 52 ms
-[28Jan2024 04:02:54.384] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:point_of_interest_type mod id kinetic
-[28Jan2024 04:02:54.441] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:point_of_interest_type mod id kinetic finished after 57 ms
-[28Jan2024 04:02:54.441] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id kinetic
-[28Jan2024 04:02:54.442] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id kinetic finished after 0 ms
-[28Jan2024 04:02:54.442] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: kinetic
-[28Jan2024 04:02:54.459] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: kinetic finished after 16 ms
-[28Jan2024 04:02:54.459] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 128 ms
-[28Jan2024 04:02:54.463] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 131, old count: 131, new count: 132, removed stale: 0, written: 1
+[28Jan2024 19:46:57.175] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\Fylow\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.2.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, kinetic, --all, --output, D:\Minecraft Forge\Projects\Kinetic\src\generated\resources, --existing, D:\Minecraft Forge\Projects\Kinetic\src\main\resources]
+[28Jan2024 19:46:57.179] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.8 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[28Jan2024 19:46:57.264] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[28Jan2024 19:46:57.296] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Fylow/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[28Jan2024 19:46:57.492] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.2.0\7f9181f85acc66547685a72020713fc8cbde98\javafmllanguage-1.20.1-47.2.0.jar is missing mods.toml file
+[28Jan2024 19:46:57.493] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.2.0\7872f5205685fdd26fae39b1be79b0e60ca5b7bd\lowcodelanguage-1.20.1-47.2.0.jar is missing mods.toml file
+[28Jan2024 19:46:57.495] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.2.0\d501d161cabed08b3c139a2c6217b02a39f3c3e9\mclanguage-1.20.1-47.2.0.jar is missing mods.toml file
+[28Jan2024 19:46:57.497] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Fylow\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.2.0\ffd3c6debac0a388c9e33ac43c9f5eafb91cb466\fmlcore-1.20.1-47.2.0.jar is missing mods.toml file
+[28Jan2024 19:46:57.566] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[28Jan2024 19:46:58.345] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\Fylow\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, kinetic, --all, --output, D:\Minecraft Forge\Projects\Kinetic\src\generated\resources, --existing, D:\Minecraft Forge\Projects\Kinetic\src\main\resources]
+[28Jan2024 19:46:58.608] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [kinetic]
+[28Jan2024 19:47:00.855] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.2.0, for MC 1.20.1 with MCP 20230612.114412
+[28Jan2024 19:47:00.855] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.2.0 Initialized
+[28Jan2024 19:47:00.990] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[28Jan2024 19:47:00.992] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 1.778 ms
+[28Jan2024 19:47:01.247] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Fylow/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0_mapped_official_1.20.1/forge-1.20.1-47.2.0_mapped_official_1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[28Jan2024 19:47:01.247] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Fylow/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.0_mapped_official_1.20.1/forge-1.20.1-47.2.0_mapped_official_1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[28Jan2024 19:47:01.339] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[28Jan2024 19:47:01.384] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 44 ms
+[28Jan2024 19:47:01.384] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:point_of_interest_type mod id kinetic
+[28Jan2024 19:47:01.456] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:point_of_interest_type mod id kinetic finished after 71 ms
+[28Jan2024 19:47:01.457] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id kinetic
+[28Jan2024 19:47:01.457] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id kinetic finished after 0 ms
+[28Jan2024 19:47:01.458] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: kinetic
+[28Jan2024 19:47:01.539] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: kinetic finished after 81 ms
+[28Jan2024 19:47:01.539] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: kinetic
+[28Jan2024 19:47:01.546] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: kinetic finished after 7 ms
+[28Jan2024 19:47:01.546] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Advancements
+[28Jan2024 19:47:01.556] [main/INFO] [net.minecraft.data.DataGenerator/]: Advancements finished after 10 ms
+[28Jan2024 19:47:01.556] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 218 ms
+[28Jan2024 19:47:01.562] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 260, old count: 278, new count: 261, removed stale: 0, written: 1

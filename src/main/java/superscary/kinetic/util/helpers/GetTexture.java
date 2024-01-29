@@ -11,9 +11,4 @@ public class GetTexture
         return Kinetic.getResource("textures/gui/" + name + "_gui.png");
     }
 
-    public static ResourceLocation ofCustom (String name)
-    {
-        return Kinetic.getResource(name);
-    }
-
 }
