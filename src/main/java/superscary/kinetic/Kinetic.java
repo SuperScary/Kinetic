@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import superscary.kinetic.fluid.KineticFluidTypes;
+import superscary.kinetic.fluid.KineticFluids;
 import superscary.kinetic.register.*;
 import superscary.kinetic.network.ModMessages;
 import superscary.kinetic.register.KineticTrunkPlacerTypes;
@@ -37,6 +39,8 @@ public class Kinetic
         KineticEntities.VILLAGER_PROFESSIONS.register(modEventBus);
         KineticTrunkPlacerTypes.TRUNK_PLACERS.register(modEventBus);
         KineticFoliagePlacerTypes.FOLIAGE_PLACERS.register(modEventBus);
+        KineticFluidTypes.FLUID_TYPES.register(modEventBus);
+        KineticFluids.FLUIDS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -55,6 +59,10 @@ public class Kinetic
     public static ResourceLocation getResource (String name)
     {
         return new ResourceLocation(MODID, name);
+    }
+    public static ResourceLocation getMinecraftResource (String name)
+    {
+        return new ResourceLocation(name);
     }
 
     public static Random getRandom ()

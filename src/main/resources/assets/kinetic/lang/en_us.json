@@ -40,6 +40,7 @@
   "item.kinetic.hard_boiled_egg": "Hard Boiled Egg",
   "item.kinetic.screwdriver": "Screwdriver",
   "item.kinetic.engineers_hammer": "Engineer's Hammer",
+  "item.kinetic.oil_bucket": "Oil Bucket",
 
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
@@ -106,6 +107,8 @@
   "block.kinetic.brick": "Bricks",
   "block.kinetic.brick_stairs": "Brick Stairs",
   "block.kinetic.brick_slab": "Brick Slab",
+
+  "block.kinetic.oil": "Oil",
 
   "itemGroup.kinetic": "Kinetic",
 

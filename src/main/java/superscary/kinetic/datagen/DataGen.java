@@ -32,6 +32,7 @@ public class DataGen
         BlockTagsProvider blockTagsProvider = new KineticBlockTagGenerator(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeClient(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new KineticItemTagGenerator(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeClient(), new KineticFluidTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
         generator.addProvider(event.includeClient(), new KineticBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new KineticItemModelProvider(packOutput, existingFileHelper));

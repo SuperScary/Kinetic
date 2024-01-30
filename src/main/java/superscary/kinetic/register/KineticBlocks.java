@@ -23,6 +23,7 @@ import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
 import superscary.kinetic.block.blocks.solar.*;
 import superscary.kinetic.block.cables.blocks.*;
 import superscary.kinetic.block.cables.blocks.power.*;
+import superscary.kinetic.fluid.KineticFluids;
 import superscary.kinetic.worldgen.tree.RubberTreeGrower;
 
 import java.util.function.Supplier;
@@ -128,6 +129,7 @@ public class KineticBlocks
     });
     public static final RegistryObject<Block> RUBBER_SAPLING = reg("rubber_sapling", () -> new SaplingBlock(new RubberTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
+    public static final RegistryObject<LiquidBlock> OIL_BLOCK = reg("oil", () -> new LiquidBlock(KineticFluids.OIL_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

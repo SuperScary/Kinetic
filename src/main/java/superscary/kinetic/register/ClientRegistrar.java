@@ -1,6 +1,8 @@
 package superscary.kinetic.register;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -12,6 +14,7 @@ import superscary.kinetic.block.cables.util.power.deluxe.DeluxePowerCableModelLo
 import superscary.kinetic.block.cables.util.power.premium.PremiumPowerCableModelLoader;
 import superscary.kinetic.block.cables.util.power.standard.StandardPowerCableModelLoader;
 import superscary.kinetic.block.cables.util.power.ultimate.UltimatePowerCableModelLoader;
+import superscary.kinetic.fluid.KineticFluids;
 import superscary.kinetic.gui.screen.*;
 import superscary.kinetic.util.FacadeBlockColor;
 
@@ -32,6 +35,12 @@ public class ClientRegistrar
         MenuScreens.register(KineticMenus.INSCRIBER_MENU.get(), InscriberScreen::new);
         MenuScreens.register(KineticMenus.BASIC_BATTERY_MENU.get(), BasicBatteryScreen::new);
         MenuScreens.register(KineticMenus.DRAFTING_TABLE_MENU.get(), DraftingTableScreen::new);
+
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(KineticFluids.OIL_SOURCE.get(), RenderType.solid());
+            ItemBlockRenderTypes.setRenderLayer(KineticFluids.OIL_FLOWING.get(), RenderType.solid());
+        });
+
     }
 
     @SubscribeEvent

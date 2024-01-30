@@ -1,11 +1,14 @@
 package superscary.kinetic.register;
 
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.KineticTabs;
+import superscary.kinetic.fluid.KineticFluids;
 import superscary.kinetic.item.*;
 import superscary.kinetic.item.properties.FoodProp;
 import superscary.kinetic.register.KineticBlocks;
@@ -59,6 +62,8 @@ public class KineticItems
     public static final RegistryObject<Item> SCREWDRIVER = reg("screwdriver", ScrewdriverItem::new);
     public static final RegistryObject<Item> ENGINEERS_HAMMER = reg("engineers_hammer", EngineersHammerItem::new);
     public static final RegistryObject<Item> FACADE_BLOCK_ITEM = KineticTabs.addItemToTab(ITEMS.register("facade", () -> new FacadeBlockItem(KineticBlocks.FACADE_BLOCK.get(), new Item.Properties())));
+
+    public static final RegistryObject<Item> OIL_BUCKET = reg("oil_bucket", () -> new BucketItem(KineticFluids.OIL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final RegistryObject<Item> HONEY_BUN = reg("honey_bun", () -> new KineticItem(new Item.Properties().food(FoodProp.HONEY_BUN)));
     public static final RegistryObject<Item> HARD_BOILED_EGG = reg("hard_boiled_egg", () -> new KineticItem(new Item.Properties().food(FoodProp.HARD_BOILED_EGG)));

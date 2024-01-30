@@ -65,6 +65,7 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.HARD_BOILED_EGG);
         simpleItem(KineticItems.SCREWDRIVER);
         simpleItem(KineticItems.ENGINEERS_HAMMER);
+        simpleItem(KineticItems.OIL_BUCKET);
 
         simpleBlockItem(KineticBlocks.DURACITE_ORE);
         simpleBlockItem(KineticBlocks.DEEPSLATE_DURACITE_ORE);
