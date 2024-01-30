@@ -2,7 +2,7 @@
 <h1 align="center">Kinetic  <br>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/kinetic-base/files"><img src="https://cf.way2muchnoise.eu/versions/kinetic-base.svg" alt="Supported Versions"></a>
 	<a href="https://github.com/SuperScary/Kinetic/blob/main/LICENSE"><img src="https://img.shields.io/github/license/SuperScary/Kinetic" alt="License"></a>
-	<a href="https://discord.gg/EGyUVjwBGj"><img src="https://img.shields.io/discord/1088229138583797780?color=5865f2&label=Discord&style=flat" alt="Discord"></a>
+	<a href="https://discord.gg/EGyUVjwBGj"><img src="https://img.shields.io/discord/1201988372902707270?color=5865f2&label=Discord&style=flat" alt="Discord"></a>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/kinetic-base"><img src="http://cf.way2muchnoise.eu/957493.svg" alt="CF"></a>
   <a href="https://modrinth.com/mod/kinetic-base"><img src="https://img.shields.io/modrinth/dt/kinetic-base?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
     <br><br>
@@ -23,6 +23,6 @@
 
 <p>&nbsp;</p>
 <h1></h1>
-<p align="center"><img alt="GitHub issues" src="https://img.shields.io/github/issues/SuperScary/Kinetic?label=Report%20Issues"></a><a href="https://discord.gg/EGyUVjwBGj"><img src="https://img.shields.io/discord/1088229138583797780?color=5865f2&label=Discord&style=flat" alt="Discord"></a> <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/SuperScary?label=Sponsors"></a></p>
+<p align="center"><img alt="GitHub issues" src="https://img.shields.io/github/issues/SuperScary/Kinetic?label=Report%20Issues"></a><a href="https://discord.gg/EGyUVjwBGj"><img src="https://img.shields.io/discord/1201988372902707270?color=5865f2&label=Discord&style=flat" alt="Discord"></a> <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/SuperScary?label=Sponsors"></a><a title="Crowdin" target="_blank" href="https://crowdin.com/project/kinetic"><img src="https://badges.crowdin.net/kinetic/localized.svg"></a></p>
 <h1></h1>
 <h4 align="center">Find out more about Kinetic on our <a href="https://www.curseforge.com/minecraft/mc-mods/kinetic-base">Curseforge</a> or <a href="https://modrinth.com/mod/kinetic-base">Modrinth</a> Page</h4>
