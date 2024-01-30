@@ -61,9 +61,10 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.ULTIMATE_PHOTOVOLTAIC_CELL);
         simpleItem(KineticItems.ORE_FINDER);
         simpleItem(KineticItems.WRENCH);
-        //simpleItem(KineticItems.FACADE_BLOCK_ITEM);
         simpleItem(KineticItems.HONEY_BUN);
         simpleItem(KineticItems.HARD_BOILED_EGG);
+        simpleItem(KineticItems.SCREWDRIVER);
+        simpleItem(KineticItems.ENGINEERS_HAMMER);
 
         simpleBlockItem(KineticBlocks.DURACITE_ORE);
         simpleBlockItem(KineticBlocks.DEEPSLATE_DURACITE_ORE);
@@ -109,7 +110,8 @@ public class KineticItemModelProvider extends ItemModelProvider
         solarPanel(KineticBlocks.DELUXE_SOLAR_PANEL.get(), "deluxe");
         solarPanel(KineticBlocks.ULTIMATE_SOLAR_PANEL.get(), "ultimate");
         simpleBlockItem(KineticBlocks.BASIC_BATTERY);
-        simpleBlockItem(KineticBlocks.DRAFTING_TABLE);
+        draftingTable(KineticBlocks.DRAFTING_TABLE);
+        simpleBlockItem(KineticBlocks.BRICK);
 
         saplingItem(KineticBlocks.RUBBER_SAPLING);
 
@@ -133,6 +135,11 @@ public class KineticItemModelProvider extends ItemModelProvider
     private ItemModelBuilder tank (RegistryObject<Block> item)
     {
         return withExistingParent(ForgeRegistries.BLOCKS.getKey(item.get()).getPath(), Kinetic.getResource("block/tank/" + ForgeRegistries.BLOCKS.getKey(item.get()).getPath()));
+    }
+
+    private ItemModelBuilder draftingTable (RegistryObject<Block> item)
+    {
+        return withExistingParent(ForgeRegistries.BLOCKS.getKey(item.get()).getPath(), Kinetic.getResource("block/drafting_table/" + ForgeRegistries.BLOCKS.getKey(item.get()).getPath()));
     }
 
     private ItemModelBuilder reactor (RegistryObject<Block> item)

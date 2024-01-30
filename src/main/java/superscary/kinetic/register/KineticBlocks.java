@@ -23,6 +23,7 @@ import superscary.kinetic.block.blocks.reactor.ReactorPowerTapBlock;
 import superscary.kinetic.block.blocks.solar.*;
 import superscary.kinetic.block.cables.blocks.*;
 import superscary.kinetic.block.cables.blocks.power.*;
+import superscary.kinetic.worldgen.tree.RubberTreeGrower;
 
 import java.util.function.Supplier;
 
@@ -45,6 +46,9 @@ public class KineticBlocks
     public static final RegistryObject<Block> MACHINE_BASE_ULTIMATE = reg("machine_base_ultimate", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_DELUXE.get()), 4));
     public static final RegistryObject<Block> UNFILLED_QUANTUM_SATELLITE = reg("unfilled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
     public static final RegistryObject<Block> FILLED_QUANTUM_SATELLITE = reg("filled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
+    public static final RegistryObject<Block> BRICK = reg("brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
+    public static final RegistryObject<Block> BRICK_STAIRS = reg("brick_stairs", () -> new StairBlock(() -> BRICK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.BRICK_STAIRS)));
+    public static final RegistryObject<Block> BRICK_SLAB = reg("brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BRICK_SLAB)));
     public static final RegistryObject<Block> DRAFTING_TABLE = reg("drafting_table", DraftingTableBlock::new);
     public static final RegistryObject<Block> TANK_BASIC = reg("tank_basic", () -> new TankBlock(64));
     public static final RegistryObject<Block> TANK_STANDARD = reg("tank_standard", () -> new TankBlock(128));
@@ -122,7 +126,7 @@ public class KineticBlocks
             return 30;
         }
     });
-    public static final RegistryObject<Block> RUBBER_SAPLING = reg("rubber_sapling", () -> new SaplingBlock(null, BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> RUBBER_SAPLING = reg("rubber_sapling", () -> new SaplingBlock(new RubberTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)

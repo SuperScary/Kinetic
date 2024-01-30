@@ -4,13 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.SlotItemHandler;
 import superscary.kinetic.block.entity.DraftingTableBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
-import superscary.kinetic.gui.UpgradeSlot;
 import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.register.KineticMenus;
 
@@ -31,7 +29,11 @@ public class DraftingTableMenu extends KineticContainerMenu
 
         if (getLevel().getBlockEntity(entity.getBlockPos()) instanceof DraftingTableBlockEntity generator)
         {
-            this.addSlot(new SlotItemHandler(generator.getItems(), 0, 43, 33));
+            this.addSlot(new SlotItemHandler(generator.getItems(), 0, 33, 28));
+            this.addSlot(new SlotItemHandler(generator.getItems(), 1, 51, 28));
+            this.addSlot(new SlotItemHandler(generator.getItems(), 2, 33, 46));
+            this.addSlot(new SlotItemHandler(generator.getItems(), 3, 51, 46));
+            this.addSlot(new SlotItemHandler(generator.getItems(), 4, 121, 39));
         }
 
     }
@@ -44,7 +46,7 @@ public class DraftingTableMenu extends KineticContainerMenu
     @Override
     public int getContainerSize ()
     {
-        return 7;
+        return 5;
     }
 
     @Override

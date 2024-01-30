@@ -55,7 +55,9 @@ public class KineticItems
     public static final RegistryObject<Item> ULTIMATE_PHOTOVOLTAIC_CELL = reg("ultimate_photovoltaic_cell", KineticItem::new);
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
-    public static final RegistryObject<Item> WRENCH = reg("wrench", () -> new WrenchItem(new Item.Properties().defaultDurability(128)));
+    public static final RegistryObject<Item> WRENCH = reg("wrench", WrenchItem::new);
+    public static final RegistryObject<Item> SCREWDRIVER = reg("screwdriver", ScrewdriverItem::new);
+    public static final RegistryObject<Item> ENGINEERS_HAMMER = reg("engineers_hammer", EngineersHammerItem::new);
     public static final RegistryObject<Item> FACADE_BLOCK_ITEM = KineticTabs.addItemToTab(ITEMS.register("facade", () -> new FacadeBlockItem(KineticBlocks.FACADE_BLOCK.get(), new Item.Properties())));
 
     public static final RegistryObject<Item> HONEY_BUN = reg("honey_bun", () -> new KineticItem(new Item.Properties().food(FoodProp.HONEY_BUN)));

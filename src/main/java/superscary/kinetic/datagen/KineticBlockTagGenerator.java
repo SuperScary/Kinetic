@@ -3,6 +3,7 @@ package superscary.kinetic.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import superscary.kinetic.Kinetic;
@@ -66,7 +67,8 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.PREMIUM_SOLAR_PANEL.get())
                 .add(KineticBlocks.DELUXE_SOLAR_PANEL.get())
                 .add(KineticBlocks.ULTIMATE_SOLAR_PANEL.get())
-                .add(KineticBlocks.BASIC_BATTERY.get());
+                .add(KineticBlocks.BASIC_BATTERY.get())
+                .add(KineticBlocks.BRICK.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(KineticBlocks.DRAFTING_TABLE.get())
@@ -123,6 +125,9 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.BASIC_BATTERY.get())
                 .add(KineticBlocks.DRAFTING_TABLE.get());
 
+        this.tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(KineticBlocks.BRICK.get());
+
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(KineticBlocks.RUBBER_LOG.get())
                 .add(KineticBlocks.RUBBER_WOOD.get())
@@ -131,6 +136,14 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
 
         this.tag(BlockTags.PLANKS)
                 .add(KineticBlocks.RUBBER_PLANKS.get());
+
+        this.tag(Tags.Blocks.ORES)
+                .add(KineticBlocks.DURACITE_ORE.get())
+                .add(KineticBlocks.DEEPSLATE_DURACITE_ORE.get())
+                .add(KineticBlocks.SULFUR_ORE.get());
+
+        this.tag(BlockTags.LEAVES)
+                .add(KineticBlocks.RUBBER_LEAVES.get());
 
     }
 }

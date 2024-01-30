@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "kinetic:duracite_ore_placed_large",
+  "step": "underground_ores"
+}

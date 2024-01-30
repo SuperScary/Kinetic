@@ -22,8 +22,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "kinetic:wrench",
-      "nbt": "{Damage:0}"
+      "item": "kinetic:wrench"
     },
     "show_toast": true,
     "title": {

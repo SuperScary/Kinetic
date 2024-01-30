@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "kinetic:block/drafting_table/drafting_table",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "kinetic:block/drafting_table/drafting_table",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "kinetic:block/drafting_table/drafting_table"
+    },
+    "facing=south": {
+      "model": "kinetic:block/drafting_table/drafting_table",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "kinetic:block/drafting_table/drafting_table",
+      "x": -90
+    },
+    "facing=west": {
+      "model": "kinetic:block/drafting_table/drafting_table",
+      "y": 270
+    }
+  }
+}

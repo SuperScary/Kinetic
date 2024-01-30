@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.register.KineticBlocks;
+import superscary.kinetic.register.KineticItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class KineticTabs
     public static final RegistryObject<CreativeModeTab> TAB = TABS.register("kinetic_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.kinetic"))
-                    .icon(() -> new ItemStack(KineticBlocks.COMPRESSOR.get()))
+                    .icon(() -> new ItemStack(KineticItems.WRENCH.get()))
                     .displayItems((displayParams, output) -> {
                         TAB_ITEMS.forEach(itemLike -> output.accept(itemLike.get()));
                     })

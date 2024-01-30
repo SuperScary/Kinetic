@@ -2,7 +2,6 @@ package superscary.kinetic;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,6 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import superscary.kinetic.register.*;
 import superscary.kinetic.network.ModMessages;
+import superscary.kinetic.register.KineticTrunkPlacerTypes;
 
 import java.util.Random;
 
@@ -35,6 +35,8 @@ public class Kinetic
         KineticRecipes.SERIALIZERS.register(modEventBus);
         KineticEntities.POI_TYPES.register(modEventBus);
         KineticEntities.VILLAGER_PROFESSIONS.register(modEventBus);
+        KineticTrunkPlacerTypes.TRUNK_PLACERS.register(modEventBus);
+        KineticFoliagePlacerTypes.FOLIAGE_PLACERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

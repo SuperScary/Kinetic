@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.gui.menu.DraftingTableMenu;
 import superscary.kinetic.item.BlueprintItem;
+import superscary.kinetic.item.EngineersHammerItem;
 import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.util.SizedInventory;
 import superscary.kinetic.util.helpers.NBTKeys;
@@ -45,7 +46,13 @@ public class DraftingTableBlockEntity extends BlockEntity implements MenuProvide
         @Override
         public boolean isItemValid (int slot, @NotNull ItemStack stack)
         {
-            return stack.getItem() instanceof BlueprintItem;
+            return switch (slot)
+            {
+                case 0 -> stack.getItem() instanceof BlueprintItem;
+                case 1 -> stack.getItem() instanceof EngineersHammerItem;
+
+                default -> false;
+            };
         }
     };
     private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
@@ -59,6 +66,12 @@ public class DraftingTableBlockEntity extends BlockEntity implements MenuProvide
     {
         setChanged();
         getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+    }
+
+    public ItemStack getRenderStack ()
+    {
+        ItemStack stack = itemHandler.getStackInSlot(0);
+        return stack.isEmpty() ? ItemStack.EMPTY : stack;
     }
 
     @Override
@@ -107,13 +120,13 @@ public class DraftingTableBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public Component getDisplayName ()
     {
-        return Component.translatable("block.kinetic.charger");
+        return Component.translatable("block.kinetic.drafting_table");
     }
 
     @Override
     public int getInventorySize ()
     {
-        return 1;
+        return 5;
     }
 
 }

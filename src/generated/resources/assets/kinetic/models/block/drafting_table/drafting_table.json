@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "kinetic:block/drafting_table/drafting_table_bottom",
+    "east": "kinetic:block/drafting_table/drafting_table_side",
+    "north": "kinetic:block/drafting_table/drafting_table_front",
+    "particle": "kinetic:block/drafting_table/drafting_table_side",
+    "south": "kinetic:block/drafting_table/drafting_table_side",
+    "up": "kinetic:block/drafting_table/drafting_table_top",
+    "west": "kinetic:block/drafting_table/drafting_table_side"
+  }
+}

@@ -71,6 +71,10 @@ public class KineticBlockLootTables extends BlockLootSubProvider
         this.dropSelf(KineticBlocks.STRIPPED_RUBBER_WOOD.get());
         this.dropSelf(KineticBlocks.RUBBER_PLANKS.get());
         this.dropSelf(KineticBlocks.RUBBER_SAPLING.get());
+        this.dropSelf(KineticBlocks.BRICK.get());
+        this.dropSelf(KineticBlocks.BRICK_STAIRS.get());
+
+        this.add(KineticBlocks.BRICK_SLAB.get(), block -> createSlabItemTable(KineticBlocks.BRICK_SLAB.get()));
 
         this.add(KineticBlocks.RUBBER_LEAVES.get(), block -> createLeavesDrops(block, KineticBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 

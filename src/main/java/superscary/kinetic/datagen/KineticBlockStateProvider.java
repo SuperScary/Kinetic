@@ -6,6 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.*;
@@ -58,6 +60,12 @@ public class KineticBlockStateProvider extends BlockStateProvider
         blockWithItem(KineticBlocks.REACTOR_POWER_TAP_BLOCK);
         blockWithItem(KineticBlocks.REACTOR_FLUID_PORT);
         blockWithItem(KineticBlocks.BASIC_BATTERY);
+        blockWithItem(KineticBlocks.BRICK);
+
+        stairsBlock((StairBlock) KineticBlocks.BRICK_STAIRS.get(), blockTexture(KineticBlocks.BRICK.get()));
+        slabBlock(((SlabBlock) KineticBlocks.BRICK_SLAB.get()), blockTexture(KineticBlocks.BRICK.get()), blockTexture(KineticBlocks.BRICK.get()));
+        blockItem(KineticBlocks.BRICK_STAIRS);
+        blockItem(KineticBlocks.BRICK_SLAB);
 
         machine(KineticBlocks.QUANTUM_QUARRY, "quantum_quarry");
         machine(KineticBlocks.COMPRESSOR, "compressor");
@@ -87,6 +95,8 @@ public class KineticBlockStateProvider extends BlockStateProvider
         blockWithItem(KineticBlocks.RUBBER_PLANKS);
         leavesBlock(KineticBlocks.RUBBER_LEAVES);
         saplingBlock(KineticBlocks.RUBBER_SAPLING);
+
+        draftingTable(KineticBlocks.DRAFTING_TABLE);
     }
 
     private void leavesBlock(RegistryObject<Block> blockRegistryObject) {
@@ -134,6 +144,13 @@ public class KineticBlockStateProvider extends BlockStateProvider
         BlockModelBuilder modelOn = models().cube("block/" + block.getId().getPath() + "/" + block.getId().getPath() + "_on", BOTTOM, TOP, modLoc("block/" + name + "/" + name + "_on"), SIDE, SIDE, SIDE).texture("particle", SIDE);
         BlockModelBuilder modelOff = models().cube("block/" + block.getId().getPath() + "/" + block.getId().getPath() + "_off", BOTTOM, TOP, modLoc("block/" + name + "/" + name + "_off"), SIDE, SIDE, SIDE).texture("particle", SIDE);
         directionBlock(block.get(), (state, builder) -> builder.modelFile(state.getValue(BlockStateProperties.POWERED) ? modelOn : modelOff));
+    }
+
+    private void draftingTable (RegistryObject<Block> block)
+    {
+        String path = "block/" + block.getId().getPath() + "/" + block.getId().getPath();
+        BlockModelBuilder modelBuilder = models().cube(path, Kinetic.getResource(path + "_bottom"), Kinetic.getResource(path + "_top"), Kinetic.getResource(path + "_front"), Kinetic.getResource(path + "_side"), Kinetic.getResource(path + "_side"), Kinetic.getResource(path + "_side")).texture("particle", Kinetic.getResource(path + "_side"));
+        directionBlock(block.get(), ((state, builder) -> builder.modelFile(modelBuilder)));
     }
 
     private void solarPanel (RegistryObject<Block> block, String name)

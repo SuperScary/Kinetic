@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kinetic:block/brick_slab"
+    },
+    "type=double": {
+      "model": "kinetic:block/brick"
+    },
+    "type=top": {
+      "model": "kinetic:block/brick_slab_top"
+    }
+  }
+}

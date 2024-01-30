@@ -26,7 +26,7 @@ public class KineticEntities
 
     public static final RegistryObject<VillagerProfession> ENGINEER = VILLAGER_PROFESSIONS.register("engineer",
             () -> new VillagerProfession("engineer", x -> x.get() == ENGINEER_POI.get(), x -> x.get() == ENGINEER_POI.get(), ImmutableSet.of(), ImmutableSet.of(),
-                    SoundEvents.VILLAGER_WORK_TOOLSMITH));
+                    SoundEvents.VILLAGER_WORK_WEAPONSMITH));
     public static final RegistryObject<VillagerProfession> TINKERER = VILLAGER_PROFESSIONS.register("tinkerer",
             () -> new VillagerProfession("tinkerer", x -> x.get() == TINKERER_POI.get(), x -> x.get() == TINKERER_POI.get(), ImmutableSet.of(), ImmutableSet.of(),
                     SoundEvents.VILLAGER_WORK_LEATHERWORKER));

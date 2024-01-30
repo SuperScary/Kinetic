@@ -12,9 +12,9 @@ import superscary.kinetic.block.blocks.MachineBlock;
 public class WrenchItem extends Item
 {
 
-    public WrenchItem (Properties properties)
+    public WrenchItem ()
     {
-        super(properties);
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override

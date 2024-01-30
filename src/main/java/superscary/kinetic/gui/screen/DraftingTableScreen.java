@@ -15,6 +15,7 @@ public class DraftingTableScreen extends KineticContainerScreen<DraftingTableMen
     public DraftingTableScreen (DraftingTableMenu menu, Inventory inventory, Component title)
     {
         super(menu, inventory, title);
+        this.imageWidth = 176;
     }
 
     @Override
@@ -29,4 +30,9 @@ public class DraftingTableScreen extends KineticContainerScreen<DraftingTableMen
         return new EnergyStorage(0, 0, 0);
     }
 
+    @Override
+    public boolean shouldRenderEnergy ()
+    {
+        return false;
+    }
 }

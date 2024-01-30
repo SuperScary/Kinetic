@@ -43,6 +43,7 @@
     "kinetic:premium_solar_panel",
     "kinetic:deluxe_solar_panel",
     "kinetic:ultimate_solar_panel",
-    "kinetic:basic_battery"
+    "kinetic:basic_battery",
+    "kinetic:brick"
   ]
 }

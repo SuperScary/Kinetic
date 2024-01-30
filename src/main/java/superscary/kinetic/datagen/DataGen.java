@@ -3,6 +3,7 @@ package superscary.kinetic.datagen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -27,12 +28,18 @@ public class DataGen
 
         generator.addProvider(event.includeServer(), KineticLootTableProvider.create(packOutput));
         generator.addProvider(event.includeClient(), new KineticPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeClient(), new KineticBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+
+        BlockTagsProvider blockTagsProvider = new KineticBlockTagGenerator(packOutput, lookupProvider, existingFileHelper);
+        generator.addProvider(event.includeClient(), blockTagsProvider);
+        generator.addProvider(event.includeServer(), new KineticItemTagGenerator(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 
         generator.addProvider(event.includeClient(), new KineticBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new KineticItemModelProvider(packOutput, existingFileHelper));
 
         generator.addProvider(event.includeClient(), new ForgeAdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new KineticAdvancementProvider())));
+
+        generator.addProvider(event.includeServer(), new KineticWorldGenProvider(packOutput, lookupProvider));
+
     }
 
 }
