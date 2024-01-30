@@ -1,6 +1,0 @@
-// 1.20.1	2024-01-28T17:19:10.7356524	Tags for minecraft:block mod id kinetic
-b6b9a18ae0ebfe26b8db2475810a570f0467c677 data/minecraft/tags/blocks/logs_that_burn.json
-a41a651eb22c96fbd8dea7b17fe75437eb26ab26 data/minecraft/tags/blocks/mineable/axe.json
-76a3d2771ad703d0535cc8eadb90e72641c7f691 data/minecraft/tags/blocks/mineable/pickaxe.json
-e85484a1f9fdd7d1b6af47f8371f44add4b73c8a data/minecraft/tags/blocks/needs_iron_tool.json
-53f628c6f0a6b6f501e6cec63def641d4e29afcc data/minecraft/tags/blocks/planks.json
