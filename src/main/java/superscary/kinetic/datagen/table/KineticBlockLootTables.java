@@ -73,6 +73,7 @@ public class KineticBlockLootTables extends BlockLootSubProvider
         this.dropSelf(KineticBlocks.RUBBER_SAPLING.get());
         this.dropSelf(KineticBlocks.BRICK.get());
         this.dropSelf(KineticBlocks.BRICK_STAIRS.get());
+        this.dropSelf(KineticBlocks.PLASTIC_BLOCK.get());
 
         this.add(KineticBlocks.BRICK_SLAB.get(), block -> createSlabItemTable(KineticBlocks.BRICK_SLAB.get()));
 

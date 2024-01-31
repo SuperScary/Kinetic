@@ -42,11 +42,7 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.UNTREATED_RUBBER);
         simpleItem(KineticItems.FLUX_COIL);
         simpleItem(KineticItems.SULFUR);
-        simpleItem(KineticItems.CAPACITOR_BASIC);
-        simpleItem(KineticItems.CAPACITOR_STANDARD);
-        simpleItem(KineticItems.CAPACITOR_PREMIUM);
-        simpleItem(KineticItems.CAPACITOR_DELUXE);
-        simpleItem(KineticItems.CAPACITOR_ULTIMATE);
+        simpleItem(KineticItems.CAPACITOR);
         upgrade(KineticItems.UPGRADE_BASE);
         upgrade(KineticItems.SPEED_UPGRADE);
         upgrade(KineticItems.POWER_EFFICIENCY_UPGRADE);
@@ -113,6 +109,7 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleBlockItem(KineticBlocks.BASIC_BATTERY);
         draftingTable(KineticBlocks.DRAFTING_TABLE);
         simpleBlockItem(KineticBlocks.BRICK);
+        simpleBlockItem(KineticBlocks.PLASTIC_BLOCK);
 
         saplingItem(KineticBlocks.RUBBER_SAPLING);
 

@@ -71,11 +71,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider, 
             {
                 case 0 -> true;
                 case 1 -> false;
-                case 2 -> stack.getItem() == KineticItems.CAPACITOR_BASIC.get()
-                        || stack.getItem() == KineticItems.CAPACITOR_STANDARD.get()
-                        || stack.getItem() == KineticItems.CAPACITOR_PREMIUM.get()
-                        || stack.getItem() == KineticItems.CAPACITOR_DELUXE.get()
-                        || stack.getItem() == KineticItems.CAPACITOR_ULTIMATE.get();
+                case 2 -> stack.getItem() == KineticItems.CAPACITOR.get();
                 case 3, 4, 5, 6 -> stack.getItem() instanceof UpgradeItem;
                 default -> super.isItemValid(slot, stack);
             };

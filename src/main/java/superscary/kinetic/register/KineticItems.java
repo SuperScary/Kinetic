@@ -11,7 +11,6 @@ import superscary.kinetic.KineticTabs;
 import superscary.kinetic.fluid.KineticFluids;
 import superscary.kinetic.item.*;
 import superscary.kinetic.item.properties.FoodProp;
-import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.block.cables.blocks.FacadeBlockItem;
 
 import java.util.function.Supplier;
@@ -39,11 +38,7 @@ public class KineticItems
     public static final RegistryObject<Item> UNTREATED_RUBBER = reg("untreated_rubber", KineticItem::new);
     public static final RegistryObject<Item> FLUX_COIL = reg("flux_coil", KineticItem::new);
     public static final RegistryObject<Item> SULFUR = reg("sulfur", KineticItem::new);
-    public static final RegistryObject<Item> CAPACITOR_BASIC = reg("capacitor_basic", () -> new CapacitorItem(64000, 128, 1));
-    public static final RegistryObject<Item> CAPACITOR_STANDARD = reg("capacitor_standard", () -> new CapacitorItem(128000, 256, 1));
-    public static final RegistryObject<Item> CAPACITOR_PREMIUM = reg("capacitor_premium", () -> new CapacitorItem(256000, 512, 2));
-    public static final RegistryObject<Item> CAPACITOR_DELUXE = reg("capacitor_deluxe", () -> new CapacitorItem(512000, 1024, 3));
-    public static final RegistryObject<Item> CAPACITOR_ULTIMATE = reg("capacitor_ultimate", () -> new CapacitorItem(1024000, 2048, 4));
+    public static final RegistryObject<Item> CAPACITOR = reg("capacitor", () -> new CapacitorItem(1024000, 2048, 4));
     public static final RegistryObject<Item> UPGRADE_BASE = reg("upgrade_base", KineticItem::new);
     public static final RegistryObject<Item> SPEED_UPGRADE = reg("upgrade_speed", UpgradeItem::new);
     public static final RegistryObject<Item> POWER_EFFICIENCY_UPGRADE = reg("upgrade_power_efficiency", UpgradeItem::new);
