@@ -23,14 +23,14 @@ import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.CoalGeneratorBlockEntity;
 
-import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_FRAME;
 
 public class CoalGeneratorBlock extends KineticBaseEntityBlock
 {
 
     public CoalGeneratorBlock ()
     {
-        super(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()).noOcclusion().strength(3.5f).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
+        super(BlockBehaviour.Properties.copy(MACHINE_FRAME.get()).noOcclusion().strength(3.5f).requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BlockStateProperties.POWERED) ? 14 : 0));
     }
 
     @Nullable

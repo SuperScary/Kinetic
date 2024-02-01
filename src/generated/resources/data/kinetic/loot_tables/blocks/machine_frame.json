@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "kinetic:machine_base_deluxe"
+          "name": "kinetic:machine_frame"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "kinetic:blocks/machine_base_deluxe"
+  "random_sequence": "kinetic:blocks/machine_frame"
 }

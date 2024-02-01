@@ -70,11 +70,7 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleBlockItem(KineticBlocks.SULFUR_ORE);
         simpleBlockItem(KineticBlocks.STEEL_BLOCK);
         simpleBlockItem(KineticBlocks.BATTERY_FRAME);
-        simpleBlockItem(KineticBlocks.MACHINE_BASE_BASIC);
-        simpleBlockItem(KineticBlocks.MACHINE_BASE_STANDARD);
-        simpleBlockItem(KineticBlocks.MACHINE_BASE_PREMIUM);
-        simpleBlockItem(KineticBlocks.MACHINE_BASE_DELUXE);
-        simpleBlockItem(KineticBlocks.MACHINE_BASE_ULTIMATE);
+        simpleBlockItem(KineticBlocks.MACHINE_FRAME);
         simpleBlockItem(KineticBlocks.UNFILLED_QUANTUM_SATELLITE);
         simpleBlockItem(KineticBlocks.FILLED_QUANTUM_SATELLITE);
         tank(KineticBlocks.TANK_BASIC);

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "kinetic:block/machine_base_ultimate"
-  }
-}

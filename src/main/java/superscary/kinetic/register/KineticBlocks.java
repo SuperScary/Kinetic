@@ -40,13 +40,9 @@ public class KineticBlocks
     public static final RegistryObject<Block> SULFUR_ORE = reg("sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE).requiresCorrectToolForDrops(), UniformInt.of(2, 3)));
     public static final RegistryObject<Block> STEEL_BLOCK = reg("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> BATTERY_FRAME = reg("battery_frame", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> MACHINE_BASE_BASIC = reg("machine_base_basic", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), 1));
-    public static final RegistryObject<Block> MACHINE_BASE_STANDARD = reg("machine_base_standard", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()), 1));
-    public static final RegistryObject<Block> MACHINE_BASE_PREMIUM = reg("machine_base_premium", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_STANDARD.get()), 2));
-    public static final RegistryObject<Block> MACHINE_BASE_DELUXE = reg("machine_base_deluxe", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_PREMIUM.get()), 3));
-    public static final RegistryObject<Block> MACHINE_BASE_ULTIMATE = reg("machine_base_ultimate", () -> new MachineBlock(BlockBehaviour.Properties.copy(MACHINE_BASE_DELUXE.get()), 4));
-    public static final RegistryObject<Block> UNFILLED_QUANTUM_SATELLITE = reg("unfilled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
-    public static final RegistryObject<Block> FILLED_QUANTUM_SATELLITE = reg("filled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get())));
+    public static final RegistryObject<Block> MACHINE_FRAME = reg("machine_frame", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), 1));
+    public static final RegistryObject<Block> UNFILLED_QUANTUM_SATELLITE = reg("unfilled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_FRAME.get())));
+    public static final RegistryObject<Block> FILLED_QUANTUM_SATELLITE = reg("filled_quantum_satellite", () -> new Block(BlockBehaviour.Properties.copy(MACHINE_FRAME.get())));
     public static final RegistryObject<Block> PLASTIC_BLOCK = reg("plastic_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.QUARTZ_BLOCK)));
     public static final RegistryObject<Block> BRICK = reg("brick", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BRICKS)));
     public static final RegistryObject<Block> BRICK_STAIRS = reg("brick_stairs", () -> new StairBlock(() -> BRICK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.BRICK_STAIRS)));

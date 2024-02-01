@@ -22,14 +22,14 @@ import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.block.entity.CompressorBlockEntity;
 
-import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_FRAME;
 
 public class CompressorBlock extends KineticBaseEntityBlock
 {
 
     public CompressorBlock ()
     {
-        super(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()).noOcclusion());
+        super(BlockBehaviour.Properties.copy(MACHINE_FRAME.get()).noOcclusion());
     }
 
     @Override

@@ -48,11 +48,7 @@ public class KineticBlockStateProvider extends BlockStateProvider
         blockWithItem(KineticBlocks.SULFUR_ORE);
         blockWithItem(KineticBlocks.STEEL_BLOCK);
         blockWithItem(KineticBlocks.BATTERY_FRAME);
-        blockWithItem(KineticBlocks.MACHINE_BASE_BASIC);
-        blockWithItem(KineticBlocks.MACHINE_BASE_STANDARD);
-        blockWithItem(KineticBlocks.MACHINE_BASE_PREMIUM);
-        blockWithItem(KineticBlocks.MACHINE_BASE_DELUXE);
-        blockWithItem(KineticBlocks.MACHINE_BASE_ULTIMATE);
+        blockWithItem(KineticBlocks.MACHINE_FRAME);
         blockWithItem(KineticBlocks.UNFILLED_QUANTUM_SATELLITE);
         blockWithItem(KineticBlocks.FILLED_QUANTUM_SATELLITE);
         blockWithItem(KineticBlocks.REACTOR_FRAME);

@@ -9,7 +9,7 @@ public class MachineBlock extends Block
 
     public MachineBlock (Properties properties, int rarity)
     {
-        super(properties);
+        super(properties.noOcclusion());
         this.rarity = rarity;
     }
 

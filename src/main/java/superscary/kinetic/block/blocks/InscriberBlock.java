@@ -22,7 +22,7 @@ public class InscriberBlock extends KineticBaseEntityBlock
 
     public InscriberBlock ()
     {
-        super(Properties.copy(KineticBlocks.MACHINE_BASE_BASIC.get()).strength(3.5f).requiresCorrectToolForDrops().noOcclusion());
+        super(Properties.copy(KineticBlocks.MACHINE_FRAME.get()).strength(3.5f).requiresCorrectToolForDrops().noOcclusion());
     }
 
     @Nullable

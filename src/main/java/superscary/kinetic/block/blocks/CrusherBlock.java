@@ -7,14 +7,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 
-import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_BASIC;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_FRAME;
 
 public class CrusherBlock extends KineticBaseEntityBlock
 {
 
     public CrusherBlock ()
     {
-        super(BlockBehaviour.Properties.copy(MACHINE_BASE_BASIC.get()));
+        super(BlockBehaviour.Properties.copy(MACHINE_FRAME.get()));
     }
 
     @Nullable

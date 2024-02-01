@@ -19,14 +19,14 @@ import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.block.entity.QQBlockEntity;
 
-import static superscary.kinetic.register.KineticBlocks.MACHINE_BASE_ULTIMATE;
+import static superscary.kinetic.register.KineticBlocks.MACHINE_FRAME;
 
 public class QuantumQuarryBlock extends KineticBaseEntityBlock
 {
 
     public QuantumQuarryBlock ()
     {
-        super(BlockBehaviour.Properties.copy(MACHINE_BASE_ULTIMATE.get()));
+        super(BlockBehaviour.Properties.copy(MACHINE_FRAME.get()));
     }
 
     @Override
