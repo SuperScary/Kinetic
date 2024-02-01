@@ -66,5 +66,4 @@ public class KineticConfiguredFeatures
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }
 
-
 }

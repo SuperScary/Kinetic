@@ -91,7 +91,7 @@ public class BasicBatteryBlockEntity extends BlockEntity implements MenuProvider
 
     private EnergyStorage createEnergyStorage ()
     {
-        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER, 500000);
+        return new EnergyStorage(CAPACITY, MAX_TRANSFER, MAX_TRANSFER, 0);
     }
 
     @Override
