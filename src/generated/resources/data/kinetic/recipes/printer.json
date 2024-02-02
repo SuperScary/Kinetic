@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "L": {
+      "item": "minecraft:magma_block"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "P": {
+      "item": "kinetic:plastic_block"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    " C ",
+    "LMP",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:printer"
+  },
+  "show_notification": true
+}

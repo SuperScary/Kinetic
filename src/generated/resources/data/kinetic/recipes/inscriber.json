@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bookshelf"
+    },
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "S": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " C ",
+    "BMB",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:inscriber"
+  },
+  "show_notification": true
+}

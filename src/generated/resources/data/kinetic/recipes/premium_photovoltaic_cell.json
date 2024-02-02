@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "P": {
+      "item": "kinetic:standard_photovoltaic_cell"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "CPC",
+    "PRP",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:premium_photovoltaic_cell"
+  },
+  "show_notification": true
+}

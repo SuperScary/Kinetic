@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "kinetic:steel_dust"
-  },
-  "result": "kinetic:steel_ingot",
-  "experience": 0.35,
-  "cookingtime": 400
-}

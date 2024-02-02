@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "pattern": [
+    "RCR",
+    "FMF",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:coal_generator"
+  },
+  "show_notification": true
+}

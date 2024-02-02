@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CGC",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:tank_basic"
+  },
+  "show_notification": true
+}

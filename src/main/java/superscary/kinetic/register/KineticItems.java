@@ -61,7 +61,10 @@ public class KineticItems
     public static final RegistryObject<Item> OIL_BUCKET = reg("oil_bucket", () -> new BucketItem(KineticFluids.OIL_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final RegistryObject<Item> HONEY_BUN = reg("honey_bun", () -> new KineticItem(new Item.Properties().food(FoodProp.HONEY_BUN)));
+    public static final RegistryObject<Item> RAW_DOUGH = reg("raw_dough", KineticItem::new);
+    public static final RegistryObject<Item> WHEAT_DUST = reg("wheat_dust", KineticItem::new);
     public static final RegistryObject<Item> HARD_BOILED_EGG = reg("hard_boiled_egg", () -> new KineticItem(new Item.Properties().food(FoodProp.HARD_BOILED_EGG)));
+
 
     public static <T extends Item> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {

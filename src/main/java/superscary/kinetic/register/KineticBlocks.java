@@ -48,11 +48,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> BRICK_STAIRS = reg("brick_stairs", () -> new StairBlock(() -> BRICK.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.BRICK_STAIRS)));
     public static final RegistryObject<Block> BRICK_SLAB = reg("brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BRICK_SLAB)));
     public static final RegistryObject<Block> DRAFTING_TABLE = reg("drafting_table", DraftingTableBlock::new);
-    public static final RegistryObject<Block> TANK_BASIC = reg("tank_basic", () -> new TankBlock(64));
-    public static final RegistryObject<Block> TANK_STANDARD = reg("tank_standard", () -> new TankBlock(128));
-    public static final RegistryObject<Block> TANK_PREMIUM = reg("tank_premium", () -> new TankBlock(256));
-    public static final RegistryObject<Block> TANK_DELUXE = reg("tank_deluxe", () -> new TankBlock(512));
-    public static final RegistryObject<Block> TANK_ULTIMATE = reg("tank_ultimate", () -> new TankBlock(1024));
+    public static final RegistryObject<Block> TANK = reg("tank_basic", () -> new TankBlock(64));
     public static final RegistryObject<Block> QUANTUM_QUARRY = reg("quantum_quarry", QuantumQuarryBlock::new);
     public static final RegistryObject<Block> COMPRESSOR = reg("compressor", CompressorBlock::new);
     public static final RegistryObject<Block> EXTRACTOR = reg("extractor", ExtractorBlock::new);
@@ -126,13 +122,18 @@ public class KineticBlocks
     });
     public static final RegistryObject<Block> RUBBER_SAPLING = reg("rubber_sapling", () -> new SaplingBlock(new RubberTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
-    public static final RegistryObject<LiquidBlock> OIL_BLOCK = reg("oil", () -> new LiquidBlock(KineticFluids.OIL_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
+    public static final RegistryObject<LiquidBlock> OIL_BLOCK = regNoTab("oil", () -> new LiquidBlock(KineticFluids.OIL_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER).noLootTable()));
 
     public static <T extends Block> RegistryObject<T> reg (final String name, final Supplier<? extends T> supplier)
     {
         RegistryObject<T> obj = KineticTabs.addBlockToTab(BLOCKS.register(name, supplier));
         KineticItems.reg(name, () -> new BlockItem(obj.get(), new Item.Properties()));
         return obj;
+    }
+
+    public static <T extends Block> RegistryObject<T> regNoTab (final String name, final Supplier<? extends T> supplier)
+    {
+        return BLOCKS.register(name, supplier);
     }
 
 }

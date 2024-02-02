@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "forge:glass"
+    },
+    "P": {
+      "item": "kinetic:plastic"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    " R ",
+    "PGP",
+    "PSP"
+  ],
+  "result": {
+    "item": "kinetic:configuration_wizard"
+  },
+  "show_notification": true
+}

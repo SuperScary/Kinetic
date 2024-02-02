@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "G": {
+      "item": "kinetic:steel_gear"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "T": {
+      "item": "minecraft:anvil"
+    }
+  },
+  "pattern": [
+    " C ",
+    "TMG",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:crusher"
+  },
+  "show_notification": true
+}

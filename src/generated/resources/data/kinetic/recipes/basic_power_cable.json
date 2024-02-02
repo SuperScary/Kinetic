@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "kinetic:duracite_ingot"
+    },
+    "R": {
+      "item": "kinetic:rubber"
+    },
+    "S": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "DSD",
+    "RRR"
+  ],
+  "result": {
+    "count": 8,
+    "item": "kinetic:basic_power_cable"
+  },
+  "show_notification": true
+}

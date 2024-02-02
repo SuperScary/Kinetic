@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "kinetic:steel_gear"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "P": {
+      "item": "minecraft:netherite_pickaxe"
+    },
+    "S": {
+      "item": "kinetic:steel_block"
+    }
+  },
+  "pattern": [
+    "DPD",
+    "GMG",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:quantum_quarry"
+  },
+  "show_notification": true
+}

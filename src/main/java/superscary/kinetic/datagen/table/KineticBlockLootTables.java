@@ -30,11 +30,7 @@ public class KineticBlockLootTables extends BlockLootSubProvider
         this.dropSelf(KineticBlocks.MACHINE_FRAME.get());
         this.dropSelf(KineticBlocks.UNFILLED_QUANTUM_SATELLITE.get());
         this.dropSelf(KineticBlocks.FILLED_QUANTUM_SATELLITE.get());
-        this.dropSelf(KineticBlocks.TANK_BASIC.get());
-        this.dropSelf(KineticBlocks.TANK_STANDARD.get());
-        this.dropSelf(KineticBlocks.TANK_PREMIUM.get());
-        this.dropSelf(KineticBlocks.TANK_DELUXE.get());
-        this.dropSelf(KineticBlocks.TANK_ULTIMATE.get());
+        this.dropSelf(KineticBlocks.TANK.get());
         this.dropSelf(KineticBlocks.QUANTUM_QUARRY.get());
         this.dropSelf(KineticBlocks.COMPRESSOR.get());
         this.dropSelf(KineticBlocks.EXTRACTOR.get());

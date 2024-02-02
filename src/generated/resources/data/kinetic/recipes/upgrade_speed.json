@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "U": {
+      "item": "kinetic:upgrade_base"
+    }
+  },
+  "pattern": [
+    "UR"
+  ],
+  "result": {
+    "item": "kinetic:upgrade_speed"
+  },
+  "show_notification": true
+}

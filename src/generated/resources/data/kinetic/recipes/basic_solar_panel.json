@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "P": {
+      "item": "kinetic:basic_photovoltaic_cell"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SMS",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:basic_solar_panel"
+  },
+  "show_notification": true
+}

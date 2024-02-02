@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "kinetic:duracite_ingot"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SDS",
+    " S "
+  ],
+  "result": {
+    "count": 4,
+    "item": "kinetic:facade"
+  },
+  "show_notification": true
+}

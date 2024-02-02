@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "kinetic:duracite_ingot"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "result": {
+    "item": "kinetic:duracite_block"
+  },
+  "show_notification": true
+}

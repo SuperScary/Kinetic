@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "kinetic:iron_gear"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SGS",
+    " S "
+  ],
+  "result": {
+    "item": "kinetic:steel_gear"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "kinetic:wood_gear"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SGS",
+    " S "
+  ],
+  "result": {
+    "item": "kinetic:stone_gear"
+  },
+  "show_notification": true
+}

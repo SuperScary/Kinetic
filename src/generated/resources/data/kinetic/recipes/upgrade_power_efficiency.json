@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "U": {
+      "item": "kinetic:upgrade_base"
+    }
+  },
+  "pattern": [
+    "UR"
+  ],
+  "result": {
+    "item": "kinetic:upgrade_power_efficiency"
+  },
+  "show_notification": true
+}

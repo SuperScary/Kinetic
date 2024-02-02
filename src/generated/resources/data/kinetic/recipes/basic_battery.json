@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:capacitor"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "CMC",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:basic_battery"
+  },
+  "show_notification": true
+}

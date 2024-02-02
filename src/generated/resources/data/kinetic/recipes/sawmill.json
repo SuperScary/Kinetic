@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "T": {
+      "item": "minecraft:iron_sword"
+    }
+  },
+  "pattern": [
+    " C ",
+    "TMT",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:sawmill"
+  },
+  "show_notification": true
+}

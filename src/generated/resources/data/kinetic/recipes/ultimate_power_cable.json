@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "kinetic:rubber"
+    },
+    "S": {
+      "item": "kinetic:deluxe_power_cable"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "DSD",
+    "RRR"
+  ],
+  "result": {
+    "item": "kinetic:ultimate_power_cable"
+  },
+  "show_notification": true
+}

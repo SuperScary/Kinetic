@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "RS ",
+    "  S",
+    "LS "
+  ],
+  "result": {
+    "item": "kinetic:magnet"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "kinetic:deluxe_solar_panel"
+    },
+    "P": {
+      "item": "kinetic:ultimate_photovoltaic_cell"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "SMS",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:ultimate_solar_panel"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "kinetic:flux_coil"
+    },
+    "G": {
+      "item": "kinetic:steel_gear"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "pattern": [
+    "GCG",
+    "PMP",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:compressor"
+  },
+  "show_notification": true
+}

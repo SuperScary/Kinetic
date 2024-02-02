@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "N": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "NNG",
+    "NNG",
+    "NNG"
+  ],
+  "result": {
+    "item": "kinetic:upgrade_base"
+  },
+  "show_notification": true
+}

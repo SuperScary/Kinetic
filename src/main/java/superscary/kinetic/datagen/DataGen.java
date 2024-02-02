@@ -40,6 +40,7 @@ public class DataGen
         generator.addProvider(event.includeClient(), new ForgeAdvancementProvider(packOutput, lookupProvider, existingFileHelper, List.of(new KineticAdvancementProvider())));
 
         generator.addProvider(event.includeServer(), new KineticWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new KineticRecipeProvider(packOutput));
 
     }
 

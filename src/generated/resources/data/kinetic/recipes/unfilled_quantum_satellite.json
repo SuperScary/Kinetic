@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:netherite_axe"
+    },
+    "H": {
+      "item": "minecraft:netherite_shovel"
+    },
+    "M": {
+      "item": "kinetic:machine_frame"
+    },
+    "P": {
+      "item": "minecraft:netherite_pickaxe"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    },
+    "T": {
+      "item": "kinetic:tank_basic"
+    }
+  },
+  "pattern": [
+    "APH",
+    "STS",
+    "MMM"
+  ],
+  "result": {
+    "item": "kinetic:unfilled_quantum_satellite"
+  },
+  "show_notification": true
+}

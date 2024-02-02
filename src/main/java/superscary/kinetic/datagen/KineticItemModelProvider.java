@@ -62,6 +62,8 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.SCREWDRIVER);
         simpleItem(KineticItems.ENGINEERS_HAMMER);
         simpleItem(KineticItems.OIL_BUCKET);
+        simpleItem(KineticItems.RAW_DOUGH);
+        simpleItem(KineticItems.WHEAT_DUST);
 
         simpleBlockItem(KineticBlocks.DURACITE_ORE);
         simpleBlockItem(KineticBlocks.DEEPSLATE_DURACITE_ORE);
@@ -73,11 +75,7 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleBlockItem(KineticBlocks.MACHINE_FRAME);
         simpleBlockItem(KineticBlocks.UNFILLED_QUANTUM_SATELLITE);
         simpleBlockItem(KineticBlocks.FILLED_QUANTUM_SATELLITE);
-        tank(KineticBlocks.TANK_BASIC);
-        tank(KineticBlocks.TANK_STANDARD);
-        tank(KineticBlocks.TANK_PREMIUM);
-        tank(KineticBlocks.TANK_DELUXE);
-        tank(KineticBlocks.TANK_ULTIMATE);
+        tank(KineticBlocks.TANK);
         blockOff(KineticBlocks.QUANTUM_QUARRY.get());
         blockOff(KineticBlocks.COMPRESSOR.get());
         blockOff(KineticBlocks.EXTRACTOR.get());

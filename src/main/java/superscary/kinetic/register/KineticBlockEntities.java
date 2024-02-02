@@ -8,7 +8,6 @@ import superscary.kinetic.Kinetic;
 import superscary.kinetic.block.cables.blocks.entity.*;
 import superscary.kinetic.block.cables.blocks.entity.power.*;
 import superscary.kinetic.block.entity.*;
-import superscary.kinetic.register.KineticBlocks;
 
 public class KineticBlockEntities
 {
@@ -29,7 +28,7 @@ public class KineticBlockEntities
 
     public static final RegistryObject<BlockEntityType<BasicTankBlockEntity>> BASIC_TANK_BE =
             BLOCK_ENTITIES.register("basic_tank_be", () -> BlockEntityType.Builder.of(BasicTankBlockEntity::new,
-                    KineticBlocks.TANK_BASIC.get()).build(null));
+                    KineticBlocks.TANK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<CoalGeneratorBlockEntity>> COAL_GENERATOR_BE =
             BLOCK_ENTITIES.register("coal_generator_be", () -> BlockEntityType.Builder.of(CoalGeneratorBlockEntity::new,

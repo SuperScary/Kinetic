@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "tag": "minecraft:slabs"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "WBW",
+    "WWW"
+  ],
+  "result": {
+    "item": "kinetic:drafting_table"
+  },
+  "show_notification": true
+}

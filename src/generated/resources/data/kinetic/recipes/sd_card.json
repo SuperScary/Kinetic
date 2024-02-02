@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "P": {
+      "item": "kinetic:plastic"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    "GGG"
+  ],
+  "result": {
+    "item": "kinetic:sd_card"
+  },
+  "show_notification": true
+}
