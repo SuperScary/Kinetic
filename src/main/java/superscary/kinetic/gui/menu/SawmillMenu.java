@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import superscary.kinetic.register.KineticBlocks;
-import superscary.kinetic.block.entity.CompressorBlockEntity;
 import superscary.kinetic.block.entity.SawmillBlockEntity;
 import superscary.kinetic.gui.KineticContainerMenu;
 import superscary.kinetic.register.KineticMenus;
@@ -21,7 +20,7 @@ import superscary.kinetic.gui.UpgradeSlot;
 public class SawmillMenu extends KineticContainerMenu
 {
 
-    public final CompressorBlockEntity blockEntity;
+    public final SawmillBlockEntity blockEntity;
 
     public SawmillMenu (int containerId, Inventory inventory, FriendlyByteBuf extraData)
     {
@@ -31,15 +30,16 @@ public class SawmillMenu extends KineticContainerMenu
     public SawmillMenu (int containerId, Inventory inventory, BlockEntity entity, ContainerData data)
     {
         super(KineticMenus.SAWMILL_MENU.get(), containerId, inventory, entity.getBlockPos());
-        blockEntity = ((CompressorBlockEntity) entity);
+        blockEntity = ((SawmillBlockEntity) entity);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59));
-            this.addSlot(new UpgradeSlot(iItemHandler, 2, 182, 5));
-            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 23));
-            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 41));
-            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 59));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 56, 35));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 116, 35));
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 116, 58));
+            this.addSlot(new UpgradeSlot(iItemHandler, 3, 182, 5));
+            this.addSlot(new UpgradeSlot(iItemHandler, 4, 182, 23));
+            this.addSlot(new UpgradeSlot(iItemHandler, 5, 182, 41));
+            this.addSlot(new UpgradeSlot(iItemHandler, 6, 182, 59));
         });
     }
 

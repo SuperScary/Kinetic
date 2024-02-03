@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.gui.screen.CompressorScreen;
+import superscary.kinetic.gui.screen.SawmillScreen;
 import superscary.kinetic.recipe.CompressorRecipe;
 import superscary.kinetic.recipe.SawmillRecipe;
 
@@ -46,7 +47,8 @@ public class JEIKineticPlugin implements IModPlugin
     @Override
     public void registerGuiHandlers (IGuiHandlerRegistration registration)
     {
-        registration.addRecipeClickArea(CompressorScreen.class, 90, 30, 20, 30, CompressorCategory.COMPRESSOR_RECIPE_TYPE);
+        registration.addRecipeClickArea(CompressorScreen.class, 80, 35, 22, 25, CompressorCategory.COMPRESSOR_RECIPE_TYPE);
+        registration.addRecipeClickArea(SawmillScreen.class, 80, 35, 22, 25, SawmillCategory.SAWMILL_RECIPE_TYPE);
     }
 
 }

@@ -64,8 +64,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider, Siz
             return switch (slot)
             {
                 case 0 -> true;
-                case 1 -> false;
-                case 2 -> stack.getItem() == KineticItems.CAPACITOR.get();
+                case 1, 2 -> false;
                 case 3, 4, 5, 6 -> stack.getItem() instanceof UpgradeItem;
                 default -> super.isItemValid(slot, stack);
             };
@@ -209,7 +208,7 @@ public class SawmillBlockEntity extends BlockEntity implements MenuProvider, Siz
     @Override
     public int getInventorySize ()
     {
-        return 3;
+        return 7;
     }
 
     public int getStoredPower ()

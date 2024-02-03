@@ -40,7 +40,7 @@ public class SawmillCategory implements IRecipeCategory<SawmillRecipe>
     @Override
     public Component getTitle ()
     {
-        return Component.translatable("block.kinetic.compressor");
+        return Component.translatable("block.kinetic.sawmill");
     }
 
     @Override

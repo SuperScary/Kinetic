@@ -2,8 +2,6 @@ package superscary.kinetic.block.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,13 +12,12 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
+import superscary.kinetic.block.entity.SawmillBlockEntity;
 import superscary.kinetic.register.KineticBlockEntities;
-import superscary.kinetic.block.entity.CompressorBlockEntity;
 
 import static superscary.kinetic.register.KineticBlocks.MACHINE_FRAME;
 
@@ -39,9 +36,9 @@ public class SawmillBlock extends KineticBaseEntityBlock
         if (state.getBlock() != newState.getBlock())
         {
             BlockEntity block = level.getBlockEntity(pos);
-            if (block instanceof CompressorBlockEntity)
+            if (block instanceof SawmillBlockEntity)
             {
-                ((CompressorBlockEntity) block).drops();
+                ((SawmillBlockEntity) block).drops();
             }
         }
 
@@ -55,9 +52,9 @@ public class SawmillBlock extends KineticBaseEntityBlock
         if (!level.isClientSide())
         {
             BlockEntity entity = level.getBlockEntity(pos);
-            if (entity instanceof CompressorBlockEntity)
+            if (entity instanceof SawmillBlockEntity)
             {
-                NetworkHooks.openScreen(((ServerPlayer) player), (CompressorBlockEntity) entity, pos);
+                NetworkHooks.openScreen(((ServerPlayer) player), (SawmillBlockEntity) entity, pos);
                 return InteractionResult.sidedSuccess(level.isClientSide());
             } else
             {
@@ -72,7 +69,7 @@ public class SawmillBlock extends KineticBaseEntityBlock
     @Override
     public BlockEntity newBlockEntity (BlockPos pos, BlockState state)
     {
-        return new CompressorBlockEntity(pos, state);
+        return new SawmillBlockEntity(pos, state);
     }
 
     @Nullable
@@ -86,10 +83,6 @@ public class SawmillBlock extends KineticBaseEntityBlock
     @Override
     public void animateTick (BlockState state, Level level, BlockPos pos, RandomSource randomSource)
     {
-        if (state.getValue(BlockStateProperties.POWERED))
-        {
-            level.playLocalSound(pos.getX() + 0.5d, pos.getY(), pos.getZ() + 0.5d, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
-        }
         super.animateTick(state, level, pos, randomSource);
     }
 
