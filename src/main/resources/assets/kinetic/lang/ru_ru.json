@@ -39,6 +39,9 @@
   "item.kinetic.oil_bucket": "Масляное ведро",
   "item.kinetic.raw_dough": "Raw Dough",
   "item.kinetic.wheat_dust": "Wheat Dust",
+  "item.kinetic.steel_plate": "Steel Plate",
+  "item.kinetic.copper_plate": "Copper Plate",
+  "item.kinetic.sawdust": "Sawdust",
   "block.kinetic.duracite_ore": "Дурактовая руда",
   "block.kinetic.deepslate_duracite_ore": "Углубляющий дуракт",
   "block.kinetic.raw_duracite_block": "Необработаный блок Duracite",
@@ -101,6 +104,8 @@
   "block.kinetic.brick_stairs": "Кирпичная лестница",
   "block.kinetic.brick_slab": "Brick Slub",
   "block.kinetic.plastic_block": "Plastic Block",
+  "block.kinetic.stone_casing": "Stone Casing",
+  "block.kinetic.wood_casing": "Wood Casing",
   "block.kinetic.oil": "Нефть",
   "fluid_type.kinetic.oil": "Нефть",
   "itemGroup.kinetic": "Кинетический",
@@ -108,5 +113,11 @@
   "chat.ore_not_found": "Руды не найдены.",
   "kinetic.facade.is_mimicing": "Набор фасада до %s",
   "entity.minecraft.villager.kinetic.engineer": "Инженер",
-  "entity.minecraft.villager.kinetic.tinkerer": "Тинкерер"
+  "entity.minecraft.villager.kinetic.tinkerer": "Тинкерер",
+  "advancement.build_compressor": "Build The Compressor",
+  "advancement.build_compressor.desc": "Under pressure...",
+  "advancement.build_wrench": "With Friends Like These..",
+  "advancement.build_wrench.desc": "Your New Best Friend",
+  "advancement.compress_plastic": "Compress Plastic",
+  "advancement.compress_plastic.desc": "Not turtle food."
 }
