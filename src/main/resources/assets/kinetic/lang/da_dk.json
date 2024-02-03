@@ -39,6 +39,9 @@
   "item.kinetic.oil_bucket": "Oliebucket",
   "item.kinetic.raw_dough": "Raw Dough",
   "item.kinetic.wheat_dust": "Wheat Dust",
+  "item.kinetic.steel_plate": "Steel Plate",
+  "item.kinetic.copper_plate": "Copper Plate",
+  "item.kinetic.sawdust": "Sawdust",
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "Deepslate Duracite Ore",
   "block.kinetic.raw_duracite_block": "Raw Duracite Block",
@@ -101,6 +104,8 @@
   "block.kinetic.brick_stairs": "Brick Stairs",
   "block.kinetic.brick_slab": "Brick Slab",
   "block.kinetic.plastic_block": "Plastic Block",
+  "block.kinetic.stone_casing": "Stone Casing",
+  "block.kinetic.wood_casing": "Wood Casing",
   "block.kinetic.oil": "Olie",
   "fluid_type.kinetic.oil": "Olie",
   "itemGroup.kinetic": "Kinetisk",
@@ -108,5 +113,11 @@
   "chat.ore_not_found": "Ingen pligter fundet.",
   "kinetic.facade.is_mimicing": "Facade-sæt til %s",
   "entity.minecraft.villager.kinetic.engineer": "Engineer",
-  "entity.minecraft.villager.kinetic.tinkerer": "Tinkerer"
+  "entity.minecraft.villager.kinetic.tinkerer": "Tinkerer",
+  "advancement.build_compressor": "Build The Compressor",
+  "advancement.build_compressor.desc": "Under pressure...",
+  "advancement.build_wrench": "With Friends Like These..",
+  "advancement.build_wrench.desc": "Your New Best Friend",
+  "advancement.compress_plastic": "Compress Plastic",
+  "advancement.compress_plastic.desc": "Not turtle food."
 }
