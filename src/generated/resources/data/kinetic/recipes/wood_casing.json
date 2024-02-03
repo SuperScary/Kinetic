@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "WSW",
+    "SSS",
+    "WSW"
+  ],
+  "result": {
+    "item": "kinetic:wood_casing"
+  },
+  "show_notification": true
+}

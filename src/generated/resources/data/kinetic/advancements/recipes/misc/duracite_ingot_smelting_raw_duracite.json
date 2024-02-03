@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_duracite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kinetic:raw_duracite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "kinetic:duracite_ingot_smelting_raw_duracite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_duracite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "kinetic:duracite_ingot_smelting_raw_duracite"
+    ]
+  },
+  "sends_telemetry_event": false
+}

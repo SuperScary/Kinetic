@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "kinetic:wheat_dust"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "DW"
+  ],
+  "result": {
+    "item": "kinetic:raw_dough"
+  },
+  "show_notification": true
+}

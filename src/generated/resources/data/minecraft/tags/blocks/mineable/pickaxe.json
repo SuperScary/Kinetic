@@ -36,6 +36,8 @@
     "kinetic:deluxe_solar_panel",
     "kinetic:ultimate_solar_panel",
     "kinetic:basic_battery",
-    "kinetic:brick"
+    "kinetic:brick",
+    "kinetic:plastic_block",
+    "kinetic:stone_casing"
   ]
 }

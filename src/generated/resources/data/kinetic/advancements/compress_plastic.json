@@ -1,11 +1,12 @@
 {
+  "parent": "kinetic:build_compressor",
   "criteria": {
-    "craft_wrench": {
+    "compressed": {
       "conditions": {
         "items": [
           {
             "items": [
-              "kinetic:wrench"
+              "kinetic:plastic"
             ]
           }
         ]
@@ -15,23 +16,22 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "kinetic:textures/block/steel_block.png",
     "description": {
-      "text": "Your New Best Friend"
+      "translate": "advancement.compress_plastic.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "kinetic:wrench"
+      "item": "kinetic:plastic"
     },
     "show_toast": true,
     "title": {
-      "text": "With Friends Like These.."
+      "translate": "advancement.compress_plastic"
     }
   },
   "requirements": [
     [
-      "craft_wrench"
+      "compressed"
     ]
   ],
   "sends_telemetry_event": true

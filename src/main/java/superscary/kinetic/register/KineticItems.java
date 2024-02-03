@@ -51,6 +51,9 @@ public class KineticItems
     public static final RegistryObject<Item> PREMIUM_PHOTOVOLTAIC_CELL = reg("premium_photovoltaic_cell", KineticItem::new);
     public static final RegistryObject<Item> DELUXE_PHOTOVOLTAIC_CELL = reg("deluxe_photovoltaic_cell", KineticItem::new);
     public static final RegistryObject<Item> ULTIMATE_PHOTOVOLTAIC_CELL = reg("ultimate_photovoltaic_cell", KineticItem::new);
+    public static final RegistryObject<Item> STEEL_PLATE = reg("steel_plate", KineticItem::new);
+    public static final RegistryObject<Item> COPPER_PLATE = reg("copper_plate", KineticItem::new);
+    public static final RegistryObject<Item> SAWDUST = reg("sawdust", () -> new FuelItem(new Item.Properties(), 200));
 
     public static final RegistryObject<Item> ORE_FINDER = reg("ore_finder", () -> new OreFinderItem(new Item.Properties()));
     public static final RegistryObject<Item> WRENCH = reg("wrench", WrenchItem::new);

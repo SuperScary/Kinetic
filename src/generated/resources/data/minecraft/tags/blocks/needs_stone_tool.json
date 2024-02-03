@@ -1,5 +1,7 @@
 {
   "values": [
-    "kinetic:brick"
+    "kinetic:brick",
+    "kinetic:wood_casing",
+    "kinetic:stone_casing"
   ]
 }

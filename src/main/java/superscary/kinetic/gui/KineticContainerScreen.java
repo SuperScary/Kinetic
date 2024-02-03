@@ -79,9 +79,10 @@ public abstract class KineticContainerScreen<T extends KineticContainerMenu> ext
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+        guiGraphics.blit(getTexture(), x, y, 0, 0, imageWidth, imageHeight);
+
         renderArrow(guiGraphics, x, y);
 
-        guiGraphics.blit(getTexture(), x, y, 0, 0, imageWidth, imageHeight);
         if (shouldRenderEnergy())
         {
             int power = menu.getPower();

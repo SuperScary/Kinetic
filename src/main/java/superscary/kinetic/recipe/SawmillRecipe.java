@@ -19,13 +19,21 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
 
     private final NonNullList<Ingredient> inputItems;
     private final ItemStack output;
+    private final int energyReq;
+    private final int craftTime;
+    private final ItemStack secondOutput;
+    private final float secondChance;
     private final ResourceLocation id;
 
-    public SawmillRecipe (NonNullList<Ingredient> inputItems, ItemStack output, ResourceLocation id)
+    public SawmillRecipe (NonNullList<Ingredient> inputItems, ItemStack output, int energyReq, int craftTime, ItemStack secondOutput, float secondChance, ResourceLocation id)
     {
         this.inputItems = inputItems;
         this.output = output;
         this.id = id;
+        this.energyReq = energyReq;
+        this.craftTime = craftTime;
+        this.secondOutput = secondOutput;
+        this.secondChance = secondChance;
     }
 
     @Override
@@ -72,31 +80,43 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
     @Override
     public RecipeSerializer<?> getSerializer ()
     {
-        return Serializer.INSTANCE;
+        return SawmillRecipe.Serializer.INSTANCE;
+    }
+
+    public int getEnergyReq ()
+    {
+        return energyReq;
+    }
+
+    public int getCraftTime ()
+    {
+        return craftTime;
     }
 
     @Override
     public RecipeType<?> getType ()
     {
-        return Type.INSTANCE;
+        return SawmillRecipe.Type.INSTANCE;
     }
 
     public static class Type implements RecipeType<SawmillRecipe>
     {
-        public static final Type INSTANCE = new Type();
+        public static final SawmillRecipe.Type INSTANCE = new SawmillRecipe.Type();
         public static final String ID = "sawmill";
     }
 
     public static class Serializer implements RecipeSerializer<SawmillRecipe>
     {
 
-        public static final Serializer INSTANCE = new Serializer();
+        public static final SawmillRecipe.Serializer INSTANCE = new SawmillRecipe.Serializer();
         public static final ResourceLocation ID = new ResourceLocation(Kinetic.MODID, "sawmill");
 
         @Override
         public SawmillRecipe fromJson (ResourceLocation recipeId, JsonObject serializedRecipe)
         {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "output"));
+            ItemStack output2 = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "secondary"));
+            float chance = GsonHelper.getAsFloat(serializedRecipe, "second_chance");
             JsonArray ingredients = GsonHelper.getAsJsonArray(serializedRecipe, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
 
@@ -105,7 +125,9 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new SawmillRecipe(inputs, output, recipeId);
+            int craftTime = GsonHelper.getAsInt(serializedRecipe, "craftTime");
+            int energy = GsonHelper.getAsInt(serializedRecipe, "energy");
+            return new SawmillRecipe(inputs, output, energy, craftTime, output2, chance, recipeId);
         }
 
         @Override
@@ -117,8 +139,12 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
                 inputs.set(i, Ingredient.fromNetwork(buffer));
             }
 
+            int craftTime = buffer.readInt();
+            int energy = buffer.readInt();
             ItemStack output = buffer.readItem();
-            return new SawmillRecipe(inputs, output, recipeId);
+            ItemStack output2 = buffer.readItem();
+            float chance = buffer.readFloat();
+            return new SawmillRecipe(inputs, output, energy, craftTime, output2, chance, recipeId);
         }
 
         @Override
@@ -131,8 +157,11 @@ public class SawmillRecipe implements Recipe<SimpleContainer>
                 ingredient.toNetwork(buffer);
             }
 
+            buffer.writeInt(recipe.craftTime);
+            buffer.writeInt(recipe.energyReq);
             buffer.writeItemStack(recipe.getResultItem(null), false);
-
+            buffer.writeItemStack(recipe.secondOutput, false);
+            buffer.writeFloat(recipe.secondChance);
         }
     }
 

@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "craft_wrench": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "kinetic:wrench"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "kinetic:textures/block/steel_block.png",
+    "description": {
+      "translate": "advancement.build_wrench.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "kinetic:wrench"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.build_wrench"
+    }
+  },
+  "requirements": [
+    [
+      "craft_wrench"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

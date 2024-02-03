@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "kinetic:rubber_log"
+    }
+  ],
+  "result": {
+    "item": "kinetic:rubber_planks"
+  }
+}

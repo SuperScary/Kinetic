@@ -1,0 +1,14 @@
+{
+  "type": "kinetic:compress",
+  "craftTime": 280,
+  "energy": 43,
+  "ingredients": [
+    {
+      "item": "kinetic:rubber_log"
+    }
+  ],
+  "output": {
+    "count": 3,
+    "item": "kinetic:untreated_rubber"
+  }
+}

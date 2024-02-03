@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "item": "kinetic:steel_ingot"
+    },
+    "P": {
+      "item": "kinetic:engineers_hammer"
+    }
+  },
+  "pattern": [
+    "IP"
+  ],
+  "result": {
+    "item": "kinetic:steel_plate"
+  },
+  "show_notification": true
+}

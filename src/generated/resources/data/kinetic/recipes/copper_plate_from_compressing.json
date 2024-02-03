@@ -1,0 +1,14 @@
+{
+  "type": "kinetic:compress",
+  "craftTime": 305,
+  "energy": 65,
+  "ingredients": [
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "output": {
+    "count": 2,
+    "item": "kinetic:copper_plate"
+  }
+}

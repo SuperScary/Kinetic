@@ -60,7 +60,9 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.DELUXE_SOLAR_PANEL.get())
                 .add(KineticBlocks.ULTIMATE_SOLAR_PANEL.get())
                 .add(KineticBlocks.BASIC_BATTERY.get())
-                .add(KineticBlocks.BRICK.get());
+                .add(KineticBlocks.BRICK.get())
+                .add(KineticBlocks.PLASTIC_BLOCK.get())
+                .add(KineticBlocks.STONE_CASING.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(KineticBlocks.DRAFTING_TABLE.get())
@@ -68,7 +70,8 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.RUBBER_WOOD.get())
                 .add(KineticBlocks.STRIPPED_RUBBER_LOG.get())
                 .add(KineticBlocks.STRIPPED_RUBBER_WOOD.get())
-                .add(KineticBlocks.RUBBER_PLANKS.get());
+                .add(KineticBlocks.RUBBER_PLANKS.get())
+                .add(KineticBlocks.WOOD_CASING.get());
 
         this.tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(KineticBlocks.DURACITE_ORE.get())
@@ -110,13 +113,16 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.DRAFTING_TABLE.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
-                .add(KineticBlocks.BRICK.get());
+                .add(KineticBlocks.BRICK.get())
+                .add(KineticBlocks.WOOD_CASING.get())
+                .add(KineticBlocks.STONE_CASING.get());
 
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(KineticBlocks.RUBBER_LOG.get())
                 .add(KineticBlocks.RUBBER_WOOD.get())
                 .add(KineticBlocks.STRIPPED_RUBBER_LOG.get())
-                .add(KineticBlocks.STRIPPED_RUBBER_WOOD.get());
+                .add(KineticBlocks.STRIPPED_RUBBER_WOOD.get())
+                .add(KineticBlocks.WOOD_CASING.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(KineticBlocks.RUBBER_PLANKS.get());

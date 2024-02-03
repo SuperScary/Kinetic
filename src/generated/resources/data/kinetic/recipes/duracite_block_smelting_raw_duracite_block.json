@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 1800,
+  "experience": 2.25,
+  "group": "duracite",
+  "ingredient": {
+    "item": "kinetic:raw_duracite_block"
+  },
+  "result": "kinetic:duracite_block"
+}

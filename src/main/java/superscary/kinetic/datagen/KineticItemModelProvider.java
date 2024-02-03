@@ -64,6 +64,9 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleItem(KineticItems.OIL_BUCKET);
         simpleItem(KineticItems.RAW_DOUGH);
         simpleItem(KineticItems.WHEAT_DUST);
+        simpleItem(KineticItems.STEEL_PLATE);
+        simpleItem(KineticItems.COPPER_PLATE);
+        simpleItem(KineticItems.SAWDUST);
 
         simpleBlockItem(KineticBlocks.DURACITE_ORE);
         simpleBlockItem(KineticBlocks.DEEPSLATE_DURACITE_ORE);
@@ -104,6 +107,8 @@ public class KineticItemModelProvider extends ItemModelProvider
         draftingTable(KineticBlocks.DRAFTING_TABLE);
         simpleBlockItem(KineticBlocks.BRICK);
         simpleBlockItem(KineticBlocks.PLASTIC_BLOCK);
+        simpleBlockItem(KineticBlocks.WOOD_CASING);
+        simpleBlockItem(KineticBlocks.STONE_CASING);
 
         saplingItem(KineticBlocks.RUBBER_SAPLING);
 

@@ -29,18 +29,13 @@ public class CompressorScreen extends KineticContainerScreen<CompressorMenu>
         return menu.blockEntity.getEnergyStorage();
     }
 
-    private void renderProgressArrow (GuiGraphics guiGraphics, int x, int y)
-    {
-        if (menu.isCrafting())
-        {
-            guiGraphics.blit(getTexture(), x + 85, y + 30, 203, 0, 8, menu.getScaledProgress());
-        }
-    }
-
     @Override
     public void renderArrow (GuiGraphics guiGraphics, int x, int y)
     {
-        renderProgressArrow(guiGraphics, x, y);
+        if (menu.isCrafting())
+        {
+            guiGraphics.blit(getTexture(), x + 80, y + 35, 203, 0, menu.getScaledProgress(), 17);
+        }
     }
 
 }

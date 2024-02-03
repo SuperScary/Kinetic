@@ -1,0 +1,16 @@
+{
+  "type": "kinetic:sawmill",
+  "craftTime": 150,
+  "energy": 35,
+  "ingredients": [
+    {
+      "item": "kinetic:rubber_log"
+    }
+  ],
+  "output": {
+    "count": 6,
+    "item": "kinetic:rubber_planks"
+  },
+  "second_chance": 0.5,
+  "secondary": "kinetic:sawdust"
+}

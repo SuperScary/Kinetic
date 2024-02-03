@@ -14,6 +14,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
 import superscary.kinetic.Kinetic;
+import superscary.kinetic.datagen.recipes.CompressorRecipeGen;
+import superscary.kinetic.datagen.recipes.SawmillRecipeGen;
 import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.register.KineticItems;
 
@@ -23,7 +25,9 @@ import java.util.function.Consumer;
 public class KineticRecipeProvider extends RecipeProvider implements IConditionBuilder
 {
 
-    private static final List<ItemLike> DURACITE_TABLE = List.of(KineticBlocks.DURACITE_ORE.get(), KineticBlocks.DEEPSLATE_DURACITE_ORE.get());
+    private static final List<ItemLike> DURACITE_TABLE = List.of(KineticBlocks.DURACITE_ORE.get(), KineticBlocks.DEEPSLATE_DURACITE_ORE.get(), KineticItems.RAW_DURACITE.get(), KineticItems.DURACITE_DUST.get());
+    private static final List<ItemLike> DURACITE_BLOCK_TABLE = List.of(KineticBlocks.RAW_DURACITE_BLOCK.get());
+    public static final List<ItemLike> STEEL_TABLE = List.of(KineticItems.STEEL_DUST.get());
     public static final List<ItemLike> SULFUR_TABLE = List.of(KineticBlocks.SULFUR_ORE.get());
 
     public KineticRecipeProvider (PackOutput pOutput)
@@ -32,7 +36,16 @@ public class KineticRecipeProvider extends RecipeProvider implements IConditionB
     }
 
     @Override
-    protected void buildRecipes (Consumer<FinishedRecipe> pWriter)
+    protected void buildRecipes (@NotNull Consumer<FinishedRecipe> pWriter)
+    {
+        addBlockRecipes(pWriter);
+        addItemRecipes(pWriter);
+        addSmeltingRecipes(pWriter);
+        addSawmillRecipes(pWriter);
+        addCompressingRecipes(pWriter);
+    }
+
+    protected static void addBlockRecipes (Consumer<FinishedRecipe> pWriter)
     {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticBlocks.RAW_DURACITE_BLOCK.get())
                 .pattern("AAA")
@@ -300,7 +313,27 @@ public class KineticRecipeProvider extends RecipeProvider implements IConditionB
                 .define('C', KineticItems.CAPACITOR.get())
                 .define('M', KineticBlocks.MACHINE_FRAME.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
 
-        // ITEMS
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticBlocks.WOOD_CASING.get())
+                .pattern("WSW")
+                .pattern("SSS")
+                .pattern("WSW")
+                .define('W', ItemTags.PLANKS)
+                .define('S', Tags.Items.RODS_WOODEN).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticBlocks.STONE_CASING.get())
+                .pattern("WWW")
+                .pattern("WSW")
+                .pattern("WWW")
+                .define('W', ItemTags.STONE_CRAFTING_MATERIALS)
+                .define('S', KineticBlocks.WOOD_CASING.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, KineticBlocks.RUBBER_PLANKS.get())
+                .requires(KineticBlocks.RUBBER_LOG.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+    }
+
+    protected static void addItemRecipes (Consumer<FinishedRecipe> pWriter)
+    {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticItems.DURACITE_INGOT.get())
                 .pattern("AAA")
                 .pattern("AAA")
@@ -450,15 +483,47 @@ public class KineticRecipeProvider extends RecipeProvider implements IConditionB
                 .define('R', Items.REDSTONE)
                 .define('C', KineticItems.FLUX_COIL.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticItems.STEEL_PLATE.get())
+                .pattern("IP")
+                .define('I', KineticItems.STEEL_INGOT.get())
+                .define('P', KineticItems.ENGINEERS_HAMMER.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticItems.COPPER_PLATE.get())
+                .pattern("IP")
+                .define('I', Items.COPPER_INGOT)
+                .define('P', KineticItems.ENGINEERS_HAMMER.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
         //ORE_FINDER
         //WRENCH
         //SCREWDRIVER
         //ENGINEERS_HAMMER
 
-        // SMELTING
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticItems.RAW_DOUGH.get())
+                .pattern("DW")
+                .define('D', KineticItems.WHEAT_DUST.get())
+                .define('W', Items.WATER_BUCKET).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+    }
+
+    protected static void addSawmillRecipes (Consumer<FinishedRecipe> pWriter)
+    {
+        new SawmillRecipeGen(KineticBlocks.RUBBER_LOG.get(), KineticBlocks.RUBBER_PLANKS.get(), 6, 35, 150, KineticItems.SAWDUST.get(), 0.5f).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+    }
+
+    protected static void addCompressingRecipes (Consumer<FinishedRecipe> pWriter)
+    {
+        new CompressorRecipeGen(KineticItems.RAW_PLASTIC.get(), KineticItems.PLASTIC.get(), 2, 45, 300).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+        new CompressorRecipeGen(KineticItems.STEEL_INGOT.get(), KineticItems.STEEL_PLATE.get(), 2, 65, 320).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+        new CompressorRecipeGen(Items.COPPER_INGOT, KineticItems.COPPER_PLATE.get(), 2, 65, 305).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+        new CompressorRecipeGen(KineticBlocks.RUBBER_LOG.get(), KineticItems.UNTREATED_RUBBER.get(), 3, 43, 280).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+    }
+
+    protected static void addSmeltingRecipes (Consumer<FinishedRecipe> pWriter)
+    {
         oreSmelting(pWriter, DURACITE_TABLE, RecipeCategory.MISC, KineticItems.DURACITE_INGOT.get(), 0.25f, 200, "duracite");
         oreSmelting(pWriter, SULFUR_TABLE, RecipeCategory.MISC, KineticItems.SULFUR.get(), 0.25f, 200, "sulfur");
-
+        oreSmelting(pWriter, STEEL_TABLE, RecipeCategory.MISC, KineticItems.STEEL_INGOT.get(), 0.25f, 400, "steel");
+        oreSmelting(pWriter, DURACITE_BLOCK_TABLE, RecipeCategory.MISC, KineticBlocks.DURACITE_BLOCK.get(), 2.25f, 1800, "duracite");
     }
 
     protected static void oreSmelting (@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, @NotNull ItemLike pResult, float pExperience, int pCookTime, String pGroup)

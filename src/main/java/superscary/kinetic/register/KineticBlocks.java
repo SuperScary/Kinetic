@@ -74,6 +74,8 @@ public class KineticBlocks
     public static final RegistryObject<Block> DELUXE_SOLAR_PANEL = reg("deluxe_solar_panel", DeluxeSolarPanelBlock::new);
     public static final RegistryObject<Block> ULTIMATE_SOLAR_PANEL = reg("ultimate_solar_panel", UltimateSolarPanelBlock::new);
     public static final RegistryObject<Block> BASIC_BATTERY = reg("basic_battery", BasicBatteryBlock::new);
+    public static final RegistryObject<Block> WOOD_CASING = reg("wood_casing", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BARREL)));
+    public static final RegistryObject<Block> STONE_CASING = reg("stone_casing", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
 
     public static final RegistryObject<Block> RUBBER_LOG = reg("rubber_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));

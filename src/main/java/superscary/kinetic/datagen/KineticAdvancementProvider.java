@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import superscary.kinetic.Kinetic;
+import superscary.kinetic.register.KineticBlocks;
 import superscary.kinetic.register.KineticItems;
 
 import java.util.function.Consumer;
@@ -19,12 +20,29 @@ public class KineticAdvancementProvider implements ForgeAdvancementProvider.Adva
     @Override
     public void generate (HolderLookup.Provider provider, Consumer<Advancement> consumer, ExistingFileHelper existingFileHelper)
     {
-        Advancement withFriendsLikeThese = Advancement.Builder.advancement()
+        Advancement root = Advancement.Builder.advancement()
                 .display(new DisplayInfo(new ItemStack(KineticItems.WRENCH.get()),
-                        Component.literal("With Friends Like These.."), Component.literal("Your New Best Friend"),
+                        Component.translatable("advancement.build_wrench"), Component.translatable("advancement.build_wrench.desc"),
                         Kinetic.getResource("textures/block/steel_block.png"),
                         FrameType.TASK, true, true, false))
                 .addCriterion("craft_wrench", InventoryChangeTrigger.TriggerInstance.hasItems(KineticItems.WRENCH.get()))
-                .save(consumer, Kinetic.getResource("withfriendslikethese"), existingFileHelper);
+                .save(consumer, Kinetic.getResource("with_friends_like_these"), existingFileHelper);
+
+        Advancement buildCompressor = Advancement.Builder.advancement()
+                .display(new DisplayInfo(new ItemStack(KineticBlocks.COMPRESSOR.get()),
+                        Component.translatable("advancement.build_compressor"), Component.translatable("advancement.build_compressor.desc"),
+                        null, FrameType.TASK, true, true, false))
+                .parent(root)
+                .addCriterion("has_compressor", InventoryChangeTrigger.TriggerInstance.hasItems(KineticBlocks.COMPRESSOR.get()))
+                .save(consumer, Kinetic.getResource("build_compressor"), existingFileHelper);
+
+        Advancement compressPlastic = Advancement.Builder.advancement()
+                .display(new DisplayInfo(new ItemStack(KineticItems.PLASTIC.get()),
+                        Component.translatable("advancement.compress_plastic"), Component.translatable("advancement.compress_plastic.desc"),
+                        null, FrameType.TASK, true, true, false))
+                .parent(buildCompressor)
+                .addCriterion("compressed", InventoryChangeTrigger.TriggerInstance.hasItems(KineticItems.PLASTIC.get()))
+                .save(consumer, Kinetic.getResource("compress_plastic"), existingFileHelper);
+
     }
 }

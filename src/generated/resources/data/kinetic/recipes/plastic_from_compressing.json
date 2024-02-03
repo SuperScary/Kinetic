@@ -1,0 +1,14 @@
+{
+  "type": "kinetic:compress",
+  "craftTime": 300,
+  "energy": 45,
+  "ingredients": [
+    {
+      "item": "kinetic:raw_plastic"
+    }
+  ],
+  "output": {
+    "count": 2,
+    "item": "kinetic:plastic"
+  }
+}
