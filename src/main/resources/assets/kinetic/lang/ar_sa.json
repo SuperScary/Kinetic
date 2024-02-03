@@ -39,6 +39,9 @@
   "item.kinetic.oil_bucket": "Bucket النفط",
   "item.kinetic.raw_dough": "Raw Dough",
   "item.kinetic.wheat_dust": "Wheat Dust",
+  "item.kinetic.steel_plate": "Steel Plate",
+  "item.kinetic.copper_plate": "Copper Plate",
+  "item.kinetic.sawdust": "Sawdust",
   "block.kinetic.duracite_ore": "Duracite Ore",
   "block.kinetic.deepslate_duracite_ore": "ديبسي دوراكويتي Ore",
   "block.kinetic.raw_duracite_block": "كتلة Raw Duracite",
@@ -101,6 +104,8 @@
   "block.kinetic.brick_stairs": "الطرز الطابوقة",
   "block.kinetic.brick_slab": "قرميد سبر",
   "block.kinetic.plastic_block": "Plastic Block",
+  "block.kinetic.stone_casing": "Stone Casing",
+  "block.kinetic.wood_casing": "Wood Casing",
   "block.kinetic.oil": "النفط",
   "fluid_type.kinetic.oil": "النفط",
   "itemGroup.kinetic": "الحركية",
@@ -108,5 +113,11 @@
   "chat.ore_not_found": "لم يتم العثور على خامات.",
   "kinetic.facade.is_mimicing": "مجموعة Facade الى %s",
   "entity.minecraft.villager.kinetic.engineer": "مهندس",
-  "entity.minecraft.villager.kinetic.tinkerer": "وحدة inkerer"
+  "entity.minecraft.villager.kinetic.tinkerer": "وحدة inkerer",
+  "advancement.build_compressor": "Build The Compressor",
+  "advancement.build_compressor.desc": "Under pressure...",
+  "advancement.build_wrench": "With Friends Like These..",
+  "advancement.build_wrench.desc": "Your New Best Friend",
+  "advancement.compress_plastic": "Compress Plastic",
+  "advancement.compress_plastic.desc": "Not turtle food."
 }
