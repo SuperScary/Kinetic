@@ -39,6 +39,9 @@
   "item.kinetic.oil_bucket": "油桶",
   "item.kinetic.raw_dough": "Raw Dough",
   "item.kinetic.wheat_dust": "Wheat Dust",
+  "item.kinetic.steel_plate": "Steel Plate",
+  "item.kinetic.copper_plate": "Copper Plate",
+  "item.kinetic.sawdust": "Sawdust",
   "block.kinetic.duracite_ore": "Duracite 矿石",
   "block.kinetic.deepslate_duracite_ore": "Deepsate Duracite 矿石",
   "block.kinetic.raw_duracite_block": "原始 Duracite 块",
@@ -101,6 +104,8 @@
   "block.kinetic.brick_stairs": "砖楼梯",
   "block.kinetic.brick_slab": "砖坯",
   "block.kinetic.plastic_block": "Plastic Block",
+  "block.kinetic.stone_casing": "Stone Casing",
+  "block.kinetic.wood_casing": "Wood Casing",
   "block.kinetic.oil": "石油",
   "fluid_type.kinetic.oil": "石油",
   "itemGroup.kinetic": "动能",
@@ -108,5 +113,11 @@
   "chat.ore_not_found": "找不到矿石。",
   "kinetic.facade.is_mimicing": "正面设置为 %s",
   "entity.minecraft.villager.kinetic.engineer": "工程师",
-  "entity.minecraft.villager.kinetic.tinkerer": "廷克雷尔"
+  "entity.minecraft.villager.kinetic.tinkerer": "廷克雷尔",
+  "advancement.build_compressor": "Build The Compressor",
+  "advancement.build_compressor.desc": "Under pressure...",
+  "advancement.build_wrench": "With Friends Like These..",
+  "advancement.build_wrench.desc": "Your New Best Friend",
+  "advancement.compress_plastic": "Compress Plastic",
+  "advancement.compress_plastic.desc": "Not turtle food."
 }
