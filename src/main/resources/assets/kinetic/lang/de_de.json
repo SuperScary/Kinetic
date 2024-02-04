@@ -106,6 +106,7 @@
   "block.kinetic.plastic_block": "Plastic Block",
   "block.kinetic.stone_casing": "Stone Casing",
   "block.kinetic.wood_casing": "Wood Casing",
+  "block.kinetic.vat": "Vat",
   "block.kinetic.oil": "Öl",
   "fluid_type.kinetic.oil": "Öl",
   "itemGroup.kinetic": "Kinetic",
