@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "S S",
+    "S S",
+    "SSS"
+  ],
+  "result": {
+    "item": "kinetic:vat"
+  },
+  "show_notification": true
+}

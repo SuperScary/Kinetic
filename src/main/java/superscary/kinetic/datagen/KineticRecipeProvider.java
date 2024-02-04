@@ -330,6 +330,12 @@ public class KineticRecipeProvider extends RecipeProvider implements IConditionB
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, KineticBlocks.RUBBER_PLANKS.get())
                 .requires(KineticBlocks.RUBBER_LOG.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BREWING, KineticBlocks.VAT.get())
+                .pattern("S S")
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', KineticItems.STEEL_INGOT.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
     }
 
     protected static void addItemRecipes (Consumer<FinishedRecipe> pWriter)

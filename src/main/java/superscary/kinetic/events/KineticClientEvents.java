@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import superscary.kinetic.Kinetic;
 import superscary.kinetic.register.KineticBlockEntities;
 import superscary.kinetic.renderer.DraftingTableRenderer;
+import superscary.kinetic.renderer.VatBlockRenderer;
 
 @Mod.EventBusSubscriber(modid = Kinetic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class KineticClientEvents
@@ -16,6 +17,7 @@ public class KineticClientEvents
     public static void registerRenderer (EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerBlockEntityRenderer(KineticBlockEntities.DRAFTING_TABLE_BE.get(), DraftingTableRenderer::new);
+        event.registerBlockEntityRenderer(KineticBlockEntities.VAT_BE.get(), VatBlockRenderer::new);
     }
 
 }

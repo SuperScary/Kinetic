@@ -60,6 +60,7 @@ public class KineticBlockStateProvider extends BlockStateProvider
         blockWithItem(KineticBlocks.PLASTIC_BLOCK);
         blockWithItem(KineticBlocks.WOOD_CASING);
         blockWithItem(KineticBlocks.STONE_CASING);
+        blockItem(KineticBlocks.VAT);
 
         stairsBlock((StairBlock) KineticBlocks.BRICK_STAIRS.get(), blockTexture(KineticBlocks.BRICK.get()));
         slabBlock(((SlabBlock) KineticBlocks.BRICK_SLAB.get()), blockTexture(KineticBlocks.BRICK.get()), blockTexture(KineticBlocks.BRICK.get()));

@@ -23,7 +23,7 @@ public class JEIKineticPlugin implements IModPlugin
     @Override
     public ResourceLocation getPluginUid ()
     {
-        return new ResourceLocation(Kinetic.MODID, "jei_plugin");
+        return Kinetic.getResource("jei_plugin");
     }
 
     @Override

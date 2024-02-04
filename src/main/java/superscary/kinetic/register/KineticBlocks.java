@@ -56,6 +56,7 @@ public class KineticBlocks
     public static final RegistryObject<Block> CRUSHER = reg("crusher", CrusherBlock::new);
     public static final RegistryObject<Block> COAL_GENERATOR = reg("coal_generator", CoalGeneratorBlock::new);
     public static final RegistryObject<Block> CHARGER = reg("charger", ChargerBlock::new);
+    public static final RegistryObject<Block> VAT = reg("vat", VatBlock::new);
     public static final RegistryObject<Block> BASIC_POWER_CABLE_BLOCK = reg("basic_power_cable", BasicPowerCableBlock::new);
     public static final RegistryObject<Block> STANDARD_POWER_CABLE_BLOCK = reg("standard_power_cable", StandardPowerCableBlock::new);
     public static final RegistryObject<Block> PREMIUM_POWER_CABLE_BLOCK = reg("premium_power_cable", PremiumPowerCableBlock::new);

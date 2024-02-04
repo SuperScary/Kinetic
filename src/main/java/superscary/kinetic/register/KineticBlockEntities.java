@@ -91,5 +91,9 @@ public class KineticBlockEntities
             BLOCK_ENTITIES.register("basic_battery_be", () -> BlockEntityType.Builder.of(BasicBatteryBlockEntity::new,
                     KineticBlocks.BASIC_BATTERY.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<VatBlockEntity>> VAT_BE =
+            BLOCK_ENTITIES.register("vat_be", () -> BlockEntityType.Builder.of(VatBlockEntity::new,
+                    KineticBlocks.VAT.get()).build(null));
+
 
 }
