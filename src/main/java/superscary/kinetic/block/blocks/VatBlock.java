@@ -15,6 +15,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import superscary.kinetic.block.KineticBaseEntityBlock;
 import superscary.kinetic.block.entity.VatBlockEntity;
@@ -52,27 +53,29 @@ public class VatBlock extends KineticBaseEntityBlock
     }
 
     @Override
-    public InteractionResult use (BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
+    public @NotNull InteractionResult use (BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit)
     {
-        if (level.isClientSide())
+        if (!level.isClientSide())
         {
             BlockEntity entity = level.getBlockEntity(pos);
+            System.out.println("VatBlock.interact");
             if (entity instanceof VatBlockEntity)
             {
+                System.out.println("VatBlock.valid");
                 VatBlockEntity vat = (VatBlockEntity) entity;
-                if (player.getItemInHand(hand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent())
+                player.getItemInHand(hand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem ->
                 {
-                    player.getItemInHand(hand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem ->
+                    System.out.println("VatBlock.use");
+                    int drainAmount = Math.min(vat.getFluidTank().getSpace(), 1000);
+                    FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+                    if (stack.isFluidEqual(vat.getFluidTank().getFluid()) || vat.getFluidTank().getFluid().isEmpty())
                     {
-                        int drainAmount = Math.min(vat.getFluidTank().getSpace(), 1000);
-                        FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-                        if (stack.isFluidEqual(vat.getFluidTank().getFluid()))
-                        {
-                            stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
-                            FluidUtils.fillTank(vat.getFluidTank(), stack, iFluidHandlerItem.getContainer(), player);
-                        }
-                    });
-                }
+                        System.out.println("VatBlock.deposit");
+                        stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                        FluidUtils.fillTank(vat.getFluidTank(), stack, iFluidHandlerItem.getContainer(), player);
+                    }
+                });
+                return InteractionResult.SUCCESS;
             }
         }
         return super.use(state, level, pos, player, hand, hit);
