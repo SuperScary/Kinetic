@@ -38,6 +38,7 @@
     "kinetic:basic_battery",
     "kinetic:brick",
     "kinetic:plastic_block",
-    "kinetic:stone_casing"
+    "kinetic:stone_casing",
+    "kinetic:vat"
   ]
 }
