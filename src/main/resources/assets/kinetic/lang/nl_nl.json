@@ -107,6 +107,8 @@
   "block.kinetic.stone_casing": "Stone Casing",
   "block.kinetic.wood_casing": "Wood Casing",
   "block.kinetic.vat": "Vat",
+  "block.kinetic.electric_motor": "Electric Motor",
+  "block.kinetic.steel_shaft": "Steel Shaft",
   "block.kinetic.oil": "Olie",
   "fluid_type.kinetic.oil": "Olie",
   "itemGroup.kinetic": "Kinetisch",
