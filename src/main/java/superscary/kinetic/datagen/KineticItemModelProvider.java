@@ -110,6 +110,8 @@ public class KineticItemModelProvider extends ItemModelProvider
         simpleBlockItem(KineticBlocks.WOOD_CASING);
         simpleBlockItem(KineticBlocks.STONE_CASING);
         simpleBlockItem(KineticBlocks.VAT);
+        simpleBlockItem(KineticBlocks.STEEL_SHAFT);
+        simpleBlockItem(KineticBlocks.ELECTRIC_MOTOR);
 
         saplingItem(KineticBlocks.RUBBER_SAPLING);
 

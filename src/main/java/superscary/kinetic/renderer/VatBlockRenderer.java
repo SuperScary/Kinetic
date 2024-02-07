@@ -22,20 +22,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-import superscary.kinetic.block.blocks.DraftingTableBlock;
 import superscary.kinetic.block.entity.VatBlockEntity;
 import superscary.kinetic.util.helpers.FluidUtils;
 
 public class VatBlockRenderer implements BlockEntityRenderer<VatBlockEntity>
 {
 
-    private float height = 0.125f;
+    private float height;
 
     private final BlockEntityRendererProvider.Context context;
 
     public VatBlockRenderer (BlockEntityRendererProvider.Context context)
     {
         this.context = context;
+        this.height = 0.125f;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class VatBlockRenderer implements BlockEntityRenderer<VatBlockEntity>
     {
         renderFluid(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
         renderItem(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, 0);
+        renderItem(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay, 1);
     }
 
     private void renderItem (VatBlockEntity pBlockEntity, float pPartialTick, @NotNull PoseStack pPoseStack, @NotNull MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay, int slot)

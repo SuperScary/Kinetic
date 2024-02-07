@@ -39,6 +39,8 @@
     "kinetic:brick",
     "kinetic:plastic_block",
     "kinetic:stone_casing",
-    "kinetic:vat"
+    "kinetic:vat",
+    "kinetic:steel_shaft",
+    "kinetic:electric_motor"
   ]
 }

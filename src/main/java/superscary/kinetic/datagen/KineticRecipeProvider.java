@@ -336,6 +336,21 @@ public class KineticRecipeProvider extends RecipeProvider implements IConditionB
                 .pattern("SSS")
                 .define('S', KineticItems.STEEL_INGOT.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticBlocks.STEEL_SHAFT.get())
+                .pattern("S")
+                .pattern("S")
+                .pattern("S")
+                .define('S', KineticItems.STEEL_INGOT.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, KineticBlocks.ELECTRIC_MOTOR.get())
+                .pattern("SCS")
+                .pattern("SRS")
+                .pattern("SCS")
+                .define('S', KineticItems.STEEL_INGOT.get())
+                .define('C', Blocks.COBBLESTONE)
+                .define('R', KineticBlocks.STEEL_SHAFT.get()).unlockedBy("has_log", inventoryTrigger(ItemPredicate.Builder.item().of(ItemTags.LOGS).build())).save(pWriter);
+
+
     }
 
     protected static void addItemRecipes (Consumer<FinishedRecipe> pWriter)

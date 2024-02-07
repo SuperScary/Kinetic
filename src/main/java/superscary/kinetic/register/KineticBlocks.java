@@ -77,6 +77,8 @@ public class KineticBlocks
     public static final RegistryObject<Block> BASIC_BATTERY = reg("basic_battery", BasicBatteryBlock::new);
     public static final RegistryObject<Block> WOOD_CASING = reg("wood_casing", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BARREL)));
     public static final RegistryObject<Block> STONE_CASING = reg("stone_casing", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+    public static final RegistryObject<Block> STEEL_SHAFT = reg("steel_shaft", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTRIC_MOTOR = reg("electric_motor", ElectricMotorBlock::new);
 
 
     public static final RegistryObject<Block> RUBBER_LOG = reg("rubber_log", () -> new FlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)));

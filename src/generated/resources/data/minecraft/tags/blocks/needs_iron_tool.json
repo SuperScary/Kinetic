@@ -37,6 +37,8 @@
     "kinetic:ultimate_solar_panel",
     "kinetic:basic_battery",
     "kinetic:drafting_table",
-    "kinetic:vat"
+    "kinetic:vat",
+    "kinetic:steel_shaft",
+    "kinetic:electric_motor"
   ]
 }

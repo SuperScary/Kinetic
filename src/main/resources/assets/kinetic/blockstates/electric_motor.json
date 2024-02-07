@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "kinetic:block/electric_motor"
+    }
+  }
+}

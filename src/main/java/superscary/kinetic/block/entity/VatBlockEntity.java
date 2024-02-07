@@ -46,8 +46,8 @@ public class VatBlockEntity extends BlockEntity
 
     private final FluidTank fluidTank = createFluidTank();
 
-    private final LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    private final LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.of(() -> fluidTank);
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.of(() -> fluidTank);
 
     public VatBlockEntity (BlockPos pPos, BlockState pBlockState)
     {
@@ -61,27 +61,11 @@ public class VatBlockEntity extends BlockEntity
     }
 
     @Override
-    protected void saveAdditional (CompoundTag tag)
+    public void onLoad ()
     {
-        super.saveAdditional(tag);
-        tag = fluidTank.writeToNBT(tag);
-        tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
-    }
-
-    @Override
-    public void load (CompoundTag tag)
-    {
-        super.load(tag);
-        if (tag.contains(NBTKeys.FLUID)) fluidTank.readFromNBT(tag.getCompound(NBTKeys.FLUID));
-        if (tag.contains(NBTKeys.INVENTORY)) itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability (@NotNull Capability<T> cap, @Nullable Direction side)
-    {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
-        else if (cap == ForgeCapabilities.FLUID_HANDLER) return lazyFluidHandler.cast();
-        return super.getCapability(cap, side);
+        super.onLoad();
+        lazyFluidHandler = LazyOptional.of(() -> fluidTank);
+        lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
 
     @Override
@@ -90,6 +74,30 @@ public class VatBlockEntity extends BlockEntity
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyFluidHandler.invalidate();
+    }
+
+    @Override
+    protected void saveAdditional (CompoundTag tag)
+    {
+        tag.put(NBTKeys.INVENTORY, itemHandler.serializeNBT());
+        tag = fluidTank.writeToNBT(tag);
+        super.saveAdditional(tag);
+    }
+
+    @Override
+    public void load (CompoundTag tag)
+    {
+        super.load(tag);
+        itemHandler.deserializeNBT(tag.getCompound(NBTKeys.INVENTORY));
+        fluidTank.readFromNBT(tag);
+    }
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability (@NotNull Capability<T> cap, @Nullable Direction side)
+    {
+        if (cap == ForgeCapabilities.ITEM_HANDLER) return lazyItemHandler.cast();
+        if (cap == ForgeCapabilities.FLUID_HANDLER) return lazyFluidHandler.cast();
+        return super.getCapability(cap, side);
     }
 
     public ItemStackHandler getItems ()

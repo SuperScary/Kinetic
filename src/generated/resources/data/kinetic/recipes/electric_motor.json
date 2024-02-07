@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "R": {
+      "item": "kinetic:steel_shaft"
+    },
+    "S": {
+      "item": "kinetic:steel_ingot"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "SRS",
+    "SCS"
+  ],
+  "result": {
+    "item": "kinetic:electric_motor"
+  },
+  "show_notification": true
+}

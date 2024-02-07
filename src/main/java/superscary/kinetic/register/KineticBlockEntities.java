@@ -5,6 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import superscary.kinetic.Kinetic;
+import superscary.kinetic.block.blocks.ElectricMotorBlock;
 import superscary.kinetic.block.cables.blocks.entity.*;
 import superscary.kinetic.block.cables.blocks.entity.power.*;
 import superscary.kinetic.block.entity.*;
@@ -94,6 +95,10 @@ public class KineticBlockEntities
     public static final RegistryObject<BlockEntityType<VatBlockEntity>> VAT_BE =
             BLOCK_ENTITIES.register("vat_be", () -> BlockEntityType.Builder.of(VatBlockEntity::new,
                     KineticBlocks.VAT.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<ElectricMotorBlockEntity>> ELECTRIC_MOTOR_BE =
+            BLOCK_ENTITIES.register("electric_motor_be", () -> BlockEntityType.Builder.of(ElectricMotorBlockEntity::new,
+                    KineticBlocks.ELECTRIC_MOTOR.get()).build(null));
 
 
 }

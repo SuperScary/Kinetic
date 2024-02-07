@@ -63,7 +63,9 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.BRICK.get())
                 .add(KineticBlocks.PLASTIC_BLOCK.get())
                 .add(KineticBlocks.STONE_CASING.get())
-                .add(KineticBlocks.VAT.get());
+                .add(KineticBlocks.VAT.get())
+                .add(KineticBlocks.STEEL_SHAFT.get())
+                .add(KineticBlocks.ELECTRIC_MOTOR.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(KineticBlocks.DRAFTING_TABLE.get())
@@ -112,7 +114,9 @@ public class KineticBlockTagGenerator extends BlockTagsProvider
                 .add(KineticBlocks.ULTIMATE_SOLAR_PANEL.get())
                 .add(KineticBlocks.BASIC_BATTERY.get())
                 .add(KineticBlocks.DRAFTING_TABLE.get())
-                .add(KineticBlocks.VAT.get());
+                .add(KineticBlocks.VAT.get())
+                .add(KineticBlocks.STEEL_SHAFT.get())
+                .add(KineticBlocks.ELECTRIC_MOTOR.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(KineticBlocks.BRICK.get())

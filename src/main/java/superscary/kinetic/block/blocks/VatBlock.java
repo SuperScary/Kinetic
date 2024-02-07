@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -61,8 +62,8 @@ public class VatBlock extends KineticBaseEntityBlock
         {
             if (player.getItemInHand(hand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent())
             {
-                fillTank(entity, player, hand);
-                return InteractionResult.SUCCESS;
+
+                return fillTank(entity, player, hand);
             }
             else
             {
@@ -73,6 +74,7 @@ public class VatBlock extends KineticBaseEntityBlock
     }
 
     /**
+     * TODO: Advanced block hits to get items out on hit
      * Puts/Removes item(s) in Vat
      * @param entity
      * @param player
@@ -84,32 +86,56 @@ public class VatBlock extends KineticBaseEntityBlock
         ItemStack stack = player.getItemInHand(hand);
         if (!player.isCrouching())
         {
-            if (entity.getItems().getStackInSlot(0).isEmpty() || entity.getItems().getStackInSlot(0).is(stack.getItem()))
+            if (entity.getItems().getStackInSlot(0).isEmpty() || entity.getItems().getStackInSlot(0) == stack)
             {
                 handleItemInput(entity, player, stack, 0);
                 return InteractionResult.SUCCESS;
             }
-            else if (entity.getItems().getStackInSlot(1).isEmpty() || entity.getItems().getStackInSlot(1).is(stack.getItem()))
+            else if (entity.getItems().getStackInSlot(1).isEmpty() || entity.getItems().getStackInSlot(1) == stack)
             {
                 handleItemInput(entity, player, stack, 1);
                 return InteractionResult.SUCCESS;
             }
+            else return InteractionResult.FAIL;
         }
-        //pull items out if not crouching. TODO: Advanced block hits to get items out on hit
-        return InteractionResult.FAIL;
+        else
+        {
+            entity.getItems().extractItem(0, entity.getItems().getStackInSlot(0).getCount(), false);
+            entity.getItems().extractItem(1, entity.getItems().getStackInSlot(1).getCount(), false);
+            return InteractionResult.SUCCESS;
+        }
     }
 
     private void handleItemInput (VatBlockEntity entity, Player player, ItemStack stack, int slot)
     {
         ItemStack s0 = entity.getItems().getStackInSlot(slot);
 
-        entity.getItems().setStackInSlot(slot, new ItemStack(stack.getItem(), maxAdd(s0, stack, s0.getMaxStackSize())));
+        int amount = 0;
+        int remainder = 0;
+        int math = maxAdd(s0, stack, s0.getMaxStackSize());
+        if (math <= -1)
+        {
+            amount = 64;
+            remainder = math * -1;
+            player.getInventory().setItem(player.getInventory().selected, new ItemStack(stack.getItem(), remainder));
+        }
+
+        if (math == 0)
+        {
+            amount = 64;
+        }
+
+        if (math >= 1)
+        {
+            amount = math;
+        }
+
+        entity.getItems().setStackInSlot(slot, new ItemStack(stack.getItem(), amount));
         if (!player.isCreative()) player.getInventory().setItem(player.getInventory().selected, ItemStack.EMPTY);
     }
 
     /**
      * Returns either the combined size of the two stacks, or the difference from maxCount.
-     * Probably doesn't work correctly.
      * @param s0 first stack
      * @param s1 second stack
      * @param maxCount max stack count
@@ -126,21 +152,35 @@ public class VatBlock extends KineticBaseEntityBlock
         }
     }
 
-    private void fillTank (BlockEntity entity, Player player, InteractionHand hand)
+    // TODO: Fill fluidhandler if player is sneaking and holding a valid fluid handler
+    private InteractionResult fillTank (BlockEntity entity, Player player, InteractionHand hand)
     {
         VatBlockEntity vat = (VatBlockEntity) entity;
         player.getItemInHand(hand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(iFluidHandlerItem ->
         {
-            int drainAmount = Math.min(vat.getFluidTank().getSpace(), 1000);
-            FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            if ((stack.isFluidEqual(vat.getFluidTank().getFluid()) || vat.getFluidTank().getFluid().isEmpty()))
+            if (!player.isCrouching())
             {
-                stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
-                FluidUtils.fillTank(vat.getFluidTank(), stack, iFluidHandlerItem.getContainer(), player);
-                System.out.println((((float) vat.getFluidTank().getFluidAmount()) / ((float) vat.getFluidTank().getCapacity())) * 0.750f);
+                int drainAmount = Math.min(vat.getFluidTank().getSpace(), 1000);
+                FluidStack stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+                if ((stack.isFluidEqual(vat.getFluidTank().getFluid()) || vat.getFluidTank().getFluid().isEmpty()))
+                {
+                    stack = iFluidHandlerItem.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                    FluidUtils.fillTank(vat.getFluidTank(), stack, iFluidHandlerItem.getContainer(), player);
+                }
             }
-            // TODO: Fill fluidhandler if player is sneaking and holding a valid fluid handler
+            else
+            {
+                int drainAmount = 1000;
+                if (vat.getFluidTank().getFluidAmount() >= drainAmount)
+                {
+                    FluidStack stack = vat.getFluidTank().drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                    Item item = stack.getFluid().getBucket();
+                    player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount() - 1);
+                    player.getInventory().add(new ItemStack(item, 1));
+                }
+            }
         });
+        return InteractionResult.SUCCESS;
     }
 
     @Override
